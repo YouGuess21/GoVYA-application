@@ -40,8 +40,139 @@ export default function App() {
           
         </div>
       </div>
-      <div className="h-screen bg-light-primary"></div>
-        <div className="contact flex flex-col w-screen h-[25%] bg-dark-secondary text-light-primary items-center ">
+      <div className="h-[147vh] bg-light-primary">
+      <div>
+        <div className="flex flex-row justify-center items-center">
+          <div className="text-dark-primary text-center text-3xl m-10">
+            <p className="">Our Strengths, Which makes us</p>
+            <p className="font-bold ">the most preferable moving brand</p>
+          </div>
+        </div>  
+          <div className="text-dark-backplace font-serif font-medium">
+            <div className="strength1 flex flex-row justify-center items-center gap-[15%]">
+              <div className="flex flex-col justify-center items-center">
+                <p className="text-dark-accent text-4xl font-bold">36+</p>
+                <p className="text-3xl">Years of Trust</p>
+                <p className="text-xl">Delivering Smiles Since 1987</p>
+              </div>
+              <div className="flex flex-col justify-center items-center">
+                <p className="text-dark-accent text-4xl font-bold">98000+</p>
+                <p className="text-3xl">Moves Annually</p>
+                <p className="text-xl">Happily Across the World</p>
+              </div>
+              <div className="flex flex-col justify-center items-center">
+                <p className="text-dark-accent text-4xl font-bold">2+</p>
+                <p className="text-3xl">Million sq.feet</p>
+                <p className="text-xl">Warehousing Space</p>
+              </div>
+            </div>
+          </div>
+            <div className="text-dark-backplace font-serif font-medium mt-10">
+            <div className="strength1 flex flex-row justify-center items-center gap-[11%]">
+              <div className="flex flex-col justify-center items-center">
+                <p className="text-dark-accent text-4xl font-bold">3000+</p>
+                <p className="text-3xl">Trained Manpower</p>
+                <p className="text-xl">makes your move safe & on time</p>
+              </div>
+              <div className="flex flex-col justify-center items-center">
+                <p className="text-dark-accent text-4xl font-bold">126+</p>
+                <p className="text-3xl">Branches PAN India</p>
+                <p className="text-xl">to cover 1264 destinations nationally</p>
+              </div>
+              <div className="flex flex-col justify-center items-center">
+                <p className="text-dark-accent text-4xl font-bold">1200+</p>
+                <p className="text-3xl">Vehicles</p>
+                <p className="text-xl">for Every Segment and needs</p>
+              </div>
+          </div>
+            </div>
+
+        </div>
+        <div>
+          <div className="flex flex-row justify-center items-center">
+            <div className="text-dark-primary text-center text-3xl m-10 mt-[5%]">
+              <p className="font-bold ">OUR CORE SERVICES</p>
+              <p className="text-xl">We specialize in performing solutions at</p>
+            </div>
+          </div>
+          <div className="text-dark-backplace font-serif font-medium text-2xl">
+            <div className="strength1 flex flex-row justify-center items-center gap-[5%]">
+              <div className="flex flex-col justify-center items-center">
+                <img src="./src/assets/group.png" alt="" className=" w-[40%]"/>
+                <p className="">International Moving</p>
+              </div>
+              <div className="flex flex-col justify-center items-center">
+                <img src="./src/assets/building.png" alt="" className=" w-[40%]"/>
+                <p className="">Domestic Moving</p>
+              </div>
+              <div className="flex flex-col justify-center items-center">
+                <img src="./src/assets/box.png" alt="" className=" w-[40%]"/>
+                <p className="">Removal & Storage</p>
+              </div>
+              <div className="flex flex-col justify-center items-center">
+                <img src="./src/assets/truckt.png" alt="" className=" w-[40%]"/>
+                <p className="">Car Carriers</p>
+              </div>
+            </div>
+            </div> 
+            <div className="text-dark-backplace font-serif font-medium text-2xl m-10">
+            <div className="strength1 flex flex-row justify-center items-center gap-[5%]">
+              <div className="flex flex-col justify-center items-center">
+                <img src="./src/assets/dtruck.png" alt="" className=" w-[35%]"/>
+                <p className="mt-1">Contract Logistics</p>
+              </div>
+              <div className="flex flex-col justify-center items-center">
+                <img src="./src/assets/forklift.png" alt="" className=" w-[35%]"/>
+                <p className="mt-1">Commercial Moving</p>
+              </div>
+              <div className="flex flex-col justify-center items-center">
+                <img src="./src/assets/load.png" alt="" className=" w-[35%]"/>
+                <p className="mt-1">Industrial Moving</p>
+              </div>
+              <div className="flex flex-col justify-center items-center">
+                <img src="./src/assets/warehouse.png" alt="" className=" w-[35%]"/>
+                <p className="mt-1">Warehousing</p>
+              </div>
+              </div>
+              </div>
+            
+            <div>
+              <div className="flex flex-row justify-center items-center">
+              <div className="text-dark-primary text-center text-3xl mt-8">
+                <p className="font-bold ">FEATURED ON:</p>
+              </div>
+              </div>
+              <div className="newslogos flex flex-row justify-center items-center gap-[8%]">
+                <img src="./src/assets/flogo1.png" alt="" />
+                <img src="./src/assets/flogo2.png" alt="" />
+                <img src="./src/assets/flogo4.png" alt="" />
+                <img src="./src/assets/flogo5.png" alt="" />
+              </div>              
+            </div> 
+
+            <div>
+              <div className="flex flex-row justify-center items-center">
+              <div className="text-dark-primary text-center text-3xl mt-[4%] m-8">
+                <p className="font-bold ">OUR CLIENTS:</p>
+              </div>
+              </div>
+              <div className="newslogos flex flex-row w-screen justify-center items-center gap-[3%]">
+                <img src="./src/assets/airtel.png" alt="" />
+                <img src="./src/assets/apollo.png" alt="" />
+                <img src="./src/assets/asian-paints.png" alt="" />
+                <img src="./src/assets/godrej.png" alt="" />
+                <img src="./src/assets/havells.png" alt="" />
+                <img src="./src/assets/hyundai.png" alt="" />
+                <img src="./src/assets/pepsico.png" alt="" />
+                <img src="./src/assets/suzuki.png" alt="" />
+                <img src="./src/assets/tata.png" alt="" />
+
+              </div>              
+            </div>  
+          </div>
+      </div>
+
+        <div className="contact flex flex-col w-screen h-[25%] bg-dark-secondary text-light-primary items-center bottom-0">
           <div className="w-[80%] flex flex-row text-justify m-10">
             <div className="w-1/3 flex flex-row justify-center">
               <div className="text-sm text-left">

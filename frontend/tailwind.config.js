@@ -12,7 +12,8 @@ export default {
       'light-primary': '#e2e8f0',
       'dark-accent': '#f54f07',
       'accent-hover': '#174743',
-      'highlight-secondary': '#e26161'
+      'highlight-secondary': '#e26161',
+      'dark-backplace': '#646464'
     }
   },
 
