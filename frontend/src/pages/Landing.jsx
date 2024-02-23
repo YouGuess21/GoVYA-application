@@ -1,5 +1,5 @@
 import { useState } from "react"
-
+import { Link } from "react-router-dom";
 export default function Landing() {
   return (
     <>
@@ -11,9 +11,13 @@ export default function Landing() {
             <p className="text-3xl hover:text-4xl hover:duration-150">GoVYA</p>  
           </div>
           <div className="flex flex-row items-center gap-16 px-20 text-light-primary text-lg font-semibold">
-            <p className="hover:underline">Login</p>
+            <Link to="/login">
+              <button className="hover:underline">Login</button>
+            </Link>
             <p className="">|</p>
-            <p className="hover:underline">Register</p>
+            <Link to="/signup">
+              <button className="hover:underline">Register</button>
+            </Link>
           </div> 
         </div>
         <div className="h-screen video-background relative">

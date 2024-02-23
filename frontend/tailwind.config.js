@@ -13,7 +13,8 @@ export default {
       'dark-accent': '#f54f07',
       'accent-hover': '#174743',
       'highlight-secondary': '#e26161',
-      'dark-backplace': '#646464'
+      'dark-backplace': '#646464',
+      'placewhite': '#848484'
     }
   },
 
