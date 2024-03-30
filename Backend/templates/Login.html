@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login|Go-VYA</title>
+    <style>
+        /* Style to display buttons inline */
+        .button-container {
+            display: inline-block;
+        }
+
+        #h1 {
+            font-size: large;
+        }
+
+        * {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Login</h1>
+    <form id="myForm" method="POST" action="/User_selector">
+        {{form.csrf_token()}}
+        <br>
+        {{form.text.label()}}
+        {{form.text()}}
+        <br>
+        {{form.password.label()}}
+        {{form.password()}}
+        <br>
+        {{form.submit()}}
+    </form>
+
+    <table align="center">
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>Password</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {%for row in data%}
+            <tr>
+                <td>{{row[0]}}</td>
+                <td>{{row[1]}}</td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+</body>
+
+</html>
