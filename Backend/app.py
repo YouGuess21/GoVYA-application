@@ -28,19 +28,34 @@ def login():
 def customer():
     welcome = request.args.get('Welcome', default='', type=str)
     userid = request.args.get('userID', default=0, type=int)
-    return render_template('Customer.html', Welcome=welcome,userid=userid)
+    if welcome:
+        return render_template('Customer.html', Welcome=welcome,userid=userid)
+    else:
+        return redirect(url_for('unauth'))
+
 
 @app.route('/admin')
 def Admin():
     welcome = request.args.get('Welcome', default='', type=str)
     userid = request.args.get('userID', default=0, type=int)
-    return render_template('Admin.html', Welcome=welcome,userid=userid)
+    if welcome:
+        return render_template('Admin.html', welcome=welcome, userid=userid)
+    else:
+        return redirect(url_for('unauth'))
+    
 
 @app.route('/Provider')
 def provider():
     welcome = request.args.get('Welcome', default='', type=str)
     userid = request.args.get('userID', default=0, type=int)
-    return render_template('Provider.html', Welcome=welcome,userid=userid)
+    if welcome:
+        return render_template('Provider.html', Welcome=welcome,userid=userid)
+    else:
+        return redirect(url_for('unauth'))
+
+@app.route('/unauthorized_Access')
+def unauth():
+    return render_template('unauthacc.html')
 
 @app.route('/User_selector', methods=['GET', 'POST'])
 def user_selector():
@@ -62,7 +77,6 @@ def user_selector():
                 if(int(int(row[0])/1000)==3):
                     return redirect(url_for('provider',Welcome="Welcome Provider "+entered_userid,userID=entered_userid))
         return render_template('User_selector.html', Welcome='User Id or Password is Wrong')
-    
     return render_template('user_selector',form=form)
 
 
