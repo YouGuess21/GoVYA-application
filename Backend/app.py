@@ -70,14 +70,17 @@ def user_selector():
         for row in value:
             if (str(row[0])==entered_userid and str(row[1])==entered_pass):
                 if(int(int(entered_userid)/1000)== 1):
-                    return redirect(url_for('customer',Welcome="Welcome Customer "+entered_userid,userID=entered_userid))
+                    name=row[2]
+                    return redirect(url_for('customer',Welcome="Welcome Customer "+name,userID=entered_userid))
                     #url_for(fn name,   )
                 if(int(int(row[0])/1000)==2):
-                    return redirect(url_for('Admin',Welcome="Welcome Admin "+entered_userid,userID=entered_userid))
+                    name=row[2]
+                    return redirect(url_for('Admin',Welcome="Welcome Admin "+name,userID=entered_userid))
                 if(int(int(row[0])/1000)==3):
-                    return redirect(url_for('provider',Welcome="Welcome Provider "+entered_userid,userID=entered_userid))
+                    name=row[2]
+                    return redirect(url_for('provider',Welcome="Welcome Provider "+name,userID=entered_userid))
         return render_template('User_selector.html', Welcome='User Id or Password is Wrong')
-    return render_template('user_selector',form=form)
+    return redirect(url_for('unauth'))
 
 
 @app.route('/register')
