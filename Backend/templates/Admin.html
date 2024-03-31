@@ -6,20 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Controls|Go-VYA</title>
     <style>
-        .button-container {
+        #inline {
             display: inline-block;
         }
 
         * {
             text-align: center;
         }
+        h1{
+            text-decoration: underline;
+        }
     </style>
 </head>
 
 <body>
+    <h1>Admin Dashboard</h1>
     <p>{{Welcome}}</p>
-    <button class="button-container">Verify registeration requests</button>
-    <button class="button-container">View Order Status</button>
+    <div id="inline">
+        <button class="button-container">Verify registeration requests</button>
+        <button class="button-container">View Order Status</button>
+        <button class="button-container">View Employees</button>
+    </div>
+
 </body>
 
 </html>
