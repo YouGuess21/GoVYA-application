@@ -22,53 +22,66 @@
             display: inline-block;
 
         }
-    </style>
 
+        #pop_up {
+            font-weight: bold;
+            font-size: 1.2em;
+            padding: 10px;
+            background-color: #FFCCCC;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+    </style>
 
 <body>
     <h1>Provider Registeration</h1>
     <div class="container">
         <div class="content"><br>
+            {% if Success %}
+            <p id="pop_up">{{Success}}</p>
+            {% endif %}
             <p>Enter Company Details:</p>
-            
-            <form>
-                
+
+            <form action="/prov_reg" method='POST'>
+
                 <label for="name">Enter Name:</label>
-                <input type="text" id="name"><br><br>
-                
-                
+                <input type="text" id="name" name="name" required><br><br>
+
+
                 <label for="pno">Phone Number:</label>
-                <input type="text" id="pno"><br><br>
-                
+                <input type="text" id="pno" name="pno" required><br><br>
+
                 <label for="email">Email Address:</label>
-                <input type="text" id="email"><br><br>
-                
+                <input type="email" id="email" name="email" required><br><br>
+
                 <label for="office">Enter Office Address:</label>
-                <input type="text" id="office"><br>
-                
+                <input type="text" id="office" name="office" required><br>
+
+
                 <p>Choose Scale of services you can provide:</p>
-                <input type="checkbox" id="small" name="scale">
+                <input type="radio" id="small" name="scale" value="Small" required>
                 <label for="small">Small Scale</label><br>
-                <input type="checkbox" id="medium" name="scale">
+                <input type="radio" id="medium" name="scale" value="Medium" required>
                 <label for="medium">Medium Scale</label><br>
-                <input type="checkbox" id="large" name="scale">
-                <label for="large">Large Scale</label><br><br>
-                
+                <input type="radio" id="large" name="scale" value="Large" required>
+                <label for="large">Large Scale</label><br>
+
                 <label for="pan">Pan number:</label>
-                <input type="text" id="pan"><br><br>
-                
+                <input type="text" id="pan" name="pan" required><br><br>
+
                 <label for="gst">Enter Company GST Number:</label>
-                <input type="text" id="gst"><br><br>
-                
+                <input type="text" id="gst" name="gst" required><br><br>
+
 
                 <label for="mult">Entetr Cost Multiplier:</label>
-                <input type="text" id="mult"><br><br>
+                <input type="number" id="mult" name="mult" step="0.01" min="0.00" max="100.00" required><br><br>
 
                 <label for="password">Create passsword:</label>
-                <input type="password" id="password"><br><br>
+                <input type="password" id="password" name="pass" required minlength="6" maxlength="16"><br><br>
 
                 <label for="confirm">Confirm password:</label>
-                <input type="text" id="confirm"><br><br>
+                <input type="password" id="confirm" name="conf" required minlength="6" maxlength="16"><br><br>
 
 
                 <button>Submit</button>

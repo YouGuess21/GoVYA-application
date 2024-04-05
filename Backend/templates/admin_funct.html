@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Functions</title>
+    <style>
+        #text {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <p id="text">
+        Admin:{{username}} <br>
+        Admin ID:{{userid}}
+    </p>
+    <table align="center" border="1">
+        <thead>
+            <tr>
+                <th>CustomerID </th>
+                <th>ProviderID </th>
+                <th>OrderID </th>
+                <th>Weight(in Kg)</th>
+                <th>Size</th>
+                <th>Type</th>
+                <th>Speed </th>
+                <th>Start_date</th>
+                <th>Status</th>
+                <th>Distance(in Km)</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {%for row in cur%}
+            <tr>
+                <td>{{row[0]}}</td>
+                <td>{{row[1]}}</td>
+                <td>{{row[2]}}</td>
+                <td>{{row[3]}}</td>
+                <td>{{row[4]}}</td>
+                <td>{{row[5]}}</td>
+                <td>{{row[6]}}</td>
+                <td>{{row[7]}}</td>
+                <td>{{row[8]}}</td>
+                <td>{{row[9]}}</td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+</body>
+
+</html>

@@ -23,11 +23,17 @@
 <body>
     <h1>Admin Dashboard</h1>
 
-    <p>{{welcome}}</p>
+    <p>Welcome Admin {{username}}</p>
     <p>Id:{{userid}}</p>
     <div id="inline">
         <button class="button-container">Verify registeration requests</button>
-        <button class="button-container">View Order Status</button>
+
+        <form action="/admin_funct" method="POST">
+            <input type="hidden" name="user_id" value="{{ userid }}">
+            <input type="hidden" name="user_name" value="{{username}}">
+            <button type="submit" class="button-container">View Order Status</button>
+        </form>
+
         <button class="button-container">View Employees</button>
     </div>
 
