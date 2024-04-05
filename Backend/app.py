@@ -44,15 +44,31 @@ def Admin():
     else:
         return redirect(url_for('unauth'))
 
+
+
 @app.route('/admin_funct',methods=['GET','POST'])
 def Admin_fun():
     if request.method == 'POST':
         username = request.form.get('user_name', default='', type=str)
         userid = request.form.get('user_id', default=0, type=int)
+        todo=request.form.get('todo', default=0,type=int)
+        provid = request.form.get('p_id', default=0, type=int)
         if username:
-            cursor.execute('SELECT  * from orders')
-            val=cursor.fetchall()
-            return render_template('admin_funct.html', username=username, userid=userid,cur=val)
+            if todo==1:
+                cursor.execute('SELECT  * from provider where not verified')
+                val=cursor.fetchall()
+                return render_template('admin_funct.html', username=username, userid=userid,cur=val,flag=True)
+
+            elif todo==2:
+                cursor.execute('SELECT  * from orders')
+                val=cursor.fetchall()
+                return render_template('admin_funct.html', username=username, userid=userid,cur=val)
+
+            elif todo==3:
+                print(3)
+            elif todo==4:
+                cursor.execute('update provider set verified=true where p_id=%s',(int(provid),))
+                return render_template('admin_funct.html', username=username, userid=userid,success="Provider with Id:"+str(provid)+"is verified")
     return redirect(url_for('unauth'))
 
 
@@ -156,7 +172,7 @@ def prov_register():
         if(passwd==conf):
             cursor.execute("insert into user(user_ID,password,name,email) values(%s,%s,%s,%s)",(p_id,passwd,name,email))
             mydb.commit()
-            cursor.execute("insert into provider(p_id,p_scale,p_officeaddr,p_phoneNo,p_multiplier,p_PAN,p_GST) values(%s,%s,%s,%s,%s,%s,%s)",(p_id,scale,office,num,float(mult),pan,gst))
+            cursor.execute("insert into provider(p_id,p_scale,p_officeaddr,p_phoneNo,p_multiplier,p_PAN,p_GST,verified) values(%s,%s,%s,%s,%s,%s,%s,%s)",(p_id,scale,office,num,float(mult),pan,gst,False))
             mydb.commit()
             return redirect(url_for('prov_register',Success="Success Account Created:"+str(name) +" User Id:" +str(p_id)))
         else:

@@ -9,6 +9,20 @@
         #text {
             text-align: center;
         }
+
+        form {
+            text-align: center;
+        }
+
+        #pop_up {
+            font-weight: bold;
+            font-size: 1.2em;
+            padding: 10px;
+            background-color: #FFCCCC;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 
@@ -17,8 +31,39 @@
         Admin:{{username}} <br>
         Admin ID:{{userid}}
     </p>
+    {%if flag%}
     <table align="center" border="1">
         <thead>
+
+            <tr>
+                <th>p_ID </th>
+                <th>p_scale </th>
+                <th>p_officeaddr </th>
+                <th>p_multiplier</th>
+                <th>p_PAN</th>
+                <th>p_GST</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {%for row in cur%}
+            <tr>
+                <td>{{row[0]}}</td>
+                <td>{{row[1]}}</td>
+                <td>{{row[2]}}</td>
+                <td>{{row[3]}}</td>
+                <td>{{row[4]}}</td>
+                <td>{{row[5]}}</td>
+                <td>{{row[6]}}</td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+
+    {% else %}
+    <table align="center" border="1">
+        <thead>
+
             <tr>
                 <th>CustomerID </th>
                 <th>ProviderID </th>
@@ -50,6 +95,22 @@
             {%endfor%}
         </tbody>
     </table>
+    {% endif %}
+
+
+    {% if success %}
+    <p id="pop_up">{{success}}</p>
+    {%endif%}
+    {% if flag %}
+    <form action="/admin_funct" method="POST">
+        <input type="hidden" name="user_id" value="{{ userid }}">
+        <input type="hidden" name="user_name" value="{{username}}">
+        <input type="hidden" name="todo" value=4>
+        <label for="p_verify">Enter the Provider ID to be verified:</label>
+        <input type="text" name="p_id" id="p_verify">
+        <button type="submit" class="button-container">Verify registeration request</button>
+    </form>
+    {% endif %}
 </body>
 
 </html>
