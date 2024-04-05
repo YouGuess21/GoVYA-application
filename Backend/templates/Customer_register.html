@@ -23,34 +23,48 @@
         display: inline-block;
 
     }
+
+    #pop_up {
+        font-weight: bold;
+        font-size: 1.2em;
+        padding: 10px;
+        background-color: #FFCCCC;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
 </style>
 
 <body>
     <h1>Customer Registeration</h1>
+
+    {% if Success %}
+    <p id="pop_up">{{Success}}</p>
+    {% endif %}
     <div class="container">
         <div class="content"><br>
             <p>Enter Customer Details:</p>
 
-            <form>
+            <form action="/cust_reg" method='POST'>
 
                 <label for="name">Enter Name:</label>
-                <input type="text" id="name"><br><br>
+                <input type="text" id="name" name="name" required><br><br>
 
 
                 <label for="pno">Phone Number:</label>
-                <input type="text" id="pno"><br><br>
+                <input type="text" id="pno" name="pno" required><br><br>
 
                 <label for="email">Email Address:</label>
-                <input type="text" id="email"><br><br>
+                <input type="email" id="email" name="email" required><br><br>
 
                 <label for="home">Enter Home Address:</label>
-                <input type="text" id="home"><br><br>
+                <input type="text" id="home" name="home" required><br><br>
 
                 <label for="password">Create passsword:</label>
-                <input type="password" id="password"><br><br>
+                <input type="password" id="password" name="pass" required minlength="6" maxlength="16"><br><br>
 
                 <label for="confirm">Confirm password:</label>
-                <input type="text" id="confirm"><br><br>
+                <input type="password" id="confirm" name="conf" required minlength="6" maxlength="16"><br><br>
 
                 <button>Submit</button>
                 <button type="reset">Reset</button>

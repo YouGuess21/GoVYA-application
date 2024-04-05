@@ -90,7 +90,7 @@ INSERT INTO USER (user_ID, name, password, email) VALUES
 (2000, 'Ashwin', 'adminpass', 'admin1@example.com'),
 (2001, 'Yogesh', 'adminpass', 'admin2@example.com'),
 (3000, 'APM', 'providerpass', 'provider1@example.com'),
-(3001, 'DTDC', 'providerpass', 'provider2@example.com'),;
+(3001, 'DTDC', 'providerpass', 'provider2@example.com');
 
 -- Inserts for CUSTOMER table
 INSERT INTO CUSTOMER (c_ID, c_homeaddr, c_phoneNo) VALUES
