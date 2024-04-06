@@ -31,6 +31,43 @@
         Admin:{{username}} <br>
         Admin ID:{{userid}}
     </p>
+
+    {% if funct==3 %}
+    <p id="text">Employees</p>
+    <table align="center" border="1">
+
+        <thead>
+
+            <tr>
+                <th>p_ID </th>
+                <th>p_scale </th>
+                <th>p_officeaddr </th>
+                <th>p_phoneNo</th>
+                <th>Is Assisting <br>(0 means not assigned)</th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+            {%for row in cur%}
+            <tr>
+                <td>{{row[0]}}</td>
+                <td>{{row[1]}}</td>
+                <td>{{row[2]}}</td>
+                <td>
+                    {% for row2 in cur2 %}
+                    {% if row[0]==row2[0] %}
+                    {{row2[1]}}<br>
+                    {% endif %}
+                    {% endfor %}
+                </td>
+                <td>{{row[3]}}</td>
+
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+    {% endif %}
     {%if flag%}
     <table align="center" border="1">
         <thead>
@@ -39,6 +76,7 @@
                 <th>p_ID </th>
                 <th>p_scale </th>
                 <th>p_officeaddr </th>
+                <th>p_phoneNo</th>
                 <th>p_multiplier</th>
                 <th>p_PAN</th>
                 <th>p_GST</th>
@@ -60,7 +98,7 @@
         </tbody>
     </table>
 
-    {% else %}
+    {% elif funct==2 %}
     <table align="center" border="1">
         <thead>
 

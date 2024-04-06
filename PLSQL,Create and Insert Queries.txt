@@ -1,3 +1,21 @@
+PL/SQL Used
+
+--create trigger
+-- not used create or replace as no in MySQL 
+
+DELIMITER //
+DROP TRIGGER IF EXISTS set_isAssisting_to_zero//
+CREATE TRIGGER set_isAssisting_to_zero
+AFTER DELETE ON user
+FOR EACH ROW
+BEGIN
+    UPDATE EMPLOYEE
+    SET isAssisting = 0
+    WHERE isAssisting = OLD.user_ID;
+END//
+DELIMITER ;
+
+
 CREATE TABLE USER (
     user_ID INT PRIMARY KEY,
     password VARCHAR(16),
@@ -67,14 +85,17 @@ CREATE TABLE ORDERS (
 CREATE TABLE EMPLOYEE (
     emp_ID INT PRIMARY KEY,
     emp_email VARCHAR(50),
-    emp_salary FLOAT
+    emp_salary FLOAT,
+    isAssisting INT DEFAULT 0
 );
+
+
 
 CREATE TABLE EMP_PHONENO (
     emp_ID INT,
     emp_phoneNo VARCHAR(15),
     PRIMARY KEY (emp_ID, emp_phoneNo),
-    FOREIGN KEY (emp_ID) REFERENCES EMPLOYEE(emp_ID)
+    FOREIGN KEY (emp_ID) REFERENCES EMPLOYEE(emp_ID) on DELETE CASCADE
 );
 
 
@@ -124,10 +145,11 @@ INSERT INTO ORDERS (c_ID, p_ID, order_ID, weight, size, type, speed, start_date,
 
 -- Inserts for EMPLOYEE table
 INSERT INTO EMPLOYEE (emp_ID, emp_email, emp_salary) VALUES
-(1, 'employee1@example.com', 50000.00),
-(2, 'employee2@example.com', 60000.00);
+(4001, 'employee1@example.com', 50000.00),
+(4002, 'employee2@example.com', 60000.00);
 
 -- Inserts for EMP_PHONENO table
 INSERT INTO EMP_PHONENO (emp_ID, emp_phoneNo) VALUES
-(1, '555-1111'),
-(2, '555-2222');
+(4001, '555-1111'),
+(4001, '555-2222'),
+(4002, '555-3333');
