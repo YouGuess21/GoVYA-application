@@ -62,13 +62,29 @@ def Admin_fun():
             elif todo==2:
                 cursor.execute('SELECT  * from orders')
                 val=cursor.fetchall()
-                return render_template('admin_funct.html', username=username, userid=userid,cur=val)
+                return render_template('admin_funct.html', username=username, userid=userid,cur=val,cur2=val,funct=2)
 
             elif todo==3:
-                print(3)
+                cursor.execute('select * from employee')
+                val=cursor.fetchall()
+                cursor.execute('select * from emp_Phoneno')
+                val2=cursor.fetchall()
+                return render_template('admin_funct.html', username=username, userid=userid,cur=val,cur2=val2,funct=3)
+                
             elif todo==4:
-                cursor.execute('update provider set verified=true where p_id=%s',(int(provid),))
-                return render_template('admin_funct.html', username=username, userid=userid,success="Provider with Id:"+str(provid)+"is verified")
+                cursor.execute('SELECT  * from provider where not verified')
+                val=cursor.fetchall()
+                for i in val:
+                    if(provid==i[0]):
+                        cursor.execute('update provider set verified=true where p_id=%s',(int(provid),))
+                        mydb.commit()
+                        cursor.execute('SELECT  * from provider where not verified')
+                        val2=cursor.fetchall()
+                        return render_template('admin_funct.html', username=username, userid=userid,success="Provider with Id:"+str(provid)+" is verified",cur=val2)
+                    
+                cursor.execute('SELECT  * from provider where not verified')
+                val2=cursor.fetchall()
+                return render_template('admin_funct.html', username=username, userid=userid,success="Provider with Id:"+str(provid)+" is already verified or it doesn't Exist",cur=val2) 
     return redirect(url_for('unauth'))
 
 
