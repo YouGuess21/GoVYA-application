@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Functions|Go-VYA</title>
+    <style>
+        #text {
+            text-align: center;
+        }
+
+        #pop_up {
+            font-weight: bold;
+            font-size: 1.2em;
+            padding: 10px;
+            background-color: #FFCCCC;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    
+    {% if funct==1 %}
+    <h1 id="text">Profile</h1>
+    <table align="center" border="1">
+        <tr>
+            <!-- c_ID,name,email,c_homeaddr,c_phoneNo -->
+            <th>Customer ID:</th>
+            <td>{{user_data[0]}}</td>
+        </tr>
+        <tr>
+            <th>Name:</th>
+            <td>{{user_data[1]}}</td>
+        </tr>
+        <tr>
+            <th>Email:</th>
+            <td>{{user_data[2]}}</td>
+        </tr>
+        <tr>
+            <th>Home Address</th>
+            <td>{{user_data[3]}}</td>
+        </tr>
+        <tr>
+            <th>Phone Number:</th>
+            <td>{{user_data[4]}}</td>
+        </tr>
+    </table>
+    {% endif %}
+</body>
+
+</html>
