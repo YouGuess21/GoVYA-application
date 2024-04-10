@@ -23,11 +23,16 @@
 
 <body>
     <h1>Customer Dashboard</h1>
-    <p>{{Welcome}}</p>
+    <p>Welcome Customer {{ username }}</p>
     <p>Id:{{userid}}</p>
 
+    <form action="/cust_funct" method='POST'>
+        <input type="hidden" name="user_id" value="{{userid}}">
+        <input type="hidden" name="todo" value=1>
 
-    <button>Profile</button>
+        <button>Profile</button>
+    </form>
+    
     <button>Place Order</button>
     <button>Check quotes</button>
     <button>View Status</button>
