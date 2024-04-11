@@ -4,18 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Functions|Go-VYA</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='/cust_funct_style.css') }}">
+    <title>Provider Functions|Go-VYA</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/prov_funct_styles.css') }}">
 </head>
 
 <body>
     <div>
         {% if funct==1 %}
-        <h1 id="head">Customer Profile</h1>
+        {{todo}}
+        <h1 id="head">Provider Profile</h1>
         <table align="center" border="1">
             <tr>
-                <!-- c_ID,name,email,c_homeaddr,c_phoneNo -->
-                <th>Customer ID:</th>
+                <th>Provider ID:</th>
                 <td>{{user_data[0]}}</td>
             </tr>
             <tr>
@@ -27,29 +27,46 @@
                 <td>{{user_data[2]}}</td>
             </tr>
             <tr>
-                <th>Home Address</th>
+                <th>Scale:</th>
                 <td>{{user_data[3]}}</td>
             </tr>
             <tr>
-                <th>Phone Number:</th>
+                <th>Office Address:</th>
                 <td>{{user_data[4]}}</td>
+            </tr>
+            <!-- select user_ID,name,email,p_scale,p_officeaddr,p_phoneNo,p_multiplier,p_PAN,p_GST from user join provider on user_id=p_id where p_id= -->
+            <tr>
+                <th>Phone Number:</th>
+                <td>{{user_data[5]}}</td>
+            </tr>
+            <tr>
+                <th>Cost Multiplier:</th>
+                <td>{{user_data[6]}}</td>
+            </tr>
+            <tr>
+                <th>PAN:</th>
+                <td>{{user_data[7]}}</td>
+            </tr>
+            <tr>
+                <th>GST Number:</th>
+                <td>{{user_data[8]}}</td>
             </tr>
         </table>
 
         {% if deletefail %}
-        <p id="pop_up">Failed To Delete Account,as Uncompleted orders In progress</p>
+        <h1 id="pop_up">Failed To Delete Account,as Uncompleted orders remain</h1>
         {%endif%}
 
-        {% if delacc %}
+        {% if delacc%}
         <div id="pop_up">
             Are you sure you want to delete your account?<br>
-            <form action="/cust_funct" method='POST' id="but_popup">
+            <form action="/prov_funct" method='POST' id="but_popup">
                 <input type="hidden" name="user_id" value="{{userid}}">
                 <input type="hidden" name="todo" value=7>
                 <button>Yes</button>
             </form>
 
-            <form action="/cust_funct" method='POST' id="but_popup">
+            <form action="/prov_funct" method='POST' id="but_popup">
                 <input type="hidden" name="user_id" value="{{userid}}">
                 <input type="hidden" name="todo" value=1>
                 <!-- todo=1 ie go back to profile viewing -->
@@ -60,21 +77,21 @@
         {% if updateacc %}
 
         <!--  -->
-        <form action="/cust_funct" method='POST'>
+        <form action="/prov_funct" method='POST'>
             <p>Hi</p>
         </form>
         {% endif %}
-
+        <!--  -->
 
         <div id="inline">
-            <form action="/cust_funct" method='POST'>
+            <form action="/prov_funct" method='POST'>
                 <input type="hidden" name="user_id" value="{{userid}}">
                 <input type="hidden" name="todo" value=5>
                 <button>Delete Account</button>
             </form>
         </div>
         <div id="inline">
-            <form action="/cust_funct" method='POST'>
+            <form action="/prov_funct" method='POST'>
                 <input type="hidden" name="user_id" value="{{userid}}">
                 <input type="hidden" name="todo" value=6>
                 <button> Update Account </button>
@@ -84,10 +101,12 @@
 
 
 
-
         {% endif %}
-        <!-- endif for fucnt==1 -->
     </div>
+
+
+
+
 </body>
 
 </html>

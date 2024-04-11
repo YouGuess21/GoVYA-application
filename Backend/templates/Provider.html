@@ -22,14 +22,18 @@
 
 <body>
     <h1>Provider Dashboard</h1>
-    {{Welcome}}
+    Welcome Provider {{username}}
     <p>Id:{{userid}}</p>
     <br>
     <div id="inline">
-        <button class="button-container">Profile</button>
-        <button class="button-container">View Requests</button>
-        <button class="button-container">Update order status</button>
-        <button class="button-container">View completed Orders</button>
+        <form action="/prov_funct" method='POST'>
+            <input type="hidden" name="user_id" value="{{userid}}">
+            <input type="hidden" name="todo" value=1>
+            <button>Profile</button>
+        </form>
+        <button>View Requests</button>
+        <button>Update order status</button>
+        <button>View completed Orders</button>
     </div>
 </body>
 
