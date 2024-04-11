@@ -1,4 +1,4 @@
-from flask import Flask,render_template,request,redirect,url_for
+from flask import Flask,render_template,request,redirect,url_for,flash
 import mysql.connector
 from flask_wtf import FlaskForm
 from wtforms import StringField,SubmitField,PasswordField
@@ -38,6 +38,26 @@ def CustomerFunction():
             #used fetchone because only one output would be there
             #didn't check wether it occured or not as it will definitely exist as we are inside it's login page
             return render_template('Cust_funct.html',userid=user_id,user_data=userdata,funct=1)
+        if(todo==5):#delete acc
+            cursor.execute("select c_ID,name,email,c_homeaddr,c_phoneNo from user join customer on user_ID=c_id where user_id=%s",(user_id,))
+            userdata=cursor.fetchone() 
+            return render_template('Cust_funct.html',userid=user_id,user_data=userdata,funct=1,delacc=True)
+        if(todo==6):#update acc
+            cursor.execute("select c_ID,name,email,c_homeaddr,c_phoneNo from user join customer on user_ID=c_id where user_id=%s",(user_id,))
+            userdata=cursor.fetchone() 
+            return render_template('Cust_funct.html',userid=user_id,user_data=userdata,funct=1,updateacc=True)
+        
+        if(todo==7):#deleteing acc after confirmation
+            cursor.execute("select * from orders where c_id=%s and status not like 'Complete%'",(user_id,))
+            value=cursor.fetchall()
+            if not value:
+               cursor.execute("delete from user where user_id=%s",(user_id,))
+               mydb.commit() 
+               return render_template('User_deleted.html',userid=user_id)
+            else:
+                cursor.execute("select c_ID,name,email,c_homeaddr,c_phoneNo from user join customer on user_ID=c_id where user_id=%s",(user_id,))
+                userdata=cursor.fetchone() 
+                return render_template('Cust_funct.html',userid=user_id,user_data=userdata,funct=1,deletefail=True)
     return redirect(url_for('unauth'))
 
 @app.route('/Customer',methods=['GET', 'POST'])
@@ -49,6 +69,52 @@ def customer():
     else:
         return redirect(url_for('unauth'))
 
+@app.route('/Provider', methods=['GET', 'POST'])
+def provider():
+    uname = request.args.get('Username', default='', type=str)
+    userid = request.args.get('userID', default=0, type=int)
+    if uname:
+        return render_template('Provider.html', username=uname,userid=userid)
+    else:
+        return redirect(url_for('unauth'))
+
+@app.route('/prov_funct', methods=['GET', 'POST'])
+def ProviderFunction():
+    if request.method == 'POST':
+        user_id= request.form.get("user_id", default=0, type=int)
+        todo=request.form.get('todo', default=0,type=int)
+        if(todo==1):#profile view
+            cursor.execute("select user_ID,name,email,p_scale,p_officeaddr,p_phoneNo,p_multiplier,p_PAN,p_GST from user join provider on user_id=p_id where p_id=%s",(user_id,))
+            userdata=cursor.fetchone()   
+            return render_template('prov_funct.html',userid=user_id,user_data=userdata,funct=1)
+        
+        if(todo==5):#delete acc
+            cursor.execute("select user_ID,name,email,p_scale,p_officeaddr,p_phoneNo,p_multiplier,p_PAN,p_GST from user join provider on user_id=p_id where p_id=%s",(user_id,))
+            userdata=cursor.fetchone() 
+            return render_template('prov_funct.html',userid=user_id,user_data=userdata,funct=1,delacc=True)
+        if(todo==6):#update acc
+            cursor.execute("select user_ID,name,email,p_scale,p_officeaddr,p_phoneNo,p_multiplier,p_PAN,p_GST from user join provider on user_id=p_id where p_id=%s",(user_id,))
+            userdata=cursor.fetchone() 
+            return render_template('prov_funct.html',userid=user_id,user_data=userdata,funct=1,updateacc=True)
+        
+        if(todo==7):#deleteing acc after confirmation
+            cursor.execute("select * from orders where p_id=%s and status not like 'Complete%'",(user_id,))
+            value=cursor.fetchall()
+            if not value:
+               cursor.execute("delete from user where user_id=%s",(user_id,))
+               mydb.commit() 
+               return render_template('User_deleted.html',userid=user_id)
+            else:
+                cursor.execute("select user_ID,name,email,p_scale,p_officeaddr,p_phoneNo,p_multiplier,p_PAN,p_GST from user join provider on user_id=p_id where p_id=%s",(user_id,))
+                userdata=cursor.fetchone() 
+                return render_template('prov_funct.html',userid=user_id,user_data=userdata,funct=1,deletefail=True)
+    return redirect(url_for('unauth'))
+
+@app.route('/deleted')
+def udeleted():
+    if(request.method == 'POST'):
+        return render_template('User_deleted.html')
+    return redirect(url_for('unauth'))
 
 @app.route('/admin',methods=['GET','POST'])
 def Admin():
@@ -103,15 +169,6 @@ def Admin_fun():
     return redirect(url_for('unauth'))
 
 
-@app.route('/Provider')
-def provider():
-    welcome = request.args.get('Welcome', default='', type=str)
-    userid = request.args.get('userID', default=0, type=int)
-    if welcome:
-        return render_template('Provider.html', Welcome=welcome,userid=userid)
-    else:
-        return redirect(url_for('unauth'))
-
 @app.route('/unauthorized_Access')
 def unauth():
     return render_template('unauthacc.html')
@@ -138,7 +195,7 @@ def user_selector():
                     return redirect(url_for('Admin',Username=name,userID=entered_userid))
                 if(int(int(row[0])/1000)==3):
                     name=row[2]
-                    return redirect(url_for('provider',Welcome="Welcome Provider "+name,userID=entered_userid))
+                    return redirect(url_for('provider',Username=name,userID=entered_userid))
         return render_template('User_selector.html', Welcome='User Id or Password is Wrong')
     return redirect(url_for('unauth'))
 
@@ -163,7 +220,7 @@ def cust_register():
         cur=cursor.fetchall()
         for i in cur:
             if(i and email==i[0]):
-                return redirect(url_for('cust_register',Success="Email Already Exists,Retry?"))
+                return redirect(url_for('cust_register',Success="Account with same Email-Id Already Exists,Retry?"))
 
         if(passwd==conf):
             cursor.execute("insert into user(user_ID,password,name,email) values(%s,%s,%s,%s)",(c_id,passwd,name,email))
