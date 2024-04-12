@@ -70,7 +70,32 @@ def CustomerFunction():
             cursor.callproc('addrequest', (user_id, weight, size, speed, dist, startpt, endpt))
             cursor.execute("select max(req_id) from requests")
             rid=cursor.fetchone()[0]
+            cursor.close()
             return render_template('Cust_funct.html',userid=user_id,r_id=rid,funct=2,success=True)
+        
+        if(todo == 9):
+            
+            cursor.execute("select * from employee where isAssisting=%s",(0,))  
+            results = cursor.fetchall()
+            for row in results:
+                if row:
+                    empid = row[0]
+                    break
+            print(empid)
+            if empid is not None :
+                
+                cursor.execute("select * from employee natural join EMP_PHONENO where emp_id =%s",(int(empid),) )
+                val2=cursor.fetchall()
+                for row in val2:
+                    if row:
+                        val=row
+                        break
+                cursor.execute("update employee set isAssisting=%s where emp_id =%s",(user_id,empid))
+                mydb.commit()
+                return render_template('Cust_funct.html',row=val,cur2=val2,assigned=True,funct=2)
+
+            else:
+                return render_template('Cust_funct.html',unassigned=True,funct=2)
 
     return redirect(url_for('unauth'))
 
@@ -119,6 +144,7 @@ def ProviderFunction():
             if not value:
                cursor.execute("delete from user where user_id=%s",(user_id,))
                mydb.commit() 
+
                return render_template('User_deleted.html',userid=user_id)
             else:
                 cursor.execute("select user_ID,name,email,p_scale,p_officeaddr,p_phoneNo,p_multiplier,p_PAN,p_GST from user join provider on user_id=p_id where p_id=%s",(user_id,))
