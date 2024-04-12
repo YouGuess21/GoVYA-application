@@ -187,9 +187,9 @@ INSERT INTO ORDERS (c_ID, p_ID, order_ID, weight, size, type, speed, start_date,
 (1001, 3001, 2, 8.2, 2.5, 'Small', 'Normal', '2024-03-20', 'Processing', 15.7);
 
 -- Inserts for EMPLOYEE table
-INSERT INTO EMPLOYEE (emp_ID, emp_email, emp_salary) VALUES
-(4001, 'employee1@example.com', 50000.00),
-(4002, 'employee2@example.com', 60000.00);
+INSERT INTO EMPLOYEE (emp_ID, emp_email, emp_salary,isAssisting) VALUES
+(4001, 'employee1@example.com', 50000.00,0),
+(4002, 'employee2@example.com', 60000.00,0);
 
 -- Inserts for EMP_PHONENO table
 INSERT INTO EMP_PHONENO (emp_ID, emp_phoneNo) VALUES
