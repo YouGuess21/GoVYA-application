@@ -106,7 +106,9 @@ CREATE TABLE QUOTES (
     p_ID INT,
     quote_amt FLOAT,
     quote_speed INT,
-    FOREIGN KEY (p_ID) REFERENCES PROVIDER(p_ID) on DELETE CASCADE
+    req_id INT,
+    FOREIGN KEY (p_ID) REFERENCES PROVIDER(p_ID) on DELETE CASCADE,
+    FOREIGN KEY (req_ID) REFERENCES requests(req_ID) on DELETE CASCADE
 );
 
 CREATE TABLE ORDERS (
@@ -120,6 +122,7 @@ CREATE TABLE ORDERS (
     start_date DATE,
     status VARCHAR(50),
     dist FLOAT,
+    bill float,
     PRIMARY KEY (c_ID, p_ID, order_ID),
     FOREIGN KEY (c_ID) REFERENCES CUSTOMER(c_ID) on DELETE CASCADE,
     FOREIGN KEY (p_ID) REFERENCES PROVIDER(p_ID) on DELETE CASCADE
@@ -172,19 +175,19 @@ INSERT INTO ADMIN (adm_ID, adm_join_date) VALUES
 (2001, '2024-02-20');
 
 -- Inserts for REQUESTS table
-INSERT INTO REQUESTS (req_ID, c_ID, req_weight, req_size, req_speed, req_dist, req_type) VALUES
-(1, 1000, 10.5, 3.2, 5, 20.5, 'Large'),
-(2, 1001, 8.2, 2.5, 3, 15.7, 'Small');
+INSERT INTO REQUESTS (req_ID, c_ID, req_weight, req_size, req_speed, req_dist, req_type,start,end) VALUES
+(1, 1000, 10.5, 3.2, 5, 20.5, 'Large','delhi','haryana'),
+(2, 1001, 8.2, 2.5, 3, 15.7, 'Small','Manipal','Udupi');
 
 -- Inserts for QUOTES table
-INSERT INTO QUOTES (quote_ID, p_ID, quote_amt, quote_speed) VALUES
-(1, 3000, 1500.0, 5),
-(2, 3001, 1200.0, 10);
+INSERT INTO QUOTES (quote_ID, p_ID, quote_amt, quote_speed,req_id) VALUES
+(1, 3000, 1500.0, 3,2),
+(2, 3001, 1200.0, 2,2);
 
 -- Inserts for ORDERS table
 INSERT INTO ORDERS (c_ID, p_ID, order_ID, weight, size, type, speed, start_date, status, dist) VALUES
-(1000, 3000, 1, 10.5, 3.2, 'Large', 'Fast', '2024-03-15', 'Reached Bangalore HUB', 20.5),
-(1001, 3001, 2, 8.2, 2.5, 'Small', 'Normal', '2024-03-20', 'Processing', 15.7);
+(1000, 3000, 1, 10.5, 3.2, 'Large', 'Fast', '2024-03-15', 'Reached Bangalore HUB', 20.5,1500),
+(1001, 3001, 2, 8.2, 2.5, 'Small', 'Normal', '2024-03-20', 'Processing', 15.7,2000);
 
 -- Inserts for EMPLOYEE table
 INSERT INTO EMPLOYEE (emp_ID, emp_email, emp_salary,isAssisting) VALUES
@@ -196,3 +199,5 @@ INSERT INTO EMP_PHONENO (emp_ID, emp_phoneNo) VALUES
 (4001, '555-1111'),
 (4001, '555-2222'),
 (4002, '555-3333');
+
+

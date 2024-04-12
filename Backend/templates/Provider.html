@@ -31,7 +31,12 @@
             <input type="hidden" name="todo" value=1>
             <button>Profile</button>
         </form>
-        <button>View Requests</button>
+        <form action="/prov_funct" method='POST'>
+            <input type="hidden" name="user_id" value="{{userid}}">
+            <input type="hidden" name="todo" value=2>
+            <button>View Requests</button>
+        </form>
+        
         <button>Update order status</button>
         <button>View completed Orders</button>
     </div>

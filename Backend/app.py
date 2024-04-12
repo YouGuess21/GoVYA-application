@@ -75,14 +75,15 @@ def CustomerFunction():
         
         if(todo == 9):
             
-            cursor.execute("select * from employee where isAssisting=%s",(0,))  
+            cursor.execute("select * from employee where isAssisting=0")  
             results = cursor.fetchall()
+            empid=0
             for row in results:
                 if row:
-                    empid = row[0]
+                    empid = int(row[0])
                     break
-            print(empid)
-            if empid is not None :
+            
+            if empid != 0 :
                 
                 cursor.execute("select * from employee natural join EMP_PHONENO where emp_id =%s",(int(empid),) )
                 val2=cursor.fetchall()
@@ -124,11 +125,13 @@ def ProviderFunction():
     if request.method == 'POST':
         user_id= request.form.get("user_id", default=0, type=int)
         todo=request.form.get('todo', default=0,type=int)
+        
+        
         if(todo==1):#profile view
             cursor.execute("select user_ID,name,email,p_scale,p_officeaddr,p_phoneNo,p_multiplier,p_PAN,p_GST from user join provider on user_id=p_id where p_id=%s",(user_id,))
             userdata=cursor.fetchone()   
             return render_template('prov_funct.html',userid=user_id,user_data=userdata,funct=1)
-        
+
         if(todo==5):#delete acc
             cursor.execute("select user_ID,name,email,p_scale,p_officeaddr,p_phoneNo,p_multiplier,p_PAN,p_GST from user join provider on user_id=p_id where p_id=%s",(user_id,))
             userdata=cursor.fetchone() 
@@ -150,6 +153,54 @@ def ProviderFunction():
                 cursor.execute("select user_ID,name,email,p_scale,p_officeaddr,p_phoneNo,p_multiplier,p_PAN,p_GST from user join provider on user_id=p_id where p_id=%s",(user_id,))
                 userdata=cursor.fetchone() 
                 return render_template('prov_funct.html',userid=user_id,user_data=userdata,funct=1,deletefail=True)
+        if(todo==2):
+            cursor.execute("select p_scale from provider where p_id=%s",(user_id,))
+            scale=cursor.fetchone()[0]
+            if(scale=="Small"):
+                cursor.execute("select * from requests where req_type like 'Small'")
+                val=cursor.fetchall()
+            if(scale=="Medium"):
+                cursor.execute("select * from requests where req_type like 'Small' or req_type like 'Medium'")
+                val=cursor.fetchall()
+            if(scale=="Large"):
+                cursor.execute("select * from requests where req_type like 'Small' or req_type like 'Medium' or req_type like 'Large'")
+                val=cursor.fetchall()
+            if bool(val):
+                return render_template('prov_funct.html',userid=user_id,cur=val,funct=2,req_exist=True)
+            else:
+                return render_template('prov_funct.html',userid=user_id,funct=2,req_not=True)
+        
+        if todo==8 :
+            
+            rid= request.form.get("rid", default=0, type=int)
+            amount= request.form.get("amt", default=0, type=int)
+            days= request.form.get("days", default=0,type=int)
+            
+            cursor.execute("select max( distinct quote_id) from quotes")
+            val=cursor.fetchone()
+            if not bool(val):
+                quoteid=0
+                
+            else:
+                quoteid=val[0]
+            
+            quoteid=quoteid+1
+            cursor.execute("insert into quotes(quote_id,p_id,quote_amt,quote_speed,req_id) values(%s,%s,%s,%s,%s)",(quoteid,user_id,amount,days,rid))
+            mydb.commit()
+            cursor.execute("select p_scale from provider where p_id=%s",(user_id,))
+            scale=cursor.fetchone()[0]
+            if(scale=="Small"):
+                cursor.execute("select * from requests where req_type like 'Small'")
+                val=cursor.fetchall()
+            if(scale=="Medium"):
+                cursor.execute("select * from requests where req_type like 'Small' or req_type like 'Medium'")
+                val=cursor.fetchall()
+            if(scale=="Large"):
+                cursor.execute("select * from requests where req_type like 'Small' or req_type like 'Medium' or req_type like 'Large'")
+                val=cursor.fetchall()
+            return render_template('prov_funct.html',userid=user_id,funct=2,qid=quoteid,qcreate=True,req_exist=True,cur=val)
+            
+
     return redirect(url_for('unauth'))
 
 @app.route('/deleted')
@@ -237,7 +288,14 @@ def user_selector():
                     return redirect(url_for('Admin',Username=name,userID=entered_userid))
                 if(int(int(row[0])/1000)==3):
                     name=row[2]
-                    return redirect(url_for('provider',Username=name,userID=entered_userid))
+                    cursor.execute("select verified from provider where p_id=%s",(entered_userid,))
+                    stat=cursor.fetchone()[0];
+                    if stat == 1:
+                        return redirect(url_for('provider',Username=name,userID=entered_userid))
+                    else:
+                        return render_template('User_selector.html', Welcome='Account is not yet Verified')
+                
+                        
         return render_template('User_selector.html', Welcome='User Id or Password is Wrong')
     return redirect(url_for('unauth'))
 
