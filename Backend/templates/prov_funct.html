@@ -9,9 +9,10 @@
 </head>
 
 <body>
-    <div>
-        {% if funct==1 %}
-        {{todo}}
+
+    {% if funct==1 %}
+    <div id="funct1">
+
         <h1 id="head">Provider Profile</h1>
         <table align="center" border="1">
             <tr>
@@ -97,12 +98,82 @@
                 <button> Update Account </button>
             </form>
         </div>
+        {% endif %}
+    </div>
+    <div id="funct2">
+        {% if funct==2 %}
+
+
+        <h1 id="head">Available Delivery Requests</h1>
+        {% if req_not %}
+        <h2 id="pop_up">No orders Available</h2>
+        {% endif %}
+
+        {% if req_exist %}
+        <table align="center" border="1">
+
+            <thead>
+                <tr>
+                    <th>Request ID </th>
+                    <th>Customer ID </th>
+                    <th>Weight of Package<br>(Kg) </th>
+                    <th>Size in Volume<br>(L)</th>
+                    <th>Requested Delivery Time<br>(In days)</th>
+                    <th>Distance<br>(Km)</th>
+                    <th>Scale</th>
+                    <th>Pickup Location</th>
+                    <th>Dropoff Location</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- req_ID | c_ID | req_weight | req_size | req_speed | req_dist | req_type | start   | end -->
+                {% for row in cur%}
+                <tr>
+                    <td>{{row[0]}}</td>
+                    <td>{{row[1]}}</td>
+                    <td>{{row[2]}}</td>
+                    <td>{{row[3]}}</td>
+                    <td>{{row[4]}}</td>
+                    <td>{{row[5]}}</td>
+                    <td>{{row[6]}}</td>
+                    <td>{{row[7]}}</td>
+                    <td>{{row[8]}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% if qcreate %}
+            <div id="pop_up">Quote created with the Id {{qid}}</div>
+        {% endif %}
+        <p>Select the request to create a quote and Enter Quote Details</p>
+
+        <form action="/prov_funct" method='post'>
+            <input type="hidden" name="user_id" value="{{userid}}">
+            <input type="hidden" name="todo" value=8>
+
+            <label >Enter the Request ID to be accepted:</label>
+            <input type="text" name="rid" required>
+
+            <label >Amount:</label>
+            <input type="text" name="amt" required>
+
+            <label>Estimated Delivery time(days):</label>
+            <input type="text" name="days"  required>
+
+            <button type="submit" class="button-container">Submit</button>
+        </form>
+
+        
+
+        {% endif %}
 
 
 
 
         {% endif %}
     </div>
+
+
 
 
 
