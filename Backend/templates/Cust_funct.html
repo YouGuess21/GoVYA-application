@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <div>
+    <div id="funct1">
         {% if funct==1 %}
         <h1 id="head">Customer Profile</h1>
         <table align="center" border="1">
@@ -87,6 +87,49 @@
 
         {% endif %}
         <!-- endif for fucnt==1 -->
+    </div>
+
+    <div>
+        {% if funct==2 %}
+        {% if success %}
+            <p id="pop_up">Your Request with Id:{{r_id}}has been created successfully</p>
+        {%endif%}
+        <h1 id="head">Create request</h1>
+        <form action="/cust_funct" method="post">
+            <input type="hidden" name="user_id" value="{{userid}}">
+            <input type="hidden" name="todo" value=8>
+
+            <label for="weight">Weight of Package(In Kg):</label>
+            <input type="text" id="weight" name="weight" required><br><br>
+
+            <label for="size">volumetric Size(in L):</label>
+            <input type="text" id="size" name="size" required><br><br>
+
+            <label for="speed">Expected Delivery Time(in days):</label>
+            <input type="text" id="speed" name="speed" required><br><br>
+
+            <label for="dist">Distance:</label>
+            <input type="text" id="dist" name="dist" required><br><br>
+            
+            <label for="startpt">Pickup Location:</label>
+            <input type="text" id="start" name="startpt" required><br><br>
+
+            <label for="endpt">Drop Off Location:</label>
+            <input type="text" id="endpt" name="endpt" required><br><br>
+
+            <button>Create Request</button>
+            <button type="reset">Reset</button>
+        </form>
+
+
+        <form action="/cust_funct">
+            <input type="hidden" name="user_id" value="{{userid}}">
+            <input type="hidden" name="todo" value=9>
+            <label for="assist">Need Assistance(Paid Service):</label>
+            <button id="assist">Need Assistance?</button>
+        </form>
+       
+        {%endif%}
     </div>
 </body>
 

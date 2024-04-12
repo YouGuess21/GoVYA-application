@@ -1,8 +1,38 @@
 PL/SQL Used
 
+--Procedure used to create request and assign it to the order_ID
+-- also dynamically selects the order type looking at the values of weight and distance
+DELIMITER //
+DROP PROCEDURE IF EXISTS addrequest;
+CREATE PROCEDURE addrequest(cid INT, weight FLOAT, size FLOAT, speed FLOAT, dist FLOAT, strt VARCHAR(50), endpt VARCHAR(50))
+BEGIN
+    DECLARE r_id INT;
+    SELECT MAX(req_id) INTO r_id FROM requests;
+    IF r_id IS NULL THEN
+        SET r_id = 1;
+    ELSE
+        SET r_id = r_id + 1;
+    END IF;
+    
+    IF weight < 50 AND dist < 15 THEN
+        INSERT INTO requests (req_id, c_id, req_weight, req_size, req_speed, req_dist, req_type, `start`, `end`) 
+        VALUES (r_id, cid, weight, size, speed, dist, 'Small', strt, endpt);
+    ELSEIF weight < 100 AND dist < 50 THEN
+        INSERT INTO requests (req_id, c_id, req_weight, req_size, req_speed, req_dist, req_type, `start`, `end`) 
+        VALUES (r_id, cid, weight, size, speed, dist, 'Medium', strt, endpt);
+    ELSE
+        INSERT INTO requests (req_id, c_id, req_weight, req_size, req_speed, req_dist, req_type, `start`, `end`) 
+        VALUES (r_id, cid, weight, size, speed, dist, 'Large', strt, endpt);
+    END IF;
+    COMMIT;
+END//
+DELIMITER ;
+-- Example call addrequest(1001,56.5,100,10,100,'delhi','haryana');
+
+
+
 --create trigger
 -- not used create or replace as no in MySQL 
-
 DELIMITER //
 DROP TRIGGER IF EXISTS set_isAssisting_to_zero//
 CREATE TRIGGER set_isAssisting_to_zero
@@ -13,6 +43,17 @@ BEGIN
     SET isAssisting = 0
     WHERE isAssisting = OLD.user_ID;
 END//
+DELIMITER ;
+
+--function Calling a user by ID
+--used in provider,customer and admin function
+DROP procedure IF EXISTS GetUserByID;
+DELIMITER //
+CREATE procedure GetUserByID(IN p_user_id INT,out uname varchar) 
+as
+BEGIN
+    SELECT name into uname FROM user WHERE user_id = p_user_id;
+END //
 DELIMITER ;
 
 
@@ -27,7 +68,7 @@ CREATE TABLE CUSTOMER (
     c_ID INT PRIMARY KEY,
     c_homeaddr VARCHAR(255),
     c_phoneNo VARCHAR(15),
-    FOREIGN KEY (c_ID) REFERENCES USER(user_ID)
+    FOREIGN KEY (c_ID) REFERENCES USER(user_ID) on DELETE CASCADE
 );
 
 CREATE TABLE PROVIDER (
@@ -38,13 +79,13 @@ CREATE TABLE PROVIDER (
     p_multiplier FLOAT,
     p_PAN VARCHAR(20),
     p_GST VARCHAR(20),
-    FOREIGN KEY (p_ID) REFERENCES USER(user_ID)
+    FOREIGN KEY (p_ID) REFERENCES USER(user_ID) on DELETE CASCADE
 );
 
 CREATE TABLE ADMIN (
     adm_ID INT PRIMARY KEY,
     adm_join_date DATE,
-    FOREIGN KEY (adm_ID) REFERENCES USER(user_ID)
+    FOREIGN KEY (adm_ID) REFERENCES USER(user_ID) on DELETE CASCADE
 );
 
 CREATE TABLE REQUESTS (
@@ -55,7 +96,9 @@ CREATE TABLE REQUESTS (
     req_speed INT,
     req_dist FLOAT,
     req_type VARCHAR(50),
-    FOREIGN KEY (c_ID) REFERENCES CUSTOMER(c_ID)
+    start varchar(50),
+    end varchar (50),
+    FOREIGN KEY (c_ID) REFERENCES CUSTOMER(c_ID) on DELETE CASCADE
 );
 
 CREATE TABLE QUOTES (
@@ -63,7 +106,7 @@ CREATE TABLE QUOTES (
     p_ID INT,
     quote_amt FLOAT,
     quote_speed INT,
-    FOREIGN KEY (p_ID) REFERENCES PROVIDER(p_ID)
+    FOREIGN KEY (p_ID) REFERENCES PROVIDER(p_ID) on DELETE CASCADE
 );
 
 CREATE TABLE ORDERS (
@@ -78,8 +121,8 @@ CREATE TABLE ORDERS (
     status VARCHAR(50),
     dist FLOAT,
     PRIMARY KEY (c_ID, p_ID, order_ID),
-    FOREIGN KEY (c_ID) REFERENCES CUSTOMER(c_ID),
-    FOREIGN KEY (p_ID) REFERENCES PROVIDER(p_ID)
+    FOREIGN KEY (c_ID) REFERENCES CUSTOMER(c_ID) on DELETE CASCADE,
+    FOREIGN KEY (p_ID) REFERENCES PROVIDER(p_ID) on DELETE CASCADE
 );
 
 CREATE TABLE EMPLOYEE (

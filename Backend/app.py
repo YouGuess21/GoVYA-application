@@ -38,6 +38,8 @@ def CustomerFunction():
             #used fetchone because only one output would be there
             #didn't check wether it occured or not as it will definitely exist as we are inside it's login page
             return render_template('Cust_funct.html',userid=user_id,user_data=userdata,funct=1)
+        if(todo==2):
+            return render_template('Cust_funct.html',userid=user_id,funct=2)
         if(todo==5):#delete acc
             cursor.execute("select c_ID,name,email,c_homeaddr,c_phoneNo from user join customer on user_ID=c_id where user_id=%s",(user_id,))
             userdata=cursor.fetchone() 
@@ -58,6 +60,18 @@ def CustomerFunction():
                 cursor.execute("select c_ID,name,email,c_homeaddr,c_phoneNo from user join customer on user_ID=c_id where user_id=%s",(user_id,))
                 userdata=cursor.fetchone() 
                 return render_template('Cust_funct.html',userid=user_id,user_data=userdata,funct=1,deletefail=True)
+        if(todo==8):
+            weight=request.form.get('weight',default=0,type=float)
+            size=request.form.get('size',default=0,type=float)
+            speed=request.form.get('speed',default=0,type=float)
+            dist=request.form.get('dist',default=0,type=float)
+            startpt = request.form.get('startpt', default='', type=str)
+            endpt = request.form.get('endpt', default='', type=str)
+            cursor.callproc('addrequest', (user_id, weight, size, speed, dist, startpt, endpt))
+            cursor.execute("select max(req_id) from requests")
+            rid=cursor.fetchone()[0]
+            return render_template('Cust_funct.html',userid=user_id,r_id=rid,funct=2,success=True)
+
     return redirect(url_for('unauth'))
 
 @app.route('/Customer',methods=['GET', 'POST'])
@@ -73,11 +87,13 @@ def customer():
 def provider():
     uname = request.args.get('Username', default='', type=str)
     userid = request.args.get('userID', default=0, type=int)
-    if uname:
+    
+    if userid:
         return render_template('Provider.html', username=uname,userid=userid)
     else:
         return redirect(url_for('unauth'))
 
+        
 @app.route('/prov_funct', methods=['GET', 'POST'])
 def ProviderFunction():
     if request.method == 'POST':
