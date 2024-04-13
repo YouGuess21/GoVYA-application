@@ -79,6 +79,7 @@ CREATE TABLE PROVIDER (
     p_multiplier FLOAT,
     p_PAN VARCHAR(20),
     p_GST VARCHAR(20),
+    verified boolean,
     FOREIGN KEY (p_ID) REFERENCES USER(user_ID) on DELETE CASCADE
 );
 
@@ -118,11 +119,12 @@ CREATE TABLE ORDERS (
     weight FLOAT,
     size FLOAT,
     type VARCHAR(50),
-    speed VARCHAR(50),
-    start_date DATE,
+    speed INT,
     status VARCHAR(50),
     dist FLOAT,
     bill float,
+    start varchar(50),
+    end varchar (50),
     PRIMARY KEY (c_ID, p_ID, order_ID),
     FOREIGN KEY (c_ID) REFERENCES CUSTOMER(c_ID) on DELETE CASCADE,
     FOREIGN KEY (p_ID) REFERENCES PROVIDER(p_ID) on DELETE CASCADE
@@ -165,9 +167,9 @@ INSERT INTO CUSTOMER (c_ID, c_homeaddr, c_phoneNo) VALUES
 (1001, '456 Oak St', '555-5678');
 
 -- Inserts for PROVIDER table
-INSERT INTO PROVIDER (p_ID, p_scale, p_officeaddr, p_phoneNo, p_multiplier, p_PAN, p_GST) VALUES
-(3000, 'Large', '789 Elm St', '555-9876', 1.5, 'ABC123', 'GST456'),
-(3001, 'Small', '321 Maple St', '555-4321', 1.2, 'DEF456', 'GST789');
+INSERT INTO PROVIDER (p_ID, p_scale, p_officeaddr, p_phoneNo, p_multiplier, p_PAN, p_GST,verified) VALUES
+(3000, 'Large', '789 Elm St', '555-9876', 1.5, 'ABC123', 'GST456',True),
+(3001, 'Small', '321 Maple St', '555-4321', 1.2, 'DEF456', 'GST789',True);
 
 -- Inserts for ADMIN table
 INSERT INTO ADMIN (adm_ID, adm_join_date) VALUES
@@ -185,9 +187,10 @@ INSERT INTO QUOTES (quote_ID, p_ID, quote_amt, quote_speed,req_id) VALUES
 (2, 3001, 1200.0, 2,2);
 
 -- Inserts for ORDERS table
-INSERT INTO ORDERS (c_ID, p_ID, order_ID, weight, size, type, speed, start_date, status, dist) VALUES
-(1000, 3000, 1, 10.5, 3.2, 'Large', 'Fast', '2024-03-15', 'Reached Bangalore HUB', 20.5,1500),
-(1001, 3001, 2, 8.2, 2.5, 'Small', 'Normal', '2024-03-20', 'Processing', 15.7,2000);
+INSERT INTO ORDERS (c_ID, p_ID, order_ID, weight, size, type, speed, status, dist,bill,start,end) VALUES
+(1000, 3000, 1, 10.5, 3.2, 'Large', 3, 'Reached Delhi HUB', 20.5,1500,'delhi','delhi'),
+(1001, 3001, 2, 8.2, 2.5, 'Small', 2, 'Processing', 15.7,2000,'Goa','Goa')
+(1001, 3000, 3, 56.3, 15, 'Medium', 5, 'Completed', 27.3,2500,'Mangalore','Mangalore');
 
 -- Inserts for EMPLOYEE table
 INSERT INTO EMPLOYEE (emp_ID, emp_email, emp_salary,isAssisting) VALUES

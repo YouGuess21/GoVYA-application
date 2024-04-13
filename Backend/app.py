@@ -38,16 +38,20 @@ def CustomerFunction():
             #used fetchone because only one output would be there
             #didn't check wether it occured or not as it will definitely exist as we are inside it's login page
             return render_template('Cust_funct.html',userid=user_id,user_data=userdata,funct=1)
-        if(todo==2):
+        if(todo==2):#create request options become visible
             return render_template('Cust_funct.html',userid=user_id,funct=2)
+        if(todo==3):
+            cursor.execute("select quote_ID ,name,quote_amt,quote_speed from (quotes natural join requests) join user on p_id=user_id where c_id=%s",(user_id,))
+            userdata=cursor.fetchall()
+            if bool(userdata):
+                return render_template('Cust_funct.html',userid=user_id,cur=userdata,funct=3,quotepresent=True)
+            else:
+                return render_template('Cust_funct.html',userid=user_id,funct=3,noquotes=True)
+                
         if(todo==5):#delete acc
             cursor.execute("select c_ID,name,email,c_homeaddr,c_phoneNo from user join customer on user_ID=c_id where user_id=%s",(user_id,))
             userdata=cursor.fetchone() 
             return render_template('Cust_funct.html',userid=user_id,user_data=userdata,funct=1,delacc=True)
-        if(todo==6):#update acc
-            cursor.execute("select c_ID,name,email,c_homeaddr,c_phoneNo from user join customer on user_ID=c_id where user_id=%s",(user_id,))
-            userdata=cursor.fetchone() 
-            return render_template('Cust_funct.html',userid=user_id,user_data=userdata,funct=1,updateacc=True)
         
         if(todo==7):#deleteing acc after confirmation
             cursor.execute("select * from orders where c_id=%s and status not like 'Complete%'",(user_id,))
@@ -70,7 +74,7 @@ def CustomerFunction():
             cursor.callproc('addrequest', (user_id, weight, size, speed, dist, startpt, endpt))
             cursor.execute("select max(req_id) from requests")
             rid=cursor.fetchone()[0]
-            cursor.close()
+            z=cursor.fetchall()
             return render_template('Cust_funct.html',userid=user_id,r_id=rid,funct=2,success=True)
         
         if(todo == 9):
@@ -78,10 +82,11 @@ def CustomerFunction():
             cursor.execute("select * from employee where isAssisting=0")  
             results = cursor.fetchall()
             empid=0
-            for row in results:
-                if row:
-                    empid = int(row[0])
-                    break
+            if bool(results):
+                for row in results:
+                    if bool(row):
+                        empid = int(row[0])
+                        break
             
             if empid != 0 :
                 
@@ -97,6 +102,69 @@ def CustomerFunction():
 
             else:
                 return render_template('Cust_funct.html',unassigned=True,funct=2)
+        if(todo==10):
+            qid=request.form.get('qid',default=0,type=int)
+            
+            #remove request
+            cursor.execute("select p_ID,quote_amt,quote_speed,req_id from quotes where quote_id = %s",(qid,))
+            val=cursor.fetchone()
+            if bool(val):
+                p_id=val[0]
+                q_amt=val[1]
+                q_speed=val[2]
+                req_id=val[3]
+                cursor.execute("select c_ID,req_weight,req_size,req_dist,req_type,start,end from requests where req_id = %s",(req_id,))
+                val2=cursor.fetchone()
+                c_id=val2[0]
+                req_weight=val2[1]
+                req_size=val2[2]
+                req_dist=val2[3]
+                req_type=val2[4]
+                start=val2[5]
+                end=val2[6]
+                print(c_id,p_id,req_weight,req_size,req_type,q_speed,'Processing',req_dist,q_amt,start,end)
+                cursor.execute("delete from requests where req_id = %s",(req_id,))
+                print("Deleted")
+                mydb.commit()
+                cursor.execute("select max( order_id) from orders")
+                val=cursor.fetchone()
+                if not bool(val):
+                    order_id=0
+                else:
+                    order_id=val[0]
+                order_id=order_id+1
+                cursor.execute("insert into orders (c_ID, p_ID, order_ID, weight, size, type, speed, status, dist, bill, start, end) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (c_id, p_id, order_id, req_weight, req_size, req_type, q_speed, 'Processing', req_dist, q_amt, start, end))
+                print("created order")
+                mydb.commit()
+                cursor.execute("select name from user where user_id=%s",(c_id,))
+                name=cursor.fetchone()[0]
+                return render_template('Customer.html',username=name,userid=user_id,order_id=order_id,ordercreated=True)
+            else:
+                cursor.execute("select quote_ID ,name,quote_amt,quote_speed from (quotes natural join requests) join user on p_id=user_id where c_id=%s",(user_id,))
+                userdata=cursor.fetchall()
+                if bool(userdata):
+                    return render_template('Cust_funct.html',userid=user_id,cur=userdata,funct=3,quotepresent=True,wrongquote=True)
+                else:
+                    return render_template('Cust_funct.html',userid=user_id,funct=3,noquotes=True)
+        if(todo==4):
+            #  order_ID,name,weight,size,type,speed,status,dist,bill,start,end
+            cursor.execute("select order_ID,name,weight,size,type,speed,status,dist,bill,start,end from orders join user on orders.p_id=user.user_id where c_id=%s and status not like 'Complete%'",(user_id,))
+            cur=cursor.fetchall()
+            if bool(cur):
+                return render_template('Cust_funct.html',userid=user_id,cur=cur,funct=4,ordinprog=True)
+            else:
+                return render_template('Cust_funct.html',userid=user_id,funct=4,noordinprog=True)
+        if(todo==11):
+            cursor.execute("select order_ID,name,weight,size,type,speed,status,dist,bill,start,end from orders join user on orders.p_id=user.user_id where c_id=%s and status  like 'Complete%'",(user_id,))
+            cur=cursor.fetchall()
+            if bool(cur):
+                return render_template('Cust_funct.html',userid=user_id,cur=cur,funct=5,ordercomp=True)
+            else:
+                return render_template('Cust_funct.html',userid=user_id,funct=5,noordercomp=True)
+                        
+                        
+           
+
 
     return redirect(url_for('unauth'))
 
@@ -258,7 +326,8 @@ def Admin_fun():
                     
                 cursor.execute('SELECT  * from provider where not verified')
                 val2=cursor.fetchall()
-                return render_template('admin_funct.html', username=username, userid=userid,success="Provider with Id:"+str(provid)+" is already verified or it doesn't Exist",cur=val2) 
+                return render_template('admin_funct.html', username=username, userid=userid,success="Provider with Id:"+str(provid)+" is already verified or it doesn't Exist",cur=val2)
+             
     return redirect(url_for('unauth'))
 
 
@@ -289,7 +358,7 @@ def user_selector():
                 if(int(int(row[0])/1000)==3):
                     name=row[2]
                     cursor.execute("select verified from provider where p_id=%s",(entered_userid,))
-                    stat=cursor.fetchone()[0];
+                    stat=cursor.fetchone()[0]
                     if stat == 1:
                         return redirect(url_for('provider',Username=name,userID=entered_userid))
                     else:
