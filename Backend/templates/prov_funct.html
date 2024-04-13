@@ -75,13 +75,6 @@
             </form>
         </div>
         {%endif%}
-        {% if updateacc %}
-
-        <!--  -->
-        <form action="/prov_funct" method='POST'>
-            <p>Hi</p>
-        </form>
-        {% endif %}
         <!--  -->
 
         <div id="inline">
@@ -89,13 +82,6 @@
                 <input type="hidden" name="user_id" value="{{userid}}">
                 <input type="hidden" name="todo" value=5>
                 <button>Delete Account</button>
-            </form>
-        </div>
-        <div id="inline">
-            <form action="/prov_funct" method='POST'>
-                <input type="hidden" name="user_id" value="{{userid}}">
-                <input type="hidden" name="todo" value=6>
-                <button> Update Account </button>
             </form>
         </div>
         {% endif %}

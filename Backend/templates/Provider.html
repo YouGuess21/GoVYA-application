@@ -36,8 +36,14 @@
             <input type="hidden" name="todo" value=2>
             <button>View Requests</button>
         </form>
+
+        <form action="/prov_funct" method='POST'>
+            <input type="hidden" name="user_id" value="{{userid}}">
+            <input type="hidden" name="todo" value=2>
+            <button>Orders in Progress</button>
+        </form>
         
-        <button>Update order status</button>
+        
         <button>View completed Orders</button>
     </div>
 </body>

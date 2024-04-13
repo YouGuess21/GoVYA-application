@@ -25,7 +25,11 @@
     <h1>Customer Dashboard</h1>
     <p>Welcome Customer {{ username }}</p>
     <p>Id:{{userid}}</p>
-
+    {% if ordercreated %}
+    <p id="pop_up">
+        Order Created with the Order ID: {{ order_id }}
+    </p>
+    {% endif %}
     <form action="/cust_funct" method='POST'>
         <input type="hidden" name="user_id" value="{{userid}}">
         <input type="hidden" name="todo" value=1>
@@ -38,10 +42,25 @@
         <button>Create a New Request</button>
     </form>
     
+    <form action="/cust_funct" method='POST'>
+        <input type="hidden" name="user_id" value="{{userid}}">
+        <input type="hidden" name="todo" value=3>
+        <button>Check quotes</button>
+    </form>
     
-    <button>Check quotes</button>
-    <button>View Status</button>
-    <button>View Completed Orders</button>
+    <form action="/cust_funct" method='POST'>
+        <input type="hidden" name="user_id" value="{{userid}}">
+        <input type="hidden" name="todo" value=4>
+        <button>View Current Order's Status</button>
+    </form>
+
+    <form action="/cust_funct" method='POST'>
+        <input type="hidden" name="user_id" value="{{userid}}">
+        <input type="hidden" name="todo" value=11>
+        <button>View Completed Orders</button>
+    </form>
+    
+    
 </body>
 
 </html>

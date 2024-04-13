@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <div id="funct1">
+    <div id="profile">
         {% if funct==1 %}
         <h1 id="head">Customer Profile</h1>
         <table align="center" border="1">
@@ -57,15 +57,6 @@
             </form>
         </div>
         {%endif%}
-        {% if updateacc %}
-
-        <!--  -->
-        <form action="/cust_funct" method='POST'>
-            <p>Hi</p>
-        </form>
-        {% endif %}
-
-
         <div id="inline">
             <form action="/cust_funct" method='POST'>
                 <input type="hidden" name="user_id" value="{{userid}}">
@@ -73,23 +64,11 @@
                 <button>Delete Account</button>
             </form>
         </div>
-        <div id="inline">
-            <form action="/cust_funct" method='POST'>
-                <input type="hidden" name="user_id" value="{{userid}}">
-                <input type="hidden" name="todo" value=6>
-                <button> Update Account </button>
-            </form>
-        </div>
-
-
-
-
-
         {% endif %}
         <!-- endif for fucnt==1 -->
     </div>
 
-    <div>
+    <div id="request">
         {% if funct==2 %}
         {% if success %}
         <p id="pop_up">Your Request with Id:{{r_id}}has been created successfully</p>
@@ -162,7 +141,7 @@
         </form>
 
 
-        <form action="/cust_funct" , method="post">
+        <form action="/cust_funct"  method="post">
             <input type="hidden" name="user_id" value="{{userid}}">
             <input type="hidden" name="todo" value=9>
             <label for="assist">Need Assistance(Paid Service):</label>
@@ -170,6 +149,155 @@
         </form>
 
         {%endif%}
+    </div>
+
+    <div id="view_quotes">
+        {% if funct==3 %} 
+        <h1 id="head">List of Available Quotes</h1>
+        {% if quotepresent %}
+        
+        <table align="center" border="1">
+
+            <thead>
+                <tr>
+                    <!-- quote_ID | name | quote_amt | quote_speed -->
+                    <th>Quote ID: </th>
+                    <th>Name Of Provider: </th>
+                    <th>Quote Amount:</th>
+                    <th>Estimated Delivery Time:</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for row in cur %}
+                <tr>
+                    <td>{{row[0]}}</td>
+                    <td>{{row[1]}}</td>
+                    <td>{{row[2]}}</td>
+                    <td>{{row[3]}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <form action="/cust_funct"  method="post">
+            <input type="hidden" name="user_id" value="{{userid}}">
+            <input type="hidden" name="todo" value=10>
+            <label for="qid">Accept Quote Id:</label>
+            <input type="text" id="qid" name="qid" required>
+            <button id="assist">Submit</button>
+        </form>
+        {%endif%}
+
+
+        {% if noquotes %}
+        <div id="pop_up">
+            <p id="pop_up">Currently No Quotes Available</p>
+        </div>
+        {%endif%}
+
+
+
+
+
+
+        {% endif %}   
+    </div>
+    <div id="orders">
+        {% if funct==4 %}
+        <h1 id="head">Orders in Progress</h1>
+        {% if ordinprog %}
+        <table align="center" border="1">
+
+            <thead>
+                <tr>
+                    <!-- order_ID,name,weight,size,type,speed,status,dist,bill,start,end -->
+                    <th>Order ID </th>
+                    <th>Name Of Provider </th>
+                    <th>Weight</th>
+                    <th>Size in Vol</th>
+                    <th>Type</th>
+                    <th>Estimated Delivery Time</th>
+                    <th>Status</th>
+                    <th>Distance</th>
+                    <th>Bill Amount</th>
+                    <th>Pickup Location</th>
+                    <th>DropOff Location</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for row in cur %}
+                <tr>
+                    <td>{{row[0]}}</td>
+                    <td>{{row[1]}}</td>
+                    <td>{{row[2]}}</td>
+                    <td>{{row[3]}}</td>
+                    <td>{{row[4]}}</td>
+                    <td>{{row[5]}}</td>
+                    <td>{{row[6]}}</td>
+                    <td>{{row[7]}}</td>
+                    <td>{{row[8]}}</td>
+                    <td>{{row[9]}}</td>
+                    <td>{{row[10]}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {%endif%}
+        {% if noordinprog %}
+            <p id="pop_up">Currently No Orders In Progress</p>
+        {%endif%}
+        {% endif %}
+    </div>
+
+    <div id="Completedorders">
+        {% if funct==5 %}
+        <h1 id="head">Previously Completed Orders</h1>
+        {% if ordercomp %}
+        <table align="center" border="1">
+
+            <thead>
+                <tr>
+                    <!-- order_ID,name,weight,size,type,speed,status,dist,bill,start,end -->
+                    <th>Order ID </th>
+                    <th>Name Of Provider </th>
+                    <th>Weight</th>
+                    <th>Size in Vol</th>
+                    <th>Type</th>
+                    <th>Estimated Delivery Time</th>
+
+                    <th>Distance</th>
+                    <th>Bill Amount</th>
+                    <th>Pickup Location</th>
+                    <th>DropOff Location</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for row in cur %}
+                <tr>
+                    <td>{{row[0]}}</td>
+                    <td>{{row[1]}}</td>
+                    <td>{{row[2]}}</td>
+                    <td>{{row[3]}}</td>
+                    <td>{{row[4]}}</td>
+                    <td>{{row[5]}}</td>
+                    
+                    <td>{{row[7]}}</td>
+                    <td>{{row[8]}}</td>
+                    <td>{{row[9]}}</td>
+                    <td>{{row[10]}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {%endif%}
+        {% if noordercomp %}
+            <p id="pop_up">No orders Previously Completed</p>
+        {%endif%}
+        {% endif %}
     </div>
 </body>
 
