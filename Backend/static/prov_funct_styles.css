@@ -3,9 +3,11 @@
 }
 #head {
     text-align: center;
+    text-decoration: underline;
 }
 #but_popup{
     display: inline-block;
+    
 }
 
 #inline {

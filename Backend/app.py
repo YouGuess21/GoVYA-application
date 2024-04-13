@@ -267,6 +267,43 @@ def ProviderFunction():
                 cursor.execute("select * from requests where req_type like 'Small' or req_type like 'Medium' or req_type like 'Large'")
                 val=cursor.fetchall()
             return render_template('prov_funct.html',userid=user_id,funct=2,qid=quoteid,qcreate=True,req_exist=True,cur=val)
+        if (todo==3):
+            cursor.execute("select order_ID,c_id,c_phoneNo,weight,size,type,speed,status,dist,bill,start,end from orders natural join customer where p_id=%s and status not like 'Complete%'",(user_id,))
+            cur=cursor.fetchall()
+            if bool(cur):
+                return render_template('prov_funct.html',userid=user_id,cur=cur,funct=3,ordinprog=True)
+            else:
+                return render_template('prov_funct.html',userid=user_id,funct=3,noordinprog=True)
+        if (todo==9):
+            ord_id= request.form.get("ordid", default=0, type=int)
+            stat= request.form.get("status", default='',type=str)
+            cursor.execute("select order_ID from orders where p_id=%s and status not like 'Complete%'",(user_id,))
+            val=cursor.fetchall()
+            cursor.execute("select order_ID,c_id,c_phoneNo,weight,size,type,speed,status,dist,bill,start,end from orders natural join customer where p_id=%s and status not like 'Complete%'",(user_id,))
+            cur=cursor.fetchall()
+            for row in val:
+                if row[0]==ord_id:
+                    cursor.execute("update orders set status=%s where order_ID=%s",(stat,ord_id))
+                    mydb.commit()
+                    cursor.execute("select order_ID,c_id,c_phoneNo,weight,size,type,speed,status,dist,bill,start,end from orders natural join customer where p_id=%s and status not like 'Complete%'",(user_id,))
+                    cur=cursor.fetchall()
+                    if stat=="Completed" or stat=="Complete":
+                        if bool(cur):
+                            return render_template('prov_funct.html',cur=cur,userid=user_id,funct=3,ordupdate=True,ordinprog=True)
+                        else:
+                            return render_template('prov_funct.html',userid=user_id,funct=3,ordupdate=True,noordinprog=True)
+                    
+                    return render_template('prov_funct.html',cur=cur,userid=user_id,funct=3,ordupdate=True,ordinprog=True)
+            return render_template('prov_funct.html',cur=cur,userid=user_id,funct=3,wrongid=True,ordinprog=True)
+        if (todo==4):
+            cursor.execute("select order_ID,c_id,c_phoneNo,weight,size,type,speed,status,dist,bill,start,end from orders natural join customer where p_id=%s and status like 'Complete%'",(user_id,))
+            cur=cursor.fetchall()
+            if bool(cur):
+                return render_template('prov_funct.html',userid=user_id,cur=cur,funct=4,ordercomp=True)
+            else:
+                return render_template('prov_funct.html',userid=user_id,funct=4,noordercomp=True)
+                
+
             
 
     return redirect(url_for('unauth'))
