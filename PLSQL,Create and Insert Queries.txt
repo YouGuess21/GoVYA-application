@@ -32,7 +32,7 @@ DELIMITER ;
 
 
 --create trigger
--- not used create or replace as no in MySQL 
+
 DELIMITER //
 DROP TRIGGER IF EXISTS set_isAssisting_to_zero//
 CREATE TRIGGER set_isAssisting_to_zero

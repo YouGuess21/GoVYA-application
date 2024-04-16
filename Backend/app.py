@@ -22,16 +22,19 @@ def home():
 
 @app.route('/login',methods=['GET','POST'])
 def login():
-    cursor.execute("select * from user")
-    value=cursor.fetchall()
+    #cursor.execute("select * from user")
+    #value=cursor.fetchall()
     form=DataForm()
-    return render_template('Login.html',data=value,form=form)
+    return render_template('Login.html',form=form)
 
 @app.route('/cust_funct',methods=['GET', 'POST'])
 def CustomerFunction():
     if request.method == 'POST':
         user_id= request.form.get("user_id", default=0, type=int)
         todo=request.form.get('todo', default=0,type=int)
+        if (user_id == 0):
+            return redirect(url_for('unauth'))
+
         if(todo==1):
             cursor.execute("select c_ID,name,email,c_homeaddr,c_phoneNo from user join customer on user_ID=c_id where user_id=%s",(user_id,))
             userdata=cursor.fetchone() 
@@ -161,11 +164,6 @@ def CustomerFunction():
                 return render_template('Cust_funct.html',userid=user_id,cur=cur,funct=5,ordercomp=True)
             else:
                 return render_template('Cust_funct.html',userid=user_id,funct=5,noordercomp=True)
-                        
-                        
-           
-
-
     return redirect(url_for('unauth'))
 
 @app.route('/Customer',methods=['GET', 'POST'])
@@ -193,7 +191,8 @@ def ProviderFunction():
     if request.method == 'POST':
         user_id= request.form.get("user_id", default=0, type=int)
         todo=request.form.get('todo', default=0,type=int)
-        
+        if (user_id == 0):
+            return redirect(url_for('unauth'))
         
         if(todo==1):#profile view
             cursor.execute("select user_ID,name,email,p_scale,p_officeaddr,p_phoneNo,p_multiplier,p_PAN,p_GST from user join provider on user_id=p_id where p_id=%s",(user_id,))

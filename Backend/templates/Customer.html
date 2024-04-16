@@ -41,17 +41,17 @@
         <input type="hidden" name="todo" value=2>
         <button>Create a New Request</button>
     </form>
-    
+
     <form action="/cust_funct" method='POST'>
         <input type="hidden" name="user_id" value="{{userid}}">
         <input type="hidden" name="todo" value=3>
         <button>Check quotes</button>
     </form>
-    
+
     <form action="/cust_funct" method='POST'>
         <input type="hidden" name="user_id" value="{{userid}}">
         <input type="hidden" name="todo" value=4>
-        <button>View Current Order's Status</button>
+        <button>View Orders in Progress</button>
     </form>
 
     <form action="/cust_funct" method='POST'>
@@ -59,8 +59,11 @@
         <input type="hidden" name="todo" value=11>
         <button>View Completed Orders</button>
     </form>
-    
-    
+    <form action="/login" method='POST'>
+
+        <button>Logout</button>
+    </form>
+
 </body>
 
 </html>
