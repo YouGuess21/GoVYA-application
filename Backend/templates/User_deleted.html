@@ -1,20 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account Deleted|Go-VYA</title>
-    <style>
-    * {
-        text-align: center;
-    }
-
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/user_deleted_styles.css') }}">
 </head>
+
 <body>
     <h1>Succesfully deleted {{userid}}</h1>
     <form action="/login">
         <button>Go back to HomePage</button>
     </form>
 </body>
+
 </html>
