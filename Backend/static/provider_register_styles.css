@@ -1,0 +1,26 @@
+h1 {
+    text-align: center;
+    text-decoration: underline;
+}
+
+.container {
+    text-align: center;
+    /* Center aligning the text */
+}
+
+.content {
+    text-align: left;
+    /* Left-aligning the text within the container */
+    display: inline-block;
+
+}
+
+#pop_up {
+    font-weight: bold;
+    font-size: 1.2em;
+    padding: 10px;
+    background-color: #FFCCCC;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}

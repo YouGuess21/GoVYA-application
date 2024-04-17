@@ -5,19 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Provider Dashboard|Go-VYA</title>
-    <style>
-        #inline {
-            display: inline-block;
-        }
+    <link rel="stylesheet" href="{{ url_for('static', filename='/provider_styles.css') }}">
 
-        * {
-            text-align: center;
-        }
-
-        h1 {
-            text-decoration: underline;
-        }
-    </style>
 </head>
 
 <body>
@@ -42,7 +31,7 @@
             <input type="hidden" name="todo" value=3>
             <button>Orders in Progress</button>
         </form>
-        
+
         <form action="/prov_funct" method='POST'>
             <input type="hidden" name="user_id" value="{{userid}}">
             <input type="hidden" name="todo" value=4>
@@ -51,7 +40,7 @@
         <form action="/login" method='POST'>
             <button>Logout</button>
         </form>
-        
+
     </div>
 </body>
 

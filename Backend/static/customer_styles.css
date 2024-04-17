@@ -1,0 +1,11 @@
+* {
+    text-align: center;
+}
+
+button {
+    display: inline-block;
+}
+
+h1 {
+    text-decoration: underline;
+}
