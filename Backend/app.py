@@ -1,9 +1,9 @@
-from flask import Flask,render_template,request,redirect,url_for,flash
+from flask import Flask,render_template,request,redirect,url_for,session,flash
 import mysql.connector
 from flask_wtf import FlaskForm
 from wtforms import StringField,SubmitField,PasswordField
 
-mydb=mysql.connector.connect(host="localhost",user="root",passwd="password",database="sql_college")
+mydb=mysql.connector.connect(host="localhost",user="root",passwd="Ashwin@319",database="sql_college")
 cursor=mydb.cursor()
 app=Flask( __name__)
 app.config['SECRET_KEY']='nokey'
@@ -22,6 +22,8 @@ def home():
 
 @app.route('/login',methods=['GET','POST'])
 def login():
+    session.pop('username', None)
+    session.pop('userid', None)
     #cursor.execute("select * from user")
     #value=cursor.fetchall()
     form=DataForm()
@@ -30,7 +32,7 @@ def login():
 @app.route('/cust_funct',methods=['GET', 'POST'])
 def CustomerFunction():
     if request.method == 'POST':
-        user_id= request.form.get("user_id", default=0, type=int)
+        user_id= session.get('userid', 0)
         todo=request.form.get('todo', default=0,type=int)
         if (user_id == 0):
             return redirect(url_for('unauth'))
@@ -168,8 +170,8 @@ def CustomerFunction():
 
 @app.route('/Customer',methods=['GET', 'POST'])
 def customer():
-    uname = request.args.get('Username', default='', type=str)
-    userid = request.args.get('userID', default=0, type=int)
+    uname = session.get('username', '')
+    userid = session.get('userid', 0)
     if uname:
         return render_template('Customer.html', username=uname,userid=userid)
     else:
@@ -177,9 +179,8 @@ def customer():
 
 @app.route('/Provider', methods=['GET', 'POST'])
 def provider():
-    uname = request.args.get('Username', default='', type=str)
-    userid = request.args.get('userID', default=0, type=int)
-    
+    uname = session.get('username', '')
+    userid = session.get('userid', 0)
     if userid:
         return render_template('Provider.html', username=uname,userid=userid)
     else:
@@ -189,7 +190,7 @@ def provider():
 @app.route('/prov_funct', methods=['GET', 'POST'])
 def ProviderFunction():
     if request.method == 'POST':
-        user_id= request.form.get("user_id", default=0, type=int)
+        user_id= session.get('userid', 0)
         todo=request.form.get('todo', default=0,type=int)
         if (user_id == 0):
             return redirect(url_for('unauth'))
@@ -310,13 +311,15 @@ def ProviderFunction():
 @app.route('/deleted')
 def udeleted():
     if(request.method == 'POST'):
+        session.pop('username', None)
+        session.pop('userid', None)
         return render_template('User_deleted.html')
     return redirect(url_for('unauth'))
 
 @app.route('/admin',methods=['GET','POST'])
 def Admin():
-    uname = request.args.get('Username', default='', type=str)
-    userid = request.args.get('userID', default=0, type=int)
+    uname = session.get('username', '')
+    userid = session.get('userid', 0)
     if uname:
         return render_template('Admin.html', username=uname, userid=userid)
     else:
@@ -327,11 +330,11 @@ def Admin():
 @app.route('/admin_funct',methods=['GET','POST'])
 def Admin_fun():
     if request.method == 'POST':
-        username = request.form.get('user_name', default='', type=str)
-        userid = request.form.get('user_id', default=0, type=int)
+        username = session.get('username', '')
+        userid = session.get('userid', 0)
         todo=request.form.get('todo', default=0,type=int)
         provid = request.form.get('p_id', default=0, type=int)
-        if username:
+        if userid:
             if todo==1:
                 cursor.execute('SELECT  * from provider where not verified')
                 val=cursor.fetchall()
@@ -386,17 +389,24 @@ def user_selector():
             if (str(row[0])==entered_userid and str(row[1])==entered_pass):
                 if(int(int(entered_userid)/1000)== 1):
                     name=row[2]
-                    return redirect(url_for('customer',Username=name,userID=entered_userid))
+                    session['username'] = name
+                    session['userid'] = entered_userid
+                    return redirect(url_for('customer'))
                     #url_for(fn name,   )
                 if(int(int(row[0])/1000)==2):
                     name=row[2]
-                    return redirect(url_for('Admin',Username=name,userID=entered_userid))
+                    session['username'] = name
+                    session['userid'] = entered_userid
+                    return redirect(url_for('Admin'))
                 if(int(int(row[0])/1000)==3):
                     name=row[2]
                     cursor.execute("select verified from provider where p_id=%s",(entered_userid,))
                     stat=cursor.fetchone()[0]
+                    
                     if stat == 1:
-                        return redirect(url_for('provider',Username=name,userID=entered_userid))
+                        session['username'] = name
+                        session['userid'] = entered_userid
+                        return redirect(url_for('provider'))
                     else:
                         return render_template('User_selector.html', Welcome='Account is not yet Verified')
                 

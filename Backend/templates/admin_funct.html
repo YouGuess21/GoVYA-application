@@ -124,8 +124,6 @@
     {%endif%}
     {% if flag %}
     <form action="/admin_funct" method="POST">
-        <input type="hidden" name="user_id" value="{{ userid }}">
-        <input type="hidden" name="user_name" value="{{username}}">
         <input type="hidden" name="todo" value=4>
         <label for="p_verify">Enter the Provider ID to be verified:</label>
         <input type="text" name="p_id" id="p_verify">

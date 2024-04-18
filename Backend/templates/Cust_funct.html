@@ -44,13 +44,13 @@
         <div id="pop_up">
             Are you sure you want to delete your account?<br>
             <form action="/cust_funct" method='POST' id="but_popup">
-                <input type="hidden" name="user_id" value="{{userid}}">
+                
                 <input type="hidden" name="todo" value=7>
                 <button>Yes</button>
             </form>
 
             <form action="/cust_funct" method='POST' id="but_popup">
-                <input type="hidden" name="user_id" value="{{userid}}">
+                
                 <input type="hidden" name="todo" value=1>
                 <!-- todo=1 ie go back to profile viewing -->
                 <button>No</button>
@@ -59,7 +59,7 @@
         {%endif%}
         <div id="inline">
             <form action="/cust_funct" method='POST'>
-                <input type="hidden" name="user_id" value="{{userid}}">
+                
                 <input type="hidden" name="todo" value=5>
                 <button>Delete Account</button>
             </form>
@@ -115,7 +115,7 @@
         {%endif%}
         <h1 id="head">Create request</h1>
         <form action="/cust_funct" method="post">
-            <input type="hidden" name="user_id" value="{{userid}}">
+            
             <input type="hidden" name="todo" value=8>
 
             <label for="weight">Weight of Package(Kg):</label>
@@ -142,7 +142,7 @@
 
 
         <form action="/cust_funct"  method="post">
-            <input type="hidden" name="user_id" value="{{userid}}">
+            
             <input type="hidden" name="todo" value=9>
             <label for="assist">Need Assistance(Paid Service):</label>
             <button id="assist">Need Assistance?</button>
@@ -180,7 +180,7 @@
             </tbody>
         </table>
         <form action="/cust_funct"  method="post">
-            <input type="hidden" name="user_id" value="{{userid}}">
+            
             <input type="hidden" name="todo" value=10>
             <label for="qid">Accept Quote Id:</label>
             <input type="text" id="qid" name="qid" required>

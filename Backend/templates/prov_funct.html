@@ -62,13 +62,13 @@
         <div id="pop_up">
             Are you sure you want to delete your account?<br>
             <form action="/prov_funct" method='POST' id="but_popup">
-                <input type="hidden" name="user_id" value="{{userid}}">
+                
                 <input type="hidden" name="todo" value=7>
                 <button>Yes</button>
             </form>
 
             <form action="/prov_funct" method='POST' id="but_popup">
-                <input type="hidden" name="user_id" value="{{userid}}">
+                
                 <input type="hidden" name="todo" value=1>
                 <!-- todo=1 ie go back to profile viewing -->
                 <button>No</button>
@@ -79,7 +79,7 @@
 
         <div id="inline">
             <form action="/prov_funct" method='POST'>
-                <input type="hidden" name="user_id" value="{{userid}}">
+                
                 <input type="hidden" name="todo" value=5>
                 <button>Delete Account</button>
             </form>
@@ -134,7 +134,7 @@
         <p>Select the request to create a quote and Enter Quote Details</p>
 
         <form action="/prov_funct" method='post'>
-            <input type="hidden" name="user_id" value="{{userid}}">
+            
             <input type="hidden" name="todo" value=8>
 
             <label>Enter the Request ID to be accepted:</label>
@@ -211,7 +211,7 @@
         </table>
         <p>Update Order Status</p>
         <form action="/prov_funct" method='POST'>
-            <input type="hidden" name="user_id" value="{{userid}}">
+            
             <input type="hidden" name="todo" value=9>
             <label for="ordid">Enter OrderID:</label>
             <input type="text" name="ordid" id="ordid">
