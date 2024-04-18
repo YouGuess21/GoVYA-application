@@ -10,10 +10,34 @@
 </head>
 
 <body>
-    <p id="text">
-        Admin:{{username}} <br>
-        Admin ID:{{userid}}
-    </p>
+    <div id="inline">
+        <h1>Admin Dashboard</h1>
+
+        <p>Welcome Admin {{username}}</p>
+        <p>Id:{{userid}}</p>
+        <form action="/admin_funct" method="POST">
+
+            <input type="hidden" name="todo" value=1>
+            <button type="submit" class="button-container">Verify registeration requests</button>
+        </form>
+
+        <form action="/admin_funct" method="POST">
+
+            <input type="hidden" name="todo" value=2>
+            <button type="submit" class="button-container">View Order Status</button>
+        </form>
+
+        <form action="/admin_funct" method="POST">
+            <input type="hidden" name="todo" value=3>
+            <button class="button-container">View Employees</button>
+        </form>
+        <form action="/login" method='POST'>
+            <input type="hidden" name="todo" value=99>
+            <button>Logout</button>
+        </form><br>
+
+    </div>
+
 
     {% if funct==3 %}
     <p id="text">Employees</p>

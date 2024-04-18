@@ -9,63 +9,99 @@
 </head>
 
 <body>
+    <h1>Customer Dashboard</h1>
+    <p>Welcome Customer {{ username }}</p>
+    <p>Id:{{userid}}</p>
+    <form action="/cust_funct" method='POST'>
+
+        <input type="hidden" name="todo" value=1>
+
+        <button>Profile</button>
+    </form>
+    <form action="/cust_funct" method='POST'>
+
+        <input type="hidden" name="todo" value=2>
+        <button>Create a New Request</button>
+    </form>
+
+    <form action="/cust_funct" method='POST'>
+
+        <input type="hidden" name="todo" value=3>
+        <button>Check quotes</button>
+    </form>
+
+    <form action="/cust_funct" method='POST'>
+
+        <input type="hidden" name="todo" value=4>
+        <button>View Orders in Progress</button>
+    </form>
+
+    <form action="/cust_funct" method='POST'>
+
+        <input type="hidden" name="todo" value=11>
+        <button>View Completed Orders</button>
+    </form>
+    <form action="/login" method='POST'>
+
+        <button>Logout</button>
+    </form>
     <div id="profile">
-        {% if funct==1 %}
-        <h1 id="head">Customer Profile</h1>
-        <table align="center" border="1">
-            <tr>
-                <!-- c_ID,name,email,c_homeaddr,c_phoneNo -->
-                <th>Customer ID:</th>
-                <td>{{user_data[0]}}</td>
-            </tr>
-            <tr>
-                <th>Name:</th>
-                <td>{{user_data[1]}}</td>
-            </tr>
-            <tr>
-                <th>Email:</th>
-                <td>{{user_data[2]}}</td>
-            </tr>
-            <tr>
-                <th>Home Address</th>
-                <td>{{user_data[3]}}</td>
-            </tr>
-            <tr>
-                <th>Phone Number:</th>
-                <td>{{user_data[4]}}</td>
-            </tr>
-        </table>
+    {% if funct==1 %}
+    <h1 id="head">Customer Profile</h1>
+    <table align="center" border="1">
+        <tr>
+            <!-- c_ID,name,email,c_homeaddr,c_phoneNo -->
+            <th>Customer ID:</th>
+            <td>{{user_data[0]}}</td>
+        </tr>
+        <tr>
+            <th>Name:</th>
+            <td>{{user_data[1]}}</td>
+        </tr>
+        <tr>
+            <th>Email:</th>
+            <td>{{user_data[2]}}</td>
+        </tr>
+        <tr>
+            <th>Home Address</th>
+            <td>{{user_data[3]}}</td>
+        </tr>
+        <tr>
+            <th>Phone Number:</th>
+            <td>{{user_data[4]}}</td>
+        </tr>
+    </table>
 
-        {% if deletefail %}
-        <p id="pop_up">Failed To Delete Account,as Uncompleted orders In progress</p>
-        {%endif%}
+    {% if deletefail %}
+    <p id="pop_up">Failed To Delete Account,as Uncompleted orders In progress</p>
+    {%endif%}
 
-        {% if delacc %}
-        <div id="pop_up">
-            Are you sure you want to delete your account?<br>
-            <form action="/cust_funct" method='POST' id="but_popup">
-                
-                <input type="hidden" name="todo" value=7>
-                <button>Yes</button>
-            </form>
+    {% if delacc %}
+    <div id="pop_up">
+        Are you sure you want to delete your account?<br>
+        <form action="/cust_funct" method='POST' id="but_popup">
 
-            <form action="/cust_funct" method='POST' id="but_popup">
-                
-                <input type="hidden" name="todo" value=1>
-                <!-- todo=1 ie go back to profile viewing -->
-                <button>No</button>
-            </form>
-        </div>
-        {%endif%}
-        <div id="inline">
-            <form action="/cust_funct" method='POST'>
-                
-                <input type="hidden" name="todo" value=5>
-                <button>Delete Account</button>
-            </form>
-        </div>
-        {% endif %}
-        <!-- endif for fucnt==1 -->
+            <input type="hidden" name="todo" value=7>
+            <button>Yes</button>
+        </form>
+
+        <form action="/cust_funct" method='POST' id="but_popup">
+
+            <input type="hidden" name="todo" value=1>
+            <!-- todo=1 ie go back to profile viewing -->
+            <button>No</button>
+        </form>
+    </div>
+    {%endif%}
+    <div id="inline">
+        <form action="/cust_funct" method='POST'>
+
+            <input type="hidden" name="todo" value=5>
+            <button>Delete Account</button>
+        </form>
+    </div>
+    {% endif %}
+    <!-- endif for fucnt==1 -->
     </div>
 
     <div id="request">
@@ -115,7 +151,7 @@
         {%endif%}
         <h1 id="head">Create request</h1>
         <form action="/cust_funct" method="post">
-            
+
             <input type="hidden" name="todo" value=8>
 
             <label for="weight">Weight of Package(Kg):</label>
@@ -141,8 +177,8 @@
         </form>
 
 
-        <form action="/cust_funct"  method="post">
-            
+        <form action="/cust_funct" method="post">
+
             <input type="hidden" name="todo" value=9>
             <label for="assist">Need Assistance(Paid Service):</label>
             <button id="assist">Need Assistance?</button>
@@ -152,10 +188,10 @@
     </div>
 
     <div id="view_quotes">
-        {% if funct==3 %} 
+        {% if funct==3 %}
         <h1 id="head">List of Available Quotes</h1>
         {% if quotepresent %}
-        
+
         <table align="center" border="1">
 
             <thead>
@@ -179,8 +215,8 @@
                 {% endfor %}
             </tbody>
         </table>
-        <form action="/cust_funct"  method="post">
-            
+        <form action="/cust_funct" method="post">
+
             <input type="hidden" name="todo" value=10>
             <label for="qid">Accept Quote Id:</label>
             <input type="text" id="qid" name="qid" required>
@@ -200,7 +236,7 @@
 
 
 
-        {% endif %}   
+        {% endif %}
     </div>
     <div id="orders">
         {% if funct==4 %}
@@ -246,7 +282,7 @@
 
         {%endif%}
         {% if noordinprog %}
-            <p id="pop_up">Currently No Orders In Progress</p>
+        <p id="pop_up">Currently No Orders In Progress</p>
         {%endif%}
         {% endif %}
     </div>
@@ -283,7 +319,7 @@
                     <td>{{row[3]}}</td>
                     <td>{{row[4]}}</td>
                     <td>{{row[5]}}</td>
-                    
+
                     <td>{{row[7]}}</td>
                     <td>{{row[8]}}</td>
                     <td>{{row[9]}}</td>
@@ -295,7 +331,7 @@
 
         {%endif%}
         {% if noordercomp %}
-            <p id="pop_up">No orders Previously Completed</p>
+        <p id="pop_up">No orders Previously Completed</p>
         {%endif%}
         {% endif %}
     </div>
