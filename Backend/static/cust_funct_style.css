@@ -14,7 +14,9 @@
 #inline {
     display: inline-block;
 }
-
+h1 {
+    text-decoration: underline;
+}
 #pop_up {
     text-align: center;
     font-weight: bold;
