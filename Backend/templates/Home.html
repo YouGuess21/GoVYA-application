@@ -10,13 +10,35 @@
 </head>
 
 <body>
-    <h1>Welcome to GO-VYA</h1>
-    <form action="/login" class="button-container">
-        <button>Login</button>
-    </form>
-    <form action="/register" class="button-container">
-        <button>New regsiteration</button><br>
-    </form>
+    <nav class="navbar">
+        <div>
+            <form action="/" class="button-container">
+                <button class="logo">GO-VYA</button>
+            </form>
+        </div>
+        <div class="side-buttons">
+            <form action="/login" class="button-container">
+                <button class="nav-button">Login</button>
+            </form>
+            <p class="nav-utility">|</p>
+            <form action="/register" class="button-container">
+                <button class="nav-button">Register</button><br>
+            </form>
+        </div>
+    </nav>
+
+    <div class="video-container">
+        <video autoplay loop muted>
+            <source src="./../static/video-2.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="overlay">
+            <p class="head1">Seamless <span class="Shipping">Shipping,</span></p>
+            <p class="head2">Instant <span class="Connections">Connections</span></h1>
+            <hr>
+            <p class="overlaytext">Experience a new level of <span class="text-highlight">efficiency </span>in<span class="text-highlight"> logistics</span>. Connect with top-tier carriers <span class="text-highlight">instantly</span>, ensuring your cargo reaches its <span class="text-highlight">destination</span> with <span class="text-highlight">speed</span> and precision.</p>
+        </div>
+    </div>
 
 
 </body>

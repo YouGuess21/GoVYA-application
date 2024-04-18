@@ -1,0 +1,17 @@
+/* config.css */
+
+/* Define color variables */
+:root {
+  --dark-primary: #181818;
+  --dark-secondary: #1f1f1f;
+  --light-primary: #e2e8f0;
+  --dark-accent: #f54f07;
+  --accent-hover: #174743;
+  --highlight-secondary: #e26161;
+  --dark-backplace: #646464;
+  --placewhite: #848484;
+}
+
+/* Add more variables for other styles if needed */
+
+/* Other global styles or utility classes */

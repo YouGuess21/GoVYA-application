@@ -1,6 +1,83 @@
-.button-container {
-    display: inline-block;
+@import url('./config.css');
+
+.logo {
+    font-size: x-large;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    color: var(--dark-accent);
+    border: none;
+    font-weight: bold;
+    padding: 0;
+    cursor: pointer;
+    appearance: none;
+    background: none;
+    transition: font-size 0.3s;
 }
-* {
+
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--dark-secondary);
+    font-size: xx-large;
+    font-family: monospace;
+    font-weight: bolder;
+}
+
+.container {
     text-align: center;
+}
+
+.uptext {
+    color: var(--light-primary);
+    margin-bottom: 20px;
+}
+
+.options {
+    display: flex;
+    justify-content: center;
+}
+
+.button-container {
+    margin: 0 10px;
+}
+
+.cust-but {
+    font-size: 2em;
+    font-weight: bold;
+    font-family: monospace;
+    background-color: var(--dark-secondary); 
+    color: lime;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: font-size 0.1s;
+    margin: 0px 20px;
+}
+
+.cust-but:hover {
+    font-size: 2.2em;
+}
+
+.prov-but {
+    font-size: 2em;
+    font-weight: bold;
+    font-family: monospace;
+    background-color: var(--dark-secondary); 
+    color: rgb(76, 84, 233); 
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: font-size 0.1s;
+    margin: 0px 20px;
+}
+
+.prov-but:hover {
+    font-size: 2.2em;
 }

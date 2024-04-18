@@ -10,18 +10,34 @@
 </head>
 
 <body>
-    <h1>Login</h1>
-    <form id="myForm" method="POST" action="/User_selector">
-        {{form.csrf_token()}}
-        <br>
-        {{form.text.label()}}
-        {{form.text()}}
-        <br>
-        {{form.password.label()}}
-        {{form.password()}}
-        <br>
-        {{form.submit()}}
-    </form>
+    <div class="container">
+        <div class="left-section">
+            <form action="/" class="button-container">
+                <button class="logo">GO-VYA</button>
+            </form>
+            <p>GoVYA helps you connect and share with the people in your life.</p>
+        </div>
+        <div class="right-section">
+            <div class="form">
+                <form id="myForm" method="POST" action="/User_selector">
+                    {{form.csrf_token()}}
+                    <br>
+                    {{form.text.label()}}
+                    {{form.text()}}
+                    <br>
+                    {{form.password.label()}}
+                    {{form.password()}}
+                    <br>
+                    {{form.submit()}}
+                </form>
+            </div>
+            <div class="register-holder">
+                <form action="/register" class="button-container">
+                    <button class="register-button">Create new account</button>
+                </form>
+            </div>
+        </div>
+    </div>
     <!-- <div class="disclaimer">Table of user and passwords from the database</div>
     <table align="center">
         <thead>

@@ -1,11 +1,129 @@
-.button-container {
-    display: inline-block;
+@import url('./config.css');
+
+body {
+    background-color: var(--light-primary);
+    left: 0;
 }
 
-#h1 {
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--dark-primary);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 50;
+    height: 10%;
+}
+
+.side-buttons {
+    display: flex;
+    flex-direction: row;
+    margin: 15px;
+}
+
+.logo {
+    color: var(--dark-accent);
+    border: none;
+    font-size: larger;
+    font-weight: bold;
+    padding: 0;
+    cursor: pointer;
+    appearance: none;
+    margin: 15px;
+    background: none;
+    transition: font-size 0.3s;
+}
+
+.logo:hover {
+    font-size: x-large;
+}
+
+/* Target buttons directly within navbar */
+.nav-button {
+    background: none;
+    border: none;
+    color: var(--light-primary);
     font-size: large;
+    padding: 0;
+    cursor: pointer;
+    appearance: none;
+    margin: 15px;
 }
 
-* {
+.nav-button:hover {
+    text-decoration: underline;
+}
+
+
+.nav-utility {
+    margin: 15px;
+    color: var(--light-primary);
+}
+
+.video-container {
+    height: 100%;
+}
+
+video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
+    color: #fff;
+}
+
+.overlay hr {
+    width: 80%;
+    color: var(--light-primary);
+    margin: 2.5%;
+}
+
+.head1 {
+    font-size: 3.5em;
+    font-weight: bold;
+    margin: 0;  
+}
+
+.head2 {
+    font-size: 3.5em;
+    font-weight: bold;
+    margin: 0;  
+}
+
+.Shipping {
+    color: #67d2ec;
+}
+
+.Connections {
+    color: #e7895d;
+}
+
+.overlaytext {
+    width: 50%;
+    font-size: 1.5em;
+    font-family: monospace;
+}
+
+.text-highlight {
+    color: var(--highlight-secondary);
 }

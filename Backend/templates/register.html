@@ -4,22 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Registeration|Go-VYA</title>
+    <title>New Registration|Go-VYA</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='/register_styles.css') }}">
-
-
 </head>
 
 <body>
-    <p>Which type of account would you like to make?</p>
-    <p>
-    <form action="/cust_reg" class="button-container">
-        <button>Customer</button>
+    <form action="/" class="button-container">
+        <button class="logo">GO-VYA</button>
     </form>
-    <form action="/prov_reg" class="button-container">
-        <button>Provider</button>
-    </form>
-    </p>
+    <div class="container">
+        <div class="uptext">
+            <p>Which type of account would you like to make?</p>
+        </div>
+        <div class="options">
+            <form action="/cust_reg" class="button-container">
+                <button class="cust-but">Customer</button>
+            </form>
+            <form action="/prov_reg" class="button-container">
+                <button class="prov-but">Provider</button>
+            </form>
+        </div>
+    </div>
 </body>
 
 </html>

@@ -3,17 +3,17 @@ import mysql.connector
 from flask_wtf import FlaskForm
 from wtforms import StringField,SubmitField,PasswordField
 
-mydb=mysql.connector.connect(host="localhost",user="root",passwd="Ashwin@319",database="sql_college")
+mydb=mysql.connector.connect(host="localhost",user="root",passwd="password",database="sql_college")
 cursor=mydb.cursor()
 app=Flask( __name__)
 app.config['SECRET_KEY']='nokey'
 
 class DataForm(FlaskForm): #We can create an object of this form
-    text=StringField('Enter User ID:', render_kw={"id": "text"})
-    password=StringField('Enter Password:', render_kw={"id": "password"})
+    text=StringField('', render_kw={"placeholder": "User ID", "id": "text"})
+    password=StringField('', render_kw={"placeholder": "Password", "id": "password"})
     #Convert in end above is for ease of access while debugging
     #password=PasswordField('Enter Password:', render_kw={"id": "password"})
-    submit=SubmitField('Submit', render_kw={"id": "sub"})
+    submit=SubmitField('Login', render_kw={"id": "sub"})
 
 @app.route('/')
 def home():

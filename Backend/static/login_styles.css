@@ -1,15 +1,143 @@
-.button-container {
-    display: inline-block;
+@import url('./config.css');
+
+body {
+    background-color: var(--dark-secondary);
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-#h1 {
-    font-size: large;
+.logo {
+    margin-top: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--dark-accent);
+    border: none;
+    font-size: 3em;
+    font-weight: bold;
+    padding: 0;
+    cursor: pointer;
+    appearance: none;
+    background: none;
+    transition: font-size 0.3s;
 }
 
-.disclaimer {
-    color: blue;
+.logo:hover {
+    font-size: 3.5em;
 }
 
-* {
+.container {
+    display: flex;
+    width: 77%;
+}
+
+.left-section {
+    flex: 1;
+    margin-right: 5%;
+    
+}
+
+.left-section p {
+    color: var(--light-primary);
+    font-size: 1.3em;
+}
+
+.right-section {
+    margin-left: 20%;
+    flex: 1;
+    padding: 20px 0px; 
+    background-color: var(--light-primary);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+
+}
+
+.form {
+    width: 90%;
+    border-bottom: 1px solid #ccc;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+/* Style for form container */
+#myForm {
+    width: 75%;
+    padding: 20px;
+    padding-bottom: 15px;
+
+    margin: auto;
+    max-width: 400px; /* Adjust max-width as needed */
+}
+
+#text, #password {
+    background-color: var(--light-primary);
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+#text:focus, #password:focus {
+    outline: none;
+}
+
+label {
+    font-weight: bold;
+}
+
+#sub {
+    width: 100%;
+    background-color: var(--dark-accent);
+    color: var(--light-primary);
+    padding: 10px 20px 10px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+
+#sub:hover {
+    background-color: #cd3e00;
+}
+
+.register-holder {
+    padding-top: 20px;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.register-button {
+    background-color: #008CBA;
+    color: var(--light-primary);
+    font-weight: bold;
+    border: none;
+    padding: 10px 20px;
     text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.register-button:hover {
+    background-color: #017196;
 }

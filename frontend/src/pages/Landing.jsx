@@ -22,7 +22,7 @@ export default function Landing() {
         </div>
         <div className="h-screen video-background relative">
           <video autoPlay loop muted className="absolute inset-0 w-full h-full object-cover">
-            <source src="./../src/assets/video-2.mp4" type="video/mp4" />
+            <source src="./../../Backend/static/video-2.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
           <div className="absolute inset-0 bg-dark-primary bg-opacity-[15%]"></div>

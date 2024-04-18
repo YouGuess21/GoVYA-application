@@ -9,57 +9,39 @@
 
 
 <body>
-    <h1>Provider Registeration</h1>
+    <form action="/" class="button-container">
+        <button class="logo">GO-VYA</button>
+    </form>
     <div class="container">
+        <div class="heading">
+            <h1>Provider Registeration</h1>
+        </div>
         <div class="content"><br>
             {% if Success %}
             <p id="pop_up">{{Success}}</p>
             {% endif %}
-            <p>Enter Company Details:</p>
-
             <form action="/prov_reg" method='POST'>
+                <input placeholder="Enter Name" type="text" id="name" name="name" required><br><br>
+                <input placeholder="Phone Number" type="text" id="pno" name="pno" required><br><br>
+                <input placeholder="Email Address" type="email" id="email" name="email" required><br><br>
+                <input placeholder="Enter Office Address" type="text" id="office" name="office" required><br>
+                <div class="radioinputs">
+                    <p>Choose Scale of services you can provide:</p>
+                    <input type="radio" id="small" name="scale" value="Small" required>
+                    <label for="small">Small Scale</label><br>
+                    <input type="radio" id="medium" name="scale" value="Medium" required>
+                    <label for="medium">Medium Scale</label><br>
+                    <input type="radio" id="large" name="scale" value="Large" required>
+                    <label for="large">Large Scale</label><br>
+                </div>
+                <input placeholder="Pan Number" type="text" id="pan" name="pan" required><br><br>
+                <input placeholder="Company GST Number" type="text" id="gst" name="gst" required><br><br>
+                <input placeholder="Enter Cost Multiplier" type="number" id="mult" name="mult" step="0.01" min="0.00" max="100.00" required><br><br>
+                <input placeholder="Create Password" type="password" id="password" name="pass" required minlength="6" maxlength="16"><br><br>
+                <input placeholder="Confirm Password" type="password" id="confirm" name="conf" required minlength="6" maxlength="16"><br><br>
 
-                <label for="name">Enter Name:</label>
-                <input type="text" id="name" name="name" required><br><br>
-
-
-                <label for="pno">Phone Number:</label>
-                <input type="text" id="pno" name="pno" required><br><br>
-
-                <label for="email">Email Address:</label>
-                <input type="email" id="email" name="email" required><br><br>
-
-                <label for="office">Enter Office Address:</label>
-                <input type="text" id="office" name="office" required><br>
-
-
-                <p>Choose Scale of services you can provide:</p>
-                <input type="radio" id="small" name="scale" value="Small" required>
-                <label for="small">Small Scale</label><br>
-                <input type="radio" id="medium" name="scale" value="Medium" required>
-                <label for="medium">Medium Scale</label><br>
-                <input type="radio" id="large" name="scale" value="Large" required>
-                <label for="large">Large Scale</label><br>
-
-                <label for="pan">Pan number:</label>
-                <input type="text" id="pan" name="pan" required><br><br>
-
-                <label for="gst">Enter Company GST Number:</label>
-                <input type="text" id="gst" name="gst" required><br><br>
-
-
-                <label for="mult">Entetr Cost Multiplier:</label>
-                <input type="number" id="mult" name="mult" step="0.01" min="0.00" max="100.00" required><br><br>
-
-                <label for="password">Create passsword:</label>
-                <input type="password" id="password" name="pass" required minlength="6" maxlength="16"><br><br>
-
-                <label for="confirm">Confirm password:</label>
-                <input type="password" id="confirm" name="conf" required minlength="6" maxlength="16"><br><br>
-
-
-                <button>Submit</button>
-                <button type="reset">Reset</button>
+                <button class="submit-button">Submit</button>
+                <button type="reset" class="reset-button">Reset</button>
 
             </form>
         </div>

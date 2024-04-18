@@ -1,20 +1,85 @@
-h1 {
-    text-align: center;
-    text-decoration: underline;
+@import url('./config.css');
+
+.logo {
+    font-size: x-large;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    color: var(--dark-accent);
+    border: none;
+    font-weight: bold;
+    padding: 0;
+    cursor: pointer;
+    appearance: none;
+    background: none;
+    transition: font-size 0.3s;
 }
 
+body, html {
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--dark-secondary);
+    color: var(--light-primary);
+}
+
+
 .container {
-    text-align: center;
-    /* Center aligning the text */
+    display: flex;
+    flex-direction: row;
+    align-items: center; 
+    width: 100%;
+}
+
+.heading {
+    flex: 1; /* Take up available space */
+    display: flex; /* Use flexbox for alignment */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    width: 30%;
+}
+
+.heading h1 {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 2.75em;
+    color: var(--light-primary);
+    width: 50%;
+    padding-bottom: 15%;
 }
 
 .content {
-    text-align: left;
-    /* Left-aligning the text within the container */
-    display: inline-block;
-
+    flex: 1; /* Take up available space */
+    text-align: center; /* Center align form content */
+    font-size: 1.3em;
+    width: 70%;
+    padding: 20px;
 }
 
+
+.content button {
+    font-size: 1.3em;
+    font-weight: 800;
+    font-family: monospace;
+    color: var(--light-primary);
+    border: none;
+    padding: 10px 50px;
+    cursor: pointer;
+    appearance: none;
+    border-radius: 5px;
+    margin: 20px 40px;
+}
+.submit-button {
+    background: #5aa1c2;
+}
+.reset-button {
+    background: #a84847;
+}
 #pop_up {
     font-weight: bold;
     font-size: 1.2em;
@@ -23,4 +88,21 @@ h1 {
     border: 1px solid #ccc;
     border-radius: 5px;
     margin-bottom: 20px;
+}
+
+
+.container input {
+    background-color: #323232;
+    font-size: 16px;
+    color: var(--light-primary);
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    padding-left: 30px;
+    width: 75%;
+}
+
+.container input::placeholder {
+    color: #e0dddd; 
+    font-family: monospace; 
 }
