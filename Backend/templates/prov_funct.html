@@ -9,10 +9,19 @@
 </head>
 
 <body>
-    <h1>Provider Dashboard</h1>
-    Welcome Provider {{username}}
-    <p>Id:{{userid}}</p>
-    <div id="inline">
+    <div class="upper">
+        <form action="/" class="button-container">
+            <button class="logo">GO-VYA</button>
+        </form>
+        <div class="hello">
+            <p>Welcome Provider {{ username }} !</p>
+            <p>Id:{{userid}}</p>
+            <form action="/login" method='POST'>                
+                <button>Logout</button>
+            </form>
+        </div>
+    </div>
+    <div class="nav" id="inline">
         <form action="/prov_funct" method='POST'>
 
             <input type="hidden" name="todo" value=1>
@@ -35,16 +44,14 @@
             <input type="hidden" name="todo" value=4>
             <button>View completed Orders</button>
         </form>
-        <form action="/login" method='POST'>
-            <button>Logout</button>
-        </form>
-
     </div>
-    {% if funct==1 %}
-    <div id="profile">
+    <div class="lower">
 
-        <h1 id="head">Provider Profile</h1>
-        <table align="center" border="1">
+        {% if funct==1 %}
+        <div id="profile">
+            
+            <h1 id="head">Provider Profile</h1>
+        <table align="center" border="0">
             <tr>
                 <th>Provider ID:</th>
                 <td>{{user_data[0]}}</td>
@@ -89,7 +96,7 @@
         {%endif%}
 
         {% if delacc%}
-        <div id="pop_up">
+        <div id="pop_up" class="yesno">
             Are you sure you want to delete your account?<br>
             <form action="/prov_funct" method='POST' id="but_popup">
 
@@ -111,12 +118,12 @@
             <form action="/prov_funct" method='POST'>
 
                 <input type="hidden" name="todo" value=5>
-                <button>Delete Account</button>
+                <button class="danger-but">Delete Account</button>
             </form>
         </div>
         {% endif %}
     </div>
-    <div id="requests">
+    <div class="request_class" id="requests">
         {% if funct==2 %}
 
 
@@ -161,23 +168,20 @@
         {% if qcreate %}
         <div id="pop_up">Quote created with the Id {{qid}}</div>
         {% endif %}
-        <p>Select the request to create a quote and Enter Quote Details</p>
+        <div class="request_form">
 
-        <form action="/prov_funct" method='post'>
-
-            <input type="hidden" name="todo" value=8>
-
-            <label>Enter the Request ID to be accepted:</label>
-            <input type="text" name="rid" required>
-
-            <label>Amount:</label>
-            <input type="text" name="amt" required>
-
-            <label>Estimated Delivery time(days):</label>
-            <input type="text" name="days" required>
-
-            <button type="submit" class="button-container">Submit</button>
-        </form>
+            <p>Select the request to create a quote and Enter Quote Details</p>
+            
+            <form action="/prov_funct" method='post'>
+                
+                <input type="hidden" name="todo" value=8>
+                <input placeholder="Enter the Request ID to be accepted:" type="text" name="rid" required><br><br>
+                <input placeholder="Amount:" type="text" name="amt" required><br><br>
+                <input placeholder="Estimated Delivery time (days):" type="text" name="days" required><br><br>
+                
+                <button type="submit" class="button-container">Submit</button>
+            </form>
+        </div>
 
 
 
@@ -239,18 +243,18 @@
                 {% endfor %}
             </tbody>
         </table>
+        <div class="request_form">
         <p>Update Order Status</p>
         <form action="/prov_funct" method='POST'>
-
+            
             <input type="hidden" name="todo" value=9>
-            <label for="ordid">Enter OrderID:</label>
-            <input type="text" name="ordid" id="ordid">
-
-            <label for="status">Enter Updated Status:</label>
-            <input type="text" name="status" id="status">
+            <input placeholder="Enter OrderID:" type="text" name="ordid" id="ordid"><br><br>
+            <input placeholder="Enter Updated Status:" type="text" name="status" id="status"><br><br>
             <button>Update</button>
-
+            
         </form>
+
+        </div>
 
         {%endif%}
         {% if noordinprog %}
@@ -309,6 +313,7 @@
         <p id="pop_up">No orders Previously Completed</p>
         {%endif%}
         {% endif %}
+    </div>
     </div>
 
 

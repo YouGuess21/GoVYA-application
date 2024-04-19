@@ -10,11 +10,22 @@
 </head>
 
 <body>
-    <div id="inline">
-        <h1>Admin Dashboard</h1>
+    <div class="upper">
+        <form action="/" class="button-container">
+            <button class="logo">GO-VYA</button>
+        </form>
+        <div class="hello">
+            <p>Welcome Admin {{username}}</p>
+            <p>Id:{{userid}}</p>
 
-        <p>Welcome Admin {{username}}</p>
-        <p>Id:{{userid}}</p>
+            <form action="/login" method='POST'>
+                <input type="hidden" name="todo" value=99>
+                <button>Logout</button>
+            </form>
+        </div>
+    </div>
+    <div class="nav">
+
         <form action="/admin_funct" method="POST">
 
             <input type="hidden" name="todo" value=1>
@@ -31,49 +42,47 @@
             <input type="hidden" name="todo" value=3>
             <button class="button-container">View Employees</button>
         </form>
-        <form action="/login" method='POST'>
-            <input type="hidden" name="todo" value=99>
-            <button>Logout</button>
-        </form><br>
+
 
     </div>
 
+    <div class="lower">
 
-    {% if funct==3 %}
-    <p id="text">Employees</p>
-    <table align="center" border="1">
-
-        <thead>
-
-            <tr>
-                <th>Employee ID: </th>
-                <th>Email ID: </th>
-                <th>Salary </th>
-                <th>Employee Phone No(s):</th>
-                <th>Is Assisting <br>(0 means not assigned)</th>
-
-            </tr>
-        </thead>
-        <tbody>
-
-            {%for row in cur%}
-            <tr>
-                <td>{{row[0]}}</td>
-                <td>{{row[1]}}</td>
-                <td>{{row[2]}}</td>
-                <td>
-                    {% for row2 in cur2 %}
-                    {% if row[0]==row2[0] %}
-                    {{row2[1]}}<br>
-                    {% endif %}
-                    {% endfor %}
-                </td>
-                <td>{{row[3]}}</td>
-
-            </tr>
-            {%endfor%}
-        </tbody>
-    </table>
+        {% if funct==3 %}
+        <h1 id="text">Employees</h1>
+        <table align="center" border="1">
+            
+            <thead>
+                
+                <tr>
+                    <th>Employee ID: </th>
+                    <th>Email ID: </th>
+                    <th>Salary </th>
+                    <th>Employee Phone No(s):</th>
+                    <th>Is Assisting <br>(0 means not assigned)</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                
+                {%for row in cur%}
+                <tr>
+                    <td>{{row[0]}}</td>
+                    <td>{{row[1]}}</td>
+                    <td>{{row[2]}}</td>
+                    <td>
+                        {% for row2 in cur2 %}
+                        {% if row[0]==row2[0] %}
+                        {{row2[1]}}<br>
+                        {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>{{row[3]}}</td>
+                    
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
     {% endif %}
     {%if flag%}
     <table align="center" border="1">
@@ -90,7 +99,7 @@
             </tr>
         </thead>
         <tbody>
-
+            
             {%for row in cur%}
             <tr>
                 <td>{{row[0]}}</td>
@@ -104,11 +113,12 @@
             {%endfor%}
         </tbody>
     </table>
-
+    
     {% elif funct==2 %}
+    <h1>Order Status</h1>
     <table align="center" border="1">
         <thead>
-
+            
             <tr>
                 <th>CustomerID </th>
                 <th>ProviderID </th>
@@ -123,7 +133,7 @@
             </tr>
         </thead>
         <tbody>
-
+            
             {%for row in cur%}
             <tr>
                 <td>{{row[0]}}</td>
@@ -142,18 +152,18 @@
     </table>
     {% endif %}
 
-
+    
     {% if success %}
     <p id="pop_up">{{success}}</p>
     {%endif%}
     {% if flag %}
     <form action="/admin_funct" method="POST">
         <input type="hidden" name="todo" value=4>
-        <label for="p_verify">Enter the Provider ID to be verified:</label>
-        <input type="text" name="p_id" id="p_verify">
+        <input placeholder="Enter Provider ID:" type="text" name="p_id" id="p_verify">
         <button type="submit" class="button-container">Verify registeration request</button>
     </form>
     {% endif %}
+    </div>
 </body>
 
 </html>

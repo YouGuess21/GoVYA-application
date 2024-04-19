@@ -8,12 +8,15 @@
     padding: 10px 20px;
     color: var(--dark-accent);
     border: none;
-    font-weight: bold;
+    font-weight: bold; 
     padding: 0;
     cursor: pointer;
     appearance: none;
     background: none;
     transition: font-size 0.3s;
+}
+.logo:hover {
+    font-size: 28px;
 }
 
 body, html {

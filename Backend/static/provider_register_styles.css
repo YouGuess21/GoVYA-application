@@ -16,6 +16,10 @@
     transition: font-size 0.3s;
 }
 
+.logo:hover {
+    font-size: 28px;
+}
+
 body, html {
     height: 100vh;
     overflow: hidden;
@@ -83,11 +87,12 @@ body, html {
     background: #a84847;
 }
 #pop_up {
+    text-align: center;
     font-weight: bold;
     font-size: 1.2em;
     padding: 10px;
-    background-color: #FFCCCC;
-    border: 1px solid #ccc;
+    background-color: #c63737;
+    border: none;
     border-radius: 5px;
     margin-bottom: 20px;
 }
