@@ -3,7 +3,7 @@ import mysql.connector
 from flask_wtf import FlaskForm
 from wtforms import StringField,SubmitField,PasswordField
 
-mydb=mysql.connector.connect(host="localhost",user="root",passwd="Ashwin@319",database="sql_college")
+mydb=mysql.connector.connect(host="localhost",user="root",passwd="password",database="sql_college")
 cursor=mydb.cursor()
 app=Flask( __name__)
 app.config['SECRET_KEY']='nokey'
@@ -247,15 +247,15 @@ def ProviderFunction():
             days= request.form.get("days", default=0,type=int)
             
             cursor.execute("select max( distinct quote_id) from quotes")
-            val=cursor.fetchone()
-            quoteid=0
-            if not bool(val):
-                quoteid=0
-                
-            else:
+            if cursor.rowcount > 0:
+                val=cursor.fetchone()
+            # if not bool(val):
                 quoteid=val[0]
+            else:
+                quoteid=0
             
             quoteid=quoteid+1
+            x=cursor.fetchall()
             cursor.execute("select p_scale from provider where p_id=%s",(user_id,))
             scale=cursor.fetchone()[0]
             if(scale=="Small"):
