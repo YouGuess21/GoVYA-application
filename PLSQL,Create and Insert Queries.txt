@@ -203,4 +203,82 @@ INSERT INTO EMP_PHONENO (emp_ID, emp_phoneNo) VALUES
 (4001, '555-2222'),
 (4002, '555-3333');
 
+---------------------------------------------------------------------------------
+
+NEW COHERENT INSERTS
+
+
+INSERT INTO CUSTOMER (c_ID, c_homeaddr, c_phoneNo) VALUES
+(1002, 'Ganga Nagar, Pune', '9901234567'),
+(1003, 'Rajendra Nagar, Chennai', '9902345678'),
+(1004, 'Krishna Colony, Durgapur', '9903456789'),
+(1005, 'Nehru Street, Ajmer', '9904567890'),
+(1006, 'Saraswati Vihar, Kolkata', '9905678901'),
+(1007, 'Gandhi Road, Lucknow', '9906789012'),
+(1008, 'Tagore Nagar, Bangalore', '9907890123'),
+(1009, 'Patel Chowk, Ahmedabad', '9908901234');
+
+INSERT INTO PROVIDER (p_ID, p_scale, p_officeaddr, p_phoneNo, p_multiplier, p_PAN, p_GST, verified) VALUES
+(3002, 'Medium', '456 Pine St', '555-6789', 1.3, 'B3JH781', '22B3JH781A1Z1', True),
+(3003, 'Large', '987 Cedar St', '555-9876', 1.6, 'C8D4F3', '22C8D4F3A1Z2', True),
+(3004, 'Small', '210 Oak St', '555-2345', 1.1, 'X2Y7Z9', '22X2Y7Z9A1Z3', True),
+(3005, 'Large', '543 Birch St', '555-5432', 1.7, 'A1B2C3', '22A1B2C3A1Z4', True),
+(3006, 'Medium', '876 Maple St', '555-8765', 1.4, 'K9L1M2', '22K9L1M2A1Z5', True),
+(3007, 'Small', '123 Willow St', '555-8901', 1.2, 'H5G3F7', '22H5G3F7A1Z6', True),
+(3008, 'Medium', '789 Cedar St', '555-2109', 1.5, 'R6T8Y2', '22R6T8Y2A1Z7', True),
+(3009, 'Large', '456 Elm St', '555-1098', 1.8, 'S4D9F1', '22S4D9F1A1Z8', True);
+
+INSERT INTO REQUESTS (req_ID, c_ID, req_weight, req_size, req_speed, req_dist, req_type, start, end) VALUES
+(3, 1002, 15.1, 4.8, 6, 30.2, 'Large', 'Mumbai', 'Pune'),
+(4, 1003, 6.8, 2.1, 4, 18.3, 'Medium', 'Bangalore', 'Chennai'),
+(5, 1004, 12.3, 3.9, 5, 25.6, 'Large', 'Kolkata', 'Durgapur'),
+(6, 1005, 9.5, 2.7, 3, 17.8, 'Small', 'Jaipur', 'Ajmer'),
+(7, 1006, 11.9, 3.6, 6, 28.4, 'Medium', 'Lucknow', 'Kanpur'),
+(8, 1007, 7.6, 2.3, 4, 20.1, 'Small', 'Hyderabad', 'Secunderabad'),
+(9, 1008, 13.7, 4.1, 5, 23.9, 'Large', 'Ahmedabad', 'Vadodara'),
+(10, 1009, 10.2, 3.0, 3, 16.5, 'Medium', 'Chandigarh', 'Ludhiana');
+
+INSERT INTO QUOTES (quote_ID, p_ID, quote_amt, quote_speed, req_id) VALUES
+(3, 3002, 8000.0, 5, 3),
+(4, 3003, 5500.0, 4, 3),
+(5, 3004, 21000.0, 6, 4),
+(6, 3005, 3000.0, 3, 4),
+(7, 3006, 15000.0, 6, 5),
+(8, 3007, 1800.0, 4, 5),
+(9, 3008, 22000.0, 5, 6),
+(10, 3009, 7000.0, 3, 6);
+
+INSERT INTO ORDERS (c_ID, p_ID, order_ID, weight, size, type, speed, status, dist, bill, start, end) VALUES
+(1002, 3002, 3, 15.1, 4.8, 'Large', 4, 'Scheduled for Pickup', 30.2, 8000, 'Mumbai', 'Pune'),
+(1003, 3003, 4, 6.8, 2.1, 'Medium', 4, 'En Route', 18.3, 5500, 'Bangalore', 'Chennai'),
+(1004, 3004, 5, 12.3, 3.9, 'Large', 5, 'At Origin Facility', 25.6, 21000, 'Kolkata', 'Durgapur'),
+(1005, 3005, 6, 9.5, 2.7, 'Small', 3, 'Processing', 17.8, 3000, 'Jaipur', 'Ajmer'),
+(1006, 3006, 7, 11.9, 3.6, 'Medium', 6, 'In Transit', 28.4, 15000, 'Lucknow', 'Kanpur'),
+(1007, 3007, 8, 7.6, 2.3, 'Small', 4, 'Scheduled for Pickup', 20.1, 1800, 'Hyderabad', 'Secunderabad'),
+(1008, 3008, 9, 13.7, 4.1, 'Large', 5, 'En Route', 23.9, 22000, 'Ahmedabad', 'Vadodara'),
+(1009, 3009, 10, 10.2, 3.0, 'Medium', 3, 'At Destination', 16.5, 7000, 'Chandigarh', 'Ludhiana');
+
+INSERT INTO EMPLOYEE (emp_ID, emp_email, emp_salary, isAssisting) VALUES
+(4001, 'akash.sharma@gmail.com', 50000.00, 0),
+(4002, 'neha.joshi@gmail.com', 60000.00, 0),
+(4003, 'suresh.kumar@gmail.com', 55000.00, 0),
+(4004, 'priya.mishra@outlook.com', 52000.00, 0),
+(4005, 'ananya.gupta@outlook.com', 53000.00, 0),
+(4006, 'rajesh.singh@outlook.com', 58000.00, 0),
+(4007, 'divya.sharma@hotmail.com', 57000.00, 0),
+(4008, 'akash.verma@hotmail.com', 62000.00, 0),
+(4009, 'meera.patel@hotmail.com', 54000.00, 0);
+
+INSERT INTO EMP_PHONENO (emp_ID, emp_phoneNo) VALUES
+(4003, '9812345678'),
+(4003, '9798765432'),
+(4004, '9876543210'),
+(4004, '9789012345'),
+(4005, '9870123456'),
+(4006, '9790123456'),
+(4007, '9810987654'),
+(4008, '9791234567'),
+(4009, '9878901234');
+
+
 
