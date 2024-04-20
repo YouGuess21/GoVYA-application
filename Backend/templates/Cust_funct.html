@@ -218,6 +218,16 @@
                 {% endfor %}
             </tbody>
         </table>
+        {% if noquotes %}
+        <div id="pop_up">
+            <p id="pop_up">Currently No Quotes Available</p>
+        </div>
+        {%endif%}
+        {% if wrongquote %}
+        <div id="pop_up">
+            <p id="pop_up">Unauthorized or Invalid Quote Id Entered</p>
+        </div>
+        {%endif%}
         <form action="/cust_funct" method="post">
             
             <input type="hidden" name="todo" value=10>
@@ -227,11 +237,6 @@
         {%endif%}
         
         
-        {% if noquotes %}
-        <div id="pop_up">
-            <p id="pop_up">Currently No Quotes Available</p>
-        </div>
-        {%endif%}
         
         
         

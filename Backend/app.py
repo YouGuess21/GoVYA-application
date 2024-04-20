@@ -3,7 +3,7 @@ import mysql.connector
 from flask_wtf import FlaskForm
 from wtforms import StringField,SubmitField,PasswordField
 
-mydb=mysql.connector.connect(host="localhost",user="root",passwd="password",database="sql_college")
+mydb=mysql.connector.connect(host="localhost",user="root",passwd="Ashwin@319",database="sql_college")
 cursor=mydb.cursor()
 app=Flask( __name__)
 app.config['SECRET_KEY']='nokey'
@@ -133,11 +133,16 @@ def CustomerFunction():
                 
                 mydb.commit()
                 cursor.execute("select max( order_id) from orders")
-                val=cursor.fetchone()
-                if not bool(val):
-                    order_id=0
-                else:
+                f=False
+                if cursor.rowcount>0:
+                    f=True
+                if f:
+                    val=cursor.fetchone()
                     order_id=val[0]
+                else:
+                    val=cursor.fetchone()
+                    order_id=0
+
                 order_id=order_id+1
                 cursor.execute("insert into orders (c_ID, p_ID, order_ID, weight, size, type, speed, status, dist, bill, start, end) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (c_id, p_id, order_id, req_weight, req_size, req_type, q_speed, 'Processing', req_dist, q_amt, start, end))
                 
@@ -249,7 +254,7 @@ def ProviderFunction():
             cursor.execute("select max( distinct quote_id) from quotes")
             if cursor.rowcount > 0:
                 val=cursor.fetchone()
-            # if not bool(val):
+            
                 quoteid=val[0]
             else:
                 quoteid=0
@@ -267,7 +272,7 @@ def ProviderFunction():
             if(scale=="Large"):
                 cursor.execute("select * from requests where req_type like 'Small' or req_type like 'Medium' or req_type like 'Large'")
                 val=cursor.fetchall()
-                flag=False
+            flag=False
             for row in val:
                 if row[0]==rid:
                     flag=True
