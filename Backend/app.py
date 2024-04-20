@@ -3,7 +3,7 @@ import mysql.connector
 from flask_wtf import FlaskForm
 from wtforms import StringField,SubmitField,PasswordField
 
-mydb=mysql.connector.connect(host="localhost",user="root",passwd="password",database="sql_college")
+mydb=mysql.connector.connect(host="localhost",user="root",passwd="Ashwin@319",database="sql_college")
 cursor=mydb.cursor()
 app=Flask( __name__)
 app.config['SECRET_KEY']='nokey'
@@ -248,6 +248,7 @@ def ProviderFunction():
             
             cursor.execute("select max( distinct quote_id) from quotes")
             val=cursor.fetchone()
+            quoteid=0
             if not bool(val):
                 quoteid=0
                 
@@ -255,8 +256,6 @@ def ProviderFunction():
                 quoteid=val[0]
             
             quoteid=quoteid+1
-            cursor.execute("insert into quotes(quote_id,p_id,quote_amt,quote_speed,req_id) values(%s,%s,%s,%s,%s)",(quoteid,user_id,amount,days,rid))
-            mydb.commit()
             cursor.execute("select p_scale from provider where p_id=%s",(user_id,))
             scale=cursor.fetchone()[0]
             if(scale=="Small"):
@@ -268,7 +267,32 @@ def ProviderFunction():
             if(scale=="Large"):
                 cursor.execute("select * from requests where req_type like 'Small' or req_type like 'Medium' or req_type like 'Large'")
                 val=cursor.fetchall()
+                flag=False
+            for row in val:
+                if row[0]==rid:
+                    flag=True
+                    break
+            if flag==False:
+                print(row[0])
+                return render_template('prov_funct.html',username=uname,userid=user_id,funct=2,qid=quoteid,qnotcreate=True,req_exist=True,cur=val)
+            else:
+                cursor.execute("insert into quotes(quote_id,p_id,quote_amt,quote_speed,req_id) values(%s,%s,%s,%s,%s)",(quoteid,user_id,amount,days,rid))
+                mydb.commit()
+
+            cursor.execute("select p_scale from provider where p_id=%s",(user_id,))
+            scale=cursor.fetchone()[0]
+            if(scale=="Small"):
+                cursor.execute("select * from requests where req_type like 'Small'")
+                val=cursor.fetchall()
+            if(scale=="Medium"):
+                cursor.execute("select * from requests where req_type like 'Small' or req_type like 'Medium'")
+                val=cursor.fetchall()
+            if(scale=="Large"):
+                cursor.execute("select * from requests where req_type like 'Small' or req_type like 'Medium' or req_type like 'Large'")
+                val=cursor.fetchall()
+            
             return render_template('prov_funct.html',username=uname,userid=user_id,funct=2,qid=quoteid,qcreate=True,req_exist=True,cur=val)
+            
         if (todo==3):
             cursor.execute("select order_ID,c_id,c_phoneNo,weight,size,type,speed,status,dist,bill,start,end from orders natural join customer where p_id=%s and status not like 'Complete%'",(user_id,))
             cur=cursor.fetchall()
