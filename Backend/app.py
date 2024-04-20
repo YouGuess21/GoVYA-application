@@ -3,7 +3,7 @@ import mysql.connector
 from flask_wtf import FlaskForm
 from wtforms import StringField,SubmitField,PasswordField
 
-mydb=mysql.connector.connect(host="localhost",user="root",passwd="Ashwin@319",database="sql_college")
+mydb=mysql.connector.connect(host="localhost",user="root",passwd="password",database="sql_college")
 cursor=mydb.cursor()
 app=Flask( __name__)
 app.config['SECRET_KEY']='nokey'
@@ -182,7 +182,7 @@ def customer():
 def provider():
     uname = session.get('username', '')
     userid = session.get('userid', 0)
-    if userid:
+    if uname:
         return render_template('Provider.html', username=uname,userid=userid)
     else:
         return redirect(url_for('unauth'))
@@ -336,7 +336,7 @@ def Admin_fun():
         userid = session.get('userid', 0)
         todo=request.form.get('todo', default=0,type=int)
         provid = request.form.get('p_id', default=0, type=int)
-        if userid:
+        if username:
             if todo==1:
                 cursor.execute('SELECT  * from provider where not verified')
                 val=cursor.fetchall()

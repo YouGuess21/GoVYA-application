@@ -1,26 +1,227 @@
-* {
-    text-align: center;
+@import url('./config.css');
+
+.logo {
+    font-size: x-large;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    color: var(--dark-accent);
+    border: none;
+    font-weight: bold;
+    padding: 0;
+    cursor: pointer;
+    appearance: none;
+    background: none;
+    transition: font-size 0.3s;
+    z-index: 2;
 }
-#head {
-    text-align: center;
+
+.logo:hover {
+    font-size: 28px;
+}
+
+body, html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--dark-secondary);
+    font-size: large;
+    font-weight: bolder;
+    color: var(--light-primary);
+}
+
+h1 {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #bb86fc;
+}
+
+
+.upper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background-color: var(--dark-primary);
+    z-index: 1;
+}
+.hello {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    top: 10px; 
+    right: 20px;
+    color: var(--light-primary);
+    z-index: 2;
+}
+
+.hello p {
+    padding: 0px 15px;
+    font-family: 'Courier New', Courier, monospace;
+}
+.hello button {
+    background: none;
+    border: none;
+    color: red;
+    font-weight: bold;
+    font-size: large;
+    padding: 0;
+    cursor: pointer;
+    appearance: none;
+    margin: 15px;
+}
+
+.hello button:hover {
     text-decoration: underline;
 }
-#but_popup{
-    display: inline-block;
-    
+
+.nav {
+    display: flex;
+    position: absolute;
+    top: 70px;
+    flex-direction: row;
+    width: 100%;
+    padding: 5px 10px;
+    background-color: #1d1d1d;
 }
 
-#inline {
-    display: inline-block;
+.nav button {
+    background: none;
+    color: var(--light-primary);
+    border: none;
+    font-size: large;
+    padding: 0;
+    cursor: pointer;
+    appearance: none;
+    margin: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
-#pop_up{
+.nav button:hover {
+    text-decoration: underline;
+}
+
+
+
+#pop_up {
     text-align: center;
     font-weight: bold;
     font-size: 1.2em;
     padding: 10px;
-    background-color: #FFCCCC;
-    border: 1px solid #ccc;
+    background-color: #c63737;
+    border: none;
     border-radius: 5px;
     margin-bottom: 20px;
+}
+
+.lower {
+    display: flex;
+    position: absolute;
+    top: 130px; /* Adjust the top position to leave space for the navbar */
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    justify-content: center ;
+    
+}
+
+
+
+
+table {
+    border-collapse: collapse;
+    border: none; 
+    margin-bottom: 20px;
+  }
+  
+  
+  th,  td {
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .lower button {
+    background: #5aa1c2;
+    color: var(--light-primary);
+    border: none;
+    font-size: large;
+    padding: 0;
+    cursor: pointer;
+    appearance: none;
+    margin: 15px;
+    padding: 7px 27px;
+    border-radius: 5px;
+
+}
+
+.request_form form{
+    display: flex;
+    align-items: center;
+    justify-self: center;
+}
+.request_form button {
+    background: #5aa1c2;
+    color: var(--light-primary);
+    border: none;
+    font-size: large;
+    padding: 0;
+    cursor: pointer;
+    appearance: none;
+    margin: 15px;
+    padding: 7px 27px;
+    border-radius: 5px;
+}
+
+.request_form input {
+    background-color: #323232;
+    font-size: 16px;
+    color: var(--light-primary);
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    padding-left: 30px;
+    width: 75%;
+    margin: 10px;
+}
+
+.yesno {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.lower .danger-but {
+    background-color: #a84847;
+}
+
+.lower .assist-but {
+    background-color: rgb(68, 170, 68);
+}   
+
+.lower input {
+    background-color: #323232;
+    font-size: 16px;
+    color: var(--light-primary);
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    padding-left: 30px;
+    width: 75%;
+}
+
+.lower .qid {
+    width: 60%;
+    margin-right: 15px;
+}
+
+.lower input::placeholder {
+    color: #e0dddd; 
+    font-family: monospace; 
 }

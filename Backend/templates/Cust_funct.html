@@ -9,191 +9,194 @@
 </head>
 
 <body>
-    <h1>Customer Dashboard</h1>
-    <p>Welcome Customer {{ username }}</p>
-    <p>Id:{{userid}}</p>
-    <form action="/cust_funct" method='POST'>
+    <div class="upper">
+        <form action="/" class="button-container">
+            <button class="logo">GO-VYA</button>
+        </form>
+        <div class="hello">
+            
+            <p>Welcome Customer {{ username }} !</p>
+            <p>Id:{{userid}}</p>
+            <form action="/login" method='POST'>
+                
+                <button>Logout</button>
+            </form>
+        </div>
+    </div>
+    <div class="nav">
 
-        <input type="hidden" name="todo" value=1>
+        <form action="/cust_funct" method='POST'>
+            
+            <input type="hidden" name="todo" value=1>
+            
+            <button>Profile</button>
+        </form>
+        <form action="/cust_funct" method='POST'>
+            
+            <input type="hidden" name="todo" value=2>
+            <button>Create a New Request</button>
+        </form>
+        
+        <form action="/cust_funct" method='POST'>
+            
+            <input type="hidden" name="todo" value=3>
+            <button>Check quotes</button>
+        </form>
+        
+        <form action="/cust_funct" method='POST'>
+            
+            <input type="hidden" name="todo" value=4>
+            <button>View Orders in Progress</button>
+        </form>
+        
+        <form action="/cust_funct" method='POST'>
+            
+            <input type="hidden" name="todo" value=11>
+            <button>View Completed Orders</button>
+        </form>
+    </div>
+    <div  class="lower">
 
-        <button>Profile</button>
-    </form>
-    <form action="/cust_funct" method='POST'>
-
-        <input type="hidden" name="todo" value=2>
-        <button>Create a New Request</button>
-    </form>
-
-    <form action="/cust_funct" method='POST'>
-
-        <input type="hidden" name="todo" value=3>
-        <button>Check quotes</button>
-    </form>
-
-    <form action="/cust_funct" method='POST'>
-
-        <input type="hidden" name="todo" value=4>
-        <button>View Orders in Progress</button>
-    </form>
-
-    <form action="/cust_funct" method='POST'>
-
-        <input type="hidden" name="todo" value=11>
-        <button>View Completed Orders</button>
-    </form>
-    <form action="/login" method='POST'>
-
-        <button>Logout</button>
-    </form>
-    <div id="profile">
-    {% if funct==1 %}
-    <h1 id="head">Customer Profile</h1>
-    <table align="center" border="1">
-        <tr>
-            <!-- c_ID,name,email,c_homeaddr,c_phoneNo -->
-            <th>Customer ID:</th>
-            <td>{{user_data[0]}}</td>
-        </tr>
-        <tr>
-            <th>Name:</th>
-            <td>{{user_data[1]}}</td>
-        </tr>
-        <tr>
-            <th>Email:</th>
-            <td>{{user_data[2]}}</td>
-        </tr>
-        <tr>
-            <th>Home Address</th>
-            <td>{{user_data[3]}}</td>
-        </tr>
-        <tr>
-            <th>Phone Number:</th>
-            <td>{{user_data[4]}}</td>
-        </tr>
-    </table>
-
+        <div id="profile">
+            {% if funct==1 %}
+            <h1 id="head">Customer Profile</h1>
+            <table align="center" border="0">
+                <tr>
+                    <!-- c_ID,name,email,c_homeaddr,c_phoneNo -->
+                    <th>Customer ID:</th>
+                    <td>{{user_data[0]}}</td>
+                </tr>
+                <tr>
+                    <th>Name:</th>
+                    <td>{{user_data[1]}}</td>
+                </tr>
+                <tr>
+                    <th>Email:</th>
+                    <td>{{user_data[2]}}</td>
+                </tr>
+                <tr>
+                    <th>Home Address</th>
+                    <td>{{user_data[3]}}</td>
+                </tr>
+                <tr>
+                    <th>Phone Number:</th>
+                    <td>{{user_data[4]}}</td>
+                </tr>
+            </table>
+    
     {% if deletefail %}
     <p id="pop_up">Failed To Delete Account,as Uncompleted orders In progress</p>
     {%endif%}
-
+    
     {% if delacc %}
     <div id="pop_up">
         Are you sure you want to delete your account?<br>
-        <form action="/cust_funct" method='POST' id="but_popup">
+        <div class="yesno">
 
-            <input type="hidden" name="todo" value=7>
-            <button>Yes</button>
-        </form>
-
-        <form action="/cust_funct" method='POST' id="but_popup">
-
-            <input type="hidden" name="todo" value=1>
-            <!-- todo=1 ie go back to profile viewing -->
-            <button>No</button>
-        </form>
+            <form action="/cust_funct" method='POST' id="but_popup">
+                
+                <input type="hidden" name="todo" value=7>
+                <button>Yes</button>
+            </form>
+            
+            <form action="/cust_funct" method='POST' id="but_popup">
+                
+                <input type="hidden" name="todo" value=1>
+                <!-- todo=1 ie go back to profile viewing -->
+                <button>No</button>
+            </form>
+        </div>
     </div>
     {%endif%}
     <div id="inline">
         <form action="/cust_funct" method='POST'>
-
+            
             <input type="hidden" name="todo" value=5>
-            <button>Delete Account</button>
+            <button class="danger-but">Delete Account</button>
         </form>
     </div>
     {% endif %}
     <!-- endif for fucnt==1 -->
+</div>
+
+<div id="request">
+    {% if funct==2 %}
+    {% if success %}
+    <p id="pop_up">Your Request with Id:{{r_id}}has been created successfully</p>
+    {%endif%}
+    {% if assigned %}
+    <div id="pop_up">
+        <p>
+            Employee has been assigned<br>
+            Employee Details:
+        </p>
+        <table align="center" border="1">
+            
+            <thead>
+                <tr>
+                    <th>Employee ID: </th>
+                    <th>Email ID: </th>
+                    <th>Employee Phone No(s): </th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                
+                <tr>
+                    <td>{{row[0]}}</td>
+                    <td>{{row[1]}}</td>
+                    <td>
+                        {% for row2 in cur2 %}
+                        {% if row[0]==row2[0] %}
+                        {{row[4]}}<br>
+                        {% endif %}
+                        {% endfor %}
+                    </td>
+                    
+                    
+                </tr>
+            </tbody>
+        </table>
     </div>
-
-    <div id="request">
-        {% if funct==2 %}
-        {% if success %}
-        <p id="pop_up">Your Request with Id:{{r_id}}has been created successfully</p>
+    {%endif%}
+    {% if unassigned %}
+    <div id="pop_up">
+        <p>No Employee is currently available. Try again in some time.</p>
+    </div>
         {%endif%}
-        {% if assigned %}
-        <div id="pop_up">
-            <p>
-                Employee has been assigned<br>
-                Employee Details:
-            </p>
-            <table align="center" border="1">
-
-                <thead>
-                    <tr>
-                        <th>Employee ID: </th>
-                        <th>Email ID: </th>
-                        <th>Employee Phone No(s): </th>
-                    </tr>
-                </thead>
-                <tbody>
-
-
-                    <tr>
-                        <td>{{row[0]}}</td>
-                        <td>{{row[1]}}</td>
-                        <td>
-                            {% for row2 in cur2 %}
-                            {% if row[0]==row2[0] %}
-                            {{row[4]}}<br>
-                            {% endif %}
-                            {% endfor %}
-                        </td>
-
-
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        {%endif%}
-        {% if unassigned %}
-        <div id="pop_up">
-            <p>No Employee is currently available.Try again in some time.</p>
-        </div>
-        {%endif%}
-        <h1 id="head">Create request</h1>
+        <h1 id="head">Create Request</h1>
         <form action="/cust_funct" method="post">
-
+            
             <input type="hidden" name="todo" value=8>
-
-            <label for="weight">Weight of Package(Kg):</label>
-            <input type="text" id="weight" name="weight" required><br><br>
-
-            <label for="size">volumetric Size(L):</label>
-            <input type="text" id="size" name="size" required><br><br>
-
-            <label for="speed">Expected Delivery Time(days):</label>
-            <input type="text" id="speed" name="speed" required><br><br>
-
-            <label for="dist">Distance(Km):</label>
-            <input type="text" id="dist" name="dist" required><br><br>
-
-            <label for="startpt">Pickup Location:</label>
-            <input type="text" id="start" name="startpt" required><br><br>
-
-            <label for="endpt">Drop Off Location:</label>
-            <input type="text" id="endpt" name="endpt" required><br><br>
-
+            <input placeholder="Weight of Package (Kg):" type="text" id="weight" name="weight" required><br><br>            
+            <input placeholder="Volumetric Size (L):" type="text" id="size" name="size" required><br><br>            
+            <input placeholder="Expected Delivery Time(days):" type="text" id="speed" name="speed" required><br><br>
+            <input placeholder="Distance (Km):" type="text" id="dist" name="dist" required><br><br>
+            <input placeholder="Pickup Location:" type="text" id="start" name="startpt" required><br><br>
+            <input placeholder="Drop Off Location:" type="text" id="endpt" name="endpt" required><br><br>
+            
             <button>Create Request</button>
-            <button type="reset">Reset</button>
+            <button type="reset" class="danger-but">Reset</button>
         </form>
-
-
+        
+        
         <form action="/cust_funct" method="post">
-
+            
             <input type="hidden" name="todo" value=9>
-            <label for="assist">Need Assistance(Paid Service):</label>
-            <button id="assist">Need Assistance?</button>
+            <label for="assist">Need Assistance (Paid Service):</label>
+            <button id="assist" class="assist-but">Need Assistance?</button>
         </form>
-
+        
         {%endif%}
     </div>
-
+    
     <div id="view_quotes">
         {% if funct==3 %}
         <h1 id="head">List of Available Quotes</h1>
         {% if quotepresent %}
-
+        
         <table align="center" border="1">
-
+            
             <thead>
                 <tr>
                     <!-- quote_ID | name | quote_amt | quote_speed -->
@@ -204,7 +207,7 @@
                 </tr>
             </thead>
             <tbody>
-
+                
                 {% for row in cur %}
                 <tr>
                     <td>{{row[0]}}</td>
@@ -216,26 +219,25 @@
             </tbody>
         </table>
         <form action="/cust_funct" method="post">
-
+            
             <input type="hidden" name="todo" value=10>
-            <label for="qid">Accept Quote Id:</label>
-            <input type="text" id="qid" name="qid" required>
-            <button id="assist">Submit</button>
+            <input placeholder="Accept Quote Id: " class="qid" type="text" id="qid" name="qid" required>
+            <button id="assist" class="ok-but">Submit</button>
         </form>
         {%endif%}
-
-
+        
+        
         {% if noquotes %}
         <div id="pop_up">
             <p id="pop_up">Currently No Quotes Available</p>
         </div>
         {%endif%}
-
-
-
-
-
-
+        
+        
+        
+        
+        
+        
         {% endif %}
     </div>
     <div id="orders">
@@ -243,7 +245,7 @@
         <h1 id="head">Orders in Progress</h1>
         {% if ordinprog %}
         <table align="center" border="1">
-
+            
             <thead>
                 <tr>
                     <!-- order_ID,name,weight,size,type,speed,status,dist,bill,start,end -->
@@ -261,7 +263,7 @@
                 </tr>
             </thead>
             <tbody>
-
+                
                 {% for row in cur %}
                 <tr>
                     <td>{{row[0]}}</td>
@@ -279,20 +281,20 @@
                 {% endfor %}
             </tbody>
         </table>
-
+        
         {%endif%}
         {% if noordinprog %}
         <p id="pop_up">Currently No Orders In Progress</p>
         {%endif%}
         {% endif %}
     </div>
-
+    
     <div id="Completedorders">
         {% if funct==5 %}
         <h1 id="head">Previously Completed Orders</h1>
         {% if ordercomp %}
         <table align="center" border="1">
-
+            
             <thead>
                 <tr>
                     <!-- order_ID,name,weight,size,type,speed,status,dist,bill,start,end -->
@@ -302,7 +304,7 @@
                     <th>Size in Vol</th>
                     <th>Type</th>
                     <th>Estimated Delivery Time</th>
-
+                    
                     <th>Distance</th>
                     <th>Bill Amount</th>
                     <th>Pickup Location</th>
@@ -310,7 +312,7 @@
                 </tr>
             </thead>
             <tbody>
-
+                
                 {% for row in cur %}
                 <tr>
                     <td>{{row[0]}}</td>
@@ -319,7 +321,7 @@
                     <td>{{row[3]}}</td>
                     <td>{{row[4]}}</td>
                     <td>{{row[5]}}</td>
-
+                    
                     <td>{{row[7]}}</td>
                     <td>{{row[8]}}</td>
                     <td>{{row[9]}}</td>
@@ -328,12 +330,13 @@
                 {% endfor %}
             </tbody>
         </table>
-
+        
         {%endif%}
         {% if noordercomp %}
         <p id="pop_up">No orders Previously Completed</p>
         {%endif%}
         {% endif %}
+    </div>
     </div>
 </body>
 
