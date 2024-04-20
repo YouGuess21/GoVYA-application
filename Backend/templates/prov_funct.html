@@ -168,6 +168,9 @@
         {% if qcreate %}
         <div id="pop_up">Quote created with the Id {{qid}}</div>
         {% endif %}
+        {% if qnotcreate %}
+        <div id="pop_up">Unauthorized Request ID selected</div>
+        {% endif %}
         <div class="request_form">
 
             <p>Select the request to create a quote and Enter Quote Details</p>
