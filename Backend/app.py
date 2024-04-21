@@ -10,9 +10,9 @@ app.config['SECRET_KEY']='nokey'
 
 class DataForm(FlaskForm): #We can create an object of this form
     text=StringField('', render_kw={"placeholder": "User ID", "id": "text"})
-    password=StringField('', render_kw={"placeholder": "Password", "id": "password"})
+    #password=StringField('', render_kw={"placeholder": "Password", "id": "password"})
     #Convert in end above is for ease of access while debugging
-    #password=PasswordField('Enter Password:', render_kw={"id": "password"})
+    password=PasswordField('', render_kw={"placeholder": "Password","id": "password"})
     submit=SubmitField('Login', render_kw={"id": "sub"})
 
 @app.route('/',methods=['GET','POST'])
@@ -48,11 +48,8 @@ def CustomerFunction():
             return render_template('Cust_funct.html',userid=user_id,funct=2,username=uname)
         if(todo==3):
             cursor.execute("select quote_ID ,name,quote_amt,quote_speed from (quotes natural join requests) join user on p_id=user_id where c_id=%s",(user_id,))
-            flag=False
-            if cursor.rowcount>0:
-                flag=True
             userdata=cursor.fetchall()
-            if flag:
+            if bool(userdata):
                 return render_template('Cust_funct.html',userid=user_id,cur=userdata,funct=3,quotepresent=True,username=uname)
             else:
                 return render_template('Cust_funct.html',userid=user_id,funct=3,noquotes=True,username=uname)
@@ -136,14 +133,10 @@ def CustomerFunction():
                 
                 mydb.commit()
                 cursor.execute("select max( order_id) from orders")
-                f=False
-                if cursor.rowcount>0:
-                    f=True
-                if f:
-                    val=cursor.fetchone()
+                val=cursor.fetchone()
+                if bool(val):
                     order_id=val[0]
                 else:
-                    val=cursor.fetchone()
                     order_id=0
 
                 order_id=order_id+1
@@ -255,12 +248,10 @@ def ProviderFunction():
             days= request.form.get("days", default=0,type=int)
             
             cursor.execute("select max( distinct quote_id) from quotes")
-            if cursor.rowcount > 0:
-                val=cursor.fetchone()
             
-                quoteid=val[0]
-            else:
-                quoteid=0
+            val=cursor.fetchone()
+            
+            quoteid=val[0]
             
             quoteid=quoteid+1
             x=cursor.fetchall()
