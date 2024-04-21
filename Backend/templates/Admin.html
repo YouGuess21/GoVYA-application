@@ -10,33 +10,61 @@
 </head>
 
 <body>
-    <h1>Admin Dashboard</h1>
-
-    <p>Welcome Admin {{username}}</p>
-    <p>Id:{{userid}}</p>
-    <div id="inline">
-        <form action="/admin_funct" method="POST">
-            
-            <input type="hidden" name="todo" value=1>
-            <button type="submit" class="button-container">Verify registeration requests</button>
+    <div class="upper">
+        <form action="/" class="button-container">
+            <button class="logo">GO-VYA</button>
         </form>
+        <div class="hello">
+            <p>Welcome Admin {{username}}</p>
+            <p>Id: {{userid}}</p>
 
+            <form action="/login" method='POST'>
+                <input type="hidden" name="todo" value=99>
+                <button>Logout</button>
+            </form>
+        </div>
+    </div>
+    <div class="lower" id="inline">
+        <div class="dashbut">
+            <img src="./../static/verify_regis.png" alt="verify registeration">
+            <form action="/admin_funct" method="POST">
+                <input type="hidden" name="todo" value=1>
+                <button type="submit" class="button-container">Verify registeration requests</button>
+            </form>
+        </div>
+
+        <div class="dashbut">
+            <img src="./../static/inprogress.png" alt="order status">
         <form action="/admin_funct" method="POST">
-            
             <input type="hidden" name="todo" value=2>
             <button type="submit" class="button-container">View Order Status</button>
         </form>
-
+        </div>
+        <div class="dashbut">
+            <img src="./../static/employee.png" alt="Employees">
         <form action="/admin_funct" method="POST">
             <input type="hidden" name="todo" value=3>
-            <button class="button-container">View Employees</button>
+            <button type="submit" class="button-container">View Employees</button>
         </form>
-        <form action="/login" method='POST'>
-            <input type="hidden" name="todo" value=99>
-            <button>Logout</button>
-        </form>
+        </div>
         
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var dashbuts = document.querySelectorAll('.dashbut');
+    
+            dashbuts.forEach(function(dashbut) {
+                dashbut.addEventListener('click', function() {
+                    var button = this.querySelector('button[type="submit"]');
+                    if (button) {
+                        button.click();
+                    }
+                });
+            });
+        });
+    </script>
+    
 
 </body>
 
