@@ -511,7 +511,7 @@ def prov_register():
             cursor.execute("insert into provider(p_id,p_scale,p_officeaddr,p_phoneNo,p_multiplier,p_PAN,p_GST,verified) values(%s,%s,%s,%s,%s,%s,%s,%s)",(p_id,scale,office,num,float(mult),pan,gst,False))
             #Had to use float() as number we get is a string so have to change it to a float
             mydb.commit()
-            return redirect(url_for('prov_register',Success="Success Account Created:"+str(name) +" User Id:" +str(p_id)))
+            return redirect(url_for('prov_register',Success="Success Account Created:"+str(name) +" User Id:" +str(p_id)+" \n Wait for Account to be verified"))
         else:
             return redirect(url_for('prov_register',Success="Passwords Do not match?"))
         

@@ -19,7 +19,9 @@
         <div class="content"><br>
             {% if Success %}
             <p id="pop_up">{{Success}}</p>
+
             {% endif %}
+            
             <form action="/prov_reg" method='POST'>
                 <input placeholder="Enter Name" type="text" id="name" name="name" required><br><br>
                 <input placeholder="Phone Number" type="text" id="pno" name="pno" required><br><br>
@@ -36,9 +38,12 @@
                 </div>
                 <input placeholder="Pan Number" type="text" id="pan" name="pan" required><br><br>
                 <input placeholder="Company GST Number" type="text" id="gst" name="gst" required><br><br>
-                <input placeholder="Enter Cost Multiplier" type="number" id="mult" name="mult" step="0.01" min="0.00" max="100.00" required><br><br>
-                <input placeholder="Create Password" type="password" id="password" name="pass" required minlength="6" maxlength="16"><br><br>
-                <input placeholder="Confirm Password" type="password" id="confirm" name="conf" required minlength="6" maxlength="16"><br><br>
+                <input placeholder="Enter Cost Multiplier" type="number" id="mult" name="mult" step="0.01" min="0.00"
+                    max="100.00" required><br><br>
+                <input placeholder="Create Password" type="password" id="password" name="pass" required minlength="6"
+                    maxlength="16"><br><br>
+                <input placeholder="Confirm Password" type="password" id="confirm" name="conf" required minlength="6"
+                    maxlength="16"><br><br>
 
                 <button class="submit-button">Submit</button>
                 <button type="reset" class="reset-button">Reset</button>
