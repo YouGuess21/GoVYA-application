@@ -226,13 +226,13 @@ INSERT INTO QUOTES (quote_ID, p_ID, quote_amt, quote_speed, req_id) VALUES
 INSERT INTO ORDERS (c_ID, p_ID, order_ID, weight, size, type, speed, status, dist, bill, start, end) VALUES
 (1002, 3002, 2, 105.1, 4.8, 'Large', 4, 'Scheduled for Pickup', 180.2, 8000, 'Mumbai', 'Pune'),
 (1003, 3003, 5, 46.8, 2.1, 'Medium', 4, 'En Route', 38.3, 4500, 'Bangalore', 'Chennai'),
-(1004, 3004, 3, 82.3, 3.9, 'Large', 5, 'At Origin Facility', 225.6, 21000, 'Kolkata', 'Durgapur'),
-(1005, 3005, 6, 69.5, 2.7, 'Small', 3, 'Processing', 147.8, 3000, 'Jaipur', 'Ajmer'),
+(1001, 3004, 3, 82.3, 3.9, 'Large', 5, 'At Origin Facility', 225.6, 21000, 'Kolkata', 'Durgapur'),
+(1001, 3005, 6, 69.5, 2.7, 'Small', 3, 'Processing', 147.8, 3000, 'Jaipur', 'Ajmer'),
 (1006, 3006, 8, 101.9, 3.6, 'Medium', 6, 'In Transit', 268.4, 15000, 'Lucknow', 'Kanpur'),
 (1007, 3007, 9, 77.6, 2.3, 'Small', 4, 'Scheduled for Pickup', 220.1, 1800, 'Hyderabad', 'Secunderabad'),
 (1008, 3008, 7, 113.7, 4.1, 'Large', 5, 'En Route', 293.9, 22000, 'Ahmedabad', 'Vadodara'),
 (1009, 3009, 11, 90.2, 3.0, 'Medium', 3, 'At Destination', 216.5, 7000, 'Chandigarh', 'Ludhiana'),
-(1010, 3003, 10, 85.4, 2.8, 'Medium', 4, 'Completed', 193.7, 8500, 'Pune', 'Mumbai'),
+(1001, 3003, 10, 85.4, 2.8, 'Medium', 4, 'Completed', 193.7, 8500, 'Pune', 'Mumbai'),
 (1011, 3008, 13, 57.6, 3.5, 'Large', 5, 'Completed', 132.4, 18000, 'Chennai', 'Bangalore'),
 (1012, 3009, 3, 120.8, 4.2, 'Large', 6, 'Completed', 270.5, 32000, 'Delhi', 'Jaipur');
 
