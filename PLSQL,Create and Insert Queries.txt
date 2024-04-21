@@ -2,6 +2,7 @@ PL/SQL Used
 
 --Procedure used to create request and assign it to the order_ID
 -- also dynamically selects the order type looking at the values of weight and distance
+
 DELIMITER //
 DROP PROCEDURE IF EXISTS addrequest;
 CREATE PROCEDURE addrequest(cid INT, weight FLOAT, size FLOAT, speed FLOAT, dist FLOAT, strt VARCHAR(50), endpt VARCHAR(50))
@@ -27,11 +28,10 @@ BEGIN
     COMMIT;
 END//
 DELIMITER ;
+
 -- Example call addrequest(1001,56.5,100,10,100,'delhi','haryana');
 
 
-
---create trigger
 
 DELIMITER //
 DROP TRIGGER IF EXISTS set_isAssisting_to_zero//
@@ -45,17 +45,8 @@ BEGIN
 END//
 DELIMITER ;
 
---function Calling a user by ID
---used in provider,customer and admin function
-DROP procedure IF EXISTS GetUserByID;
-DELIMITER //
-CREATE procedure GetUserByID(IN p_user_id INT,out uname varchar) 
-as
-BEGIN
-    SELECT name into uname FROM user WHERE user_id = p_user_id;
-END //
-DELIMITER ;
 
+------------------------------------------------------------------------------------------------
 
 CREATE TABLE USER (
     user_ID INT PRIMARY KEY,
@@ -146,69 +137,46 @@ CREATE TABLE EMP_PHONENO (
     FOREIGN KEY (emp_ID) REFERENCES EMPLOYEE(emp_ID) on DELETE CASCADE
 );
 
-
-
-
-
-
-
--- Inserts for USER table
-INSERT INTO USER (user_ID, name, password, email) VALUES
-(1000, 'Vansh', 'password123', 'john@example.com'),
-(1001, 'Jane Smith', 'securepass', 'jane@example.com'),
-(2000, 'Ashwin', 'adminpass', 'admin1@example.com'),
-(2001, 'Yogesh', 'adminpass', 'admin2@example.com'),
-(3000, 'APM', 'providerpass', 'provider1@example.com'),
-(3001, 'DTDC', 'providerpass', 'provider2@example.com');
-
--- Inserts for CUSTOMER table
-INSERT INTO CUSTOMER (c_ID, c_homeaddr, c_phoneNo) VALUES
-(1000, '123 Main St', '555-1234'),
-(1001, '456 Oak St', '555-5678');
-
--- Inserts for PROVIDER table
-INSERT INTO PROVIDER (p_ID, p_scale, p_officeaddr, p_phoneNo, p_multiplier, p_PAN, p_GST,verified) VALUES
-(3000, 'Large', '789 Elm St', '555-9876', 1.5, 'ABC123', 'GST456',True),
-(3001, 'Small', '321 Maple St', '555-4321', 1.2, 'DEF456', 'GST789',True);
-
--- Inserts for ADMIN table
-INSERT INTO ADMIN (adm_ID, adm_join_date) VALUES
-(2000, '2024-01-15'),
-(2001, '2024-02-20');
-
--- Inserts for REQUESTS table
-INSERT INTO REQUESTS (req_ID, c_ID, req_weight, req_size, req_speed, req_dist, req_type,start,end) VALUES
-(1, 1000, 10.5, 3.2, 5, 20.5, 'Large','delhi','haryana'),
-(2, 1001, 8.2, 2.5, 3, 15.7, 'Small','Manipal','Udupi');
-
--- Inserts for QUOTES table
-INSERT INTO QUOTES (quote_ID, p_ID, quote_amt, quote_speed,req_id) VALUES
-(1, 3000, 1500.0, 3,2),
-(2, 3001, 1200.0, 2,2);
-
--- Inserts for ORDERS table
-INSERT INTO ORDERS (c_ID, p_ID, order_ID, weight, size, type, speed, status, dist,bill,start,end) VALUES
-(1000, 3000, 1, 10.5, 3.2, 'Large', 3, 'Reached Delhi HUB', 20.5,1500,'delhi','delhi'),
-(1001, 3001, 2, 8.2, 2.5, 'Small', 2, 'Processing', 15.7,2000,'Goa','Goa')
-(1001, 3000, 3, 56.3, 15, 'Medium', 5, 'Completed', 27.3,2500,'Mangalore','Mangalore');
-
--- Inserts for EMPLOYEE table
-INSERT INTO EMPLOYEE (emp_ID, emp_email, emp_salary,isAssisting) VALUES
-(4001, 'employee1@example.com', 50000.00,0),
-(4002, 'employee2@example.com', 60000.00,0);
-
--- Inserts for EMP_PHONENO table
-INSERT INTO EMP_PHONENO (emp_ID, emp_phoneNo) VALUES
-(4001, '555-1111'),
-(4001, '555-2222'),
-(4002, '555-3333');
-
 ---------------------------------------------------------------------------------
 
-NEW COHERENT INSERTS
+-- INSERTS statements
 
+INSERT INTO USER (user_ID, name, password, email) VALUES
+(1000, 'Vikram', 'password123', 'vikram@gmail.com'),
+(1001, 'Rohan Patel', 'securepass', 'rohan_patel@gmail.com'),
+(1002, 'Vikas', 'abcdefVik', 'vikas@gmail.com'),
+(1003, 'Aarav Patel', 'Aaravpass456', 'Aarav@gmail.com'),
+(1004, 'Aisha Sharma', 'Aishapass123', 'Aisha@gmail.com'),
+(1005, 'Arjun Singh', 'Arjunsecure123', 'Arjun@gmail.com'),
+(1006, 'Devika Gupta', 'devikapass', 'devika@gmail.com'),
+(1007, 'Kabir Mehta', 'kabirpassMehta', 'kabir@gmail.com'),
+(1008, 'Meera Reddy', 'meera123Red', 'meera@gmail.com'),
+(1009, 'Rahul Khanna', 'rahulpass456', 'rahul@gmail.com'),
+(1010, 'Sanya Desai', 'sanyapass789', 'sanya@gmail.com'),
+(1011, 'Vikram Malhotra', 'vikrampass1011', 'vikram_malhotra@gmail.com'),
+(1012, 'Zara Khan', 'zara123Khan','zara_khan@gmail.com'),
+(2000, 'Yogesh Rane', 'adminpass', 'yogesh@gmail.com'),
+(2001, 'Akshay K C', 'adminpass', 'akshay@gmail.com'),
+(2002, 'Ashwin Mittal', 'adminpass', 'ashwin@gmail.com'),
+(3000, 'APM', 'providerpass', 'aarav_mehra@live.com'),
+(3001, 'Interocean', 'providerpass', 'dhruv_trivedi@live.com'),
+(3002, 'RashDriven', 'absolut', 'info@kingfisher.com'),
+(3003, 'Arjun Enterprises', 'ArjunEnt@789', 'arjun_enterprises@hotmail.com'),
+(3004, 'Aditya Corp', 'AdityaCorp!@#', 'aditya_corp@outlook.com'),
+(3005, 'InnovateX', 'InnovateX#2024', 'info@innovatex.com'),
+(3006, 'Genesis Group', 'GenesisGroup$567', 'contact@genesisgroup.com'),
+(3007, 'Quantum Solutions', 'QuantumSol&890', 'info@quantumsolutions.com'),
+(3008, 'Vertex Ventures', 'VertexVent$123', 'contact@vertexventures.com'),
+(3009, 'Fusion Innovations', 'FusionInno*456', 'info@fusioninnovations.com');
+
+INSERT INTO ADMIN (adm_ID, adm_join_date) VALUES
+(2000, '2024-01-15'),
+(2001, '2024-02-20'),
+(2002, '2024-03-25');
 
 INSERT INTO CUSTOMER (c_ID, c_homeaddr, c_phoneNo) VALUES
+(1000,'Udupi','8974561234'),
+(1001,'Gokarna','8420453229'),
 (1002, 'Ganga Nagar, Pune', '9901234567'),
 (1003, 'Rajendra Nagar, Chennai', '9902345678'),
 (1004, 'Krishna Colony, Durgapur', '9903456789'),
@@ -216,8 +184,8 @@ INSERT INTO CUSTOMER (c_ID, c_homeaddr, c_phoneNo) VALUES
 (1006, 'Saraswati Vihar, Kolkata', '9905678901'),
 (1007, 'Gandhi Road, Lucknow', '9906789012'),
 (1008, 'Tagore Nagar, Bangalore', '9907890123'),
-(1009, 'Patel Chowk, Ahmedabad', '9908901234');
-(1010, 'Vasant Vihar’, '9908887777'),
+(1009, 'Patel Chowk, Ahmedabad', '9908901234'),
+(1010, 'Vasant Vihar', '9908887777'),
 (1011, 'Patlipada', '9907776666'),
 (1012, 'Godhbunder', '9906665555');
 
@@ -235,40 +203,38 @@ INSERT INTO PROVIDER (p_ID, p_scale, p_officeaddr, p_phoneNo, p_multiplier, p_PA
 (3009, 'Large', 'Peacock Street', '9999910987', 1.8, 'S4D9F1', '22S4D9F1A1Z8', True);
 
 INSERT INTO REQUESTS (req_ID, c_ID, req_weight, req_size, req_speed, req_dist, req_type, start, end) VALUES
-(3, 1002, 105.1, 4.8, 6, 180.2, 'Large', 'Mumbai', 'Pune'),
-(4, 1003, 46.8, 2.1, 4, 118.3, 'Medium', 'Bangalore', 'Chennai'),
-(5, 1004, 82.3, 3.9, 5, 225.6, 'Large', 'Kolkata', 'Durgapur'),
-(6, 1005, 69.5, 2.7, 3, 147.8, 'Small', 'Jaipur', 'Ajmer'),
-(7, 1006, 101.9, 3.6, 6, 268.4, 'Medium', 'Lucknow', 'Kanpur'),
-(8, 1007, 77.6, 2.3, 4, 220.1, 'Small', 'Hyderabad', 'Secunderabad'),
-(9, 1008, 113.7, 4.1, 5, 293.9, 'Large', 'Ahmedabad', 'Vadodara'),
-(10, 1009, 90.2, 3.0, 3, 216.5, 'Medium', 'Chandigarh', 'Ludhiana');
+(1, 1008, 113.7, 4.1, 5, 293.9, 'Large', 'Ahmedabad', 'Vadodara'),
+(2, 1009, 90.2, 3.0, 3, 45.5, 'Medium', 'Chandigarh', 'Ludhiana'),
+(3, 1001, 105.1, 4.8, 6, 180.2, 'Large', 'Mumbai', 'Pune'),
+(4, 1003, 46.8, 2.1, 4, 32.3, 'Medium', 'Bangalore', 'Chennai'),
+(5, 1002, 82.3, 3.9, 5, 225.6, 'Large', 'Kolkata', 'Durgapur'),
+(6, 1002, 9.5, 2.7, 3, 47.8, 'Medium', 'Jaipur', 'Ajmer'),
+(7, 1006, 99.9, 3.6, 6, 28.4, 'Medium', 'Lucknow', 'Kanpur'),
+(8, 1007, 29, 2.3, 4, 7.1, 'Small', 'Hyderabad', 'Secunderabad');
 
 INSERT INTO QUOTES (quote_ID, p_ID, quote_amt, quote_speed, req_id) VALUES
-(3, 3002, 8000.0, 5, 3),
-(4, 3003, 5500.0, 4, 3),
+(1, 3008, 22000.0, 5, 6),
+(2, 3009, 7000.0, 3, 6),
+(3, 3002, 8000.0, 4, 3),
+(4, 3003, 5500.0, 5, 3),
 (5, 3004, 21000.0, 6, 4),
 (6, 3005, 3000.0, 3, 4),
 (7, 3006, 15000.0, 6, 5),
 (8, 3007, 1800.0, 4, 5),
-(9, 3008, 22000.0, 5, 6),
-(10, 3009, 7000.0, 3, 6);
-
-
-
+(9, 3006, 6500, 5, 3);
 
 INSERT INTO ORDERS (c_ID, p_ID, order_ID, weight, size, type, speed, status, dist, bill, start, end) VALUES
-(1002, 3002, 3, 105.1, 4.8, 'Large', 4, 'Scheduled for Pickup', 180.2, 8000, 'Mumbai', 'Pune'),
-(1003, 3003, 4, 46.8, 2.1, 'Medium', 4, 'En Route', 118.3, 5500, 'Bangalore', 'Chennai'),
-(1004, 3004, 5, 82.3, 3.9, 'Large', 5, 'At Origin Facility', 225.6, 21000, 'Kolkata', 'Durgapur'),
+(1002, 3002, 2, 105.1, 4.8, 'Large', 4, 'Scheduled for Pickup', 180.2, 8000, 'Mumbai', 'Pune'),
+(1003, 3003, 5, 46.8, 2.1, 'Medium', 4, 'En Route', 38.3, 4500, 'Bangalore', 'Chennai'),
+(1004, 3004, 3, 82.3, 3.9, 'Large', 5, 'At Origin Facility', 225.6, 21000, 'Kolkata', 'Durgapur'),
 (1005, 3005, 6, 69.5, 2.7, 'Small', 3, 'Processing', 147.8, 3000, 'Jaipur', 'Ajmer'),
-(1006, 3006, 7, 101.9, 3.6, 'Medium', 6, 'In Transit', 268.4, 15000, 'Lucknow', 'Kanpur'),
-(1007, 3007, 8, 77.6, 2.3, 'Small', 4, 'Scheduled for Pickup', 220.1, 1800, 'Hyderabad', 'Secunderabad'),
-(1008, 3008, 9, 113.7, 4.1, 'Large', 5, 'En Route', 293.9, 22000, 'Ahmedabad', 'Vadodara'),
-(1009, 3009, 10, 90.2, 3.0, 'Medium', 3, 'At Destination', 216.5, 7000, 'Chandigarh', 'Ludhiana'),
-(1010, 3007, 11, 85.4, 2.8, 'Medium', 4, 'Completed', 193.7, 8500, 'Pune', 'Mumbai'),
-(1011, 3008, 12, 57.6, 3.5, 'Large', 5, 'Completed', 132.4, 18000, 'Chennai', 'Bangalore'),
-(1012, 3009, 13, 120.8, 4.2, 'Large', 6, 'Completed', 270.5, 32000, 'Delhi', 'Jaipur');
+(1006, 3006, 8, 101.9, 3.6, 'Medium', 6, 'In Transit', 268.4, 15000, 'Lucknow', 'Kanpur'),
+(1007, 3007, 9, 77.6, 2.3, 'Small', 4, 'Scheduled for Pickup', 220.1, 1800, 'Hyderabad', 'Secunderabad'),
+(1008, 3008, 7, 113.7, 4.1, 'Large', 5, 'En Route', 293.9, 22000, 'Ahmedabad', 'Vadodara'),
+(1009, 3009, 11, 90.2, 3.0, 'Medium', 3, 'At Destination', 216.5, 7000, 'Chandigarh', 'Ludhiana'),
+(1010, 3003, 10, 85.4, 2.8, 'Medium', 4, 'Completed', 193.7, 8500, 'Pune', 'Mumbai'),
+(1011, 3008, 13, 57.6, 3.5, 'Large', 5, 'Completed', 132.4, 18000, 'Chennai', 'Bangalore'),
+(1012, 3009, 3, 120.8, 4.2, 'Large', 6, 'Completed', 270.5, 32000, 'Delhi', 'Jaipur');
 
 INSERT INTO EMPLOYEE (emp_ID, emp_email, emp_salary, isAssisting) VALUES
 (4001, 'akash.sharma@gmail.com', 50000.00, 1002),
@@ -281,7 +247,9 @@ INSERT INTO EMPLOYEE (emp_ID, emp_email, emp_salary, isAssisting) VALUES
 (4008, 'akash.verma@hotmail.com', 62000.00, 1003),
 (4009, 'meera.patel@hotmail.com', 54000.00, 0);
 
-INSERT INTO EMP_PHONENO (emp_ID, emp_phoneNo) VALUES <wite fir 4001 2>
+INSERT INTO EMP_PHONENO (emp_ID, emp_phoneNo) VALUES
+(4001, '9345543210'),
+(4002, '9971882633'),
 (4003, '9812345678'),
 (4003, '9798765432'),
 (4004, '9876543210'),
@@ -292,23 +260,50 @@ INSERT INTO EMP_PHONENO (emp_ID, emp_phoneNo) VALUES <wite fir 4001 2>
 (4008, '9791234567'),
 (4009, '9878901234');
 
-INSERT INTO ADMIN (adm_ID, adm_join_date) VALUES
-(2000, '2024-01-15'),
-(2001, '2024-02-20');
-(2002, '2024-03-25'),
-(2003, '2024-04-30');
+----------------------------------------------------------------
 
-INSERT INTO USER (user_ID, name, password, email) VALUES
-(1000, 'Vikram', 'password123', 'vikram@gmail.com'),
-(1001, 'Jasmine Patel', 'securepass', 'jasmine_patel@gmail.com'),
-(1002, 'Vikas', 'abcde', 'vikas@gmail.com'),
-(2000, 'Ashok Kumar', 'adminpass', 'ashok@gmail.com'),
-(2001, 'Yogendra Singh', 'adminpass', 'yogendra@live.com'),
-(2003, 'Akshay', 'admin', 'akshay@gmail.com'),
-(2004, 'Aryan', 'admin', 'aryan@hotmail.com'),
-(3000, 'Aarav Mehra', 'providerpass', 'aarav_mehra@live.com'),
-(3001, 'Dhruv Trivedi', 'providerpass', 'dhruv_trivedi@live.com');
-(3003, 'Arjun', '12345', 'arjun@hotmail.com'),
-(3004, 'Aditya', 'abcde', 'aditya@outlook.com');
+--select statements
+select * from user;
+select * from admin;
+select * from customer;
+select * from provider;
+select * from requests;
+select * from quotes;
+select * from orders;
+select * from employee;
+select * from emp_phoneNo;
+show triggers;
+SHOW PROCEDURE STATUS WHERE db ='sql_college';
 
 
+----------------------------------------------------------------
+
+--Describe statements
+desc user;
+desc admin;
+desc customer;
+desc provider;
+desc requests;
+desc quotes;
+desc orders;
+desc employee;
+desc emp_phoneNo;
+
+
+----------------------------------------------------------------
+
+
+--delete statements
+drop trigger set_isAssisting_to_zero;
+drop procedure addrequest;
+drop table emp_phoneNo;
+drop table employee;
+drop table orders;
+drop table quotes;
+drop table requests;
+drop table admin;
+drop table customer;
+drop table provider;
+drop table user;
+
+--show triggers ka use
