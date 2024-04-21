@@ -10,38 +10,71 @@
 </head>
 
 <body>
-    <h1>Provider Dashboard</h1>
-    Welcome Provider {{username}}
-    <p>Id:{{userid}}</p>
-    <br>
-    <div id="inline">
-        <form action="/prov_funct" method='POST'>
-            
-            <input type="hidden" name="todo" value=1>
-            <button>Profile</button>
+    
+    <div class="upper">
+        <form action="/" class="button-container">
+            <button class="logo">GO-VYA</button>
         </form>
-        <form action="/prov_funct" method='POST'>
-            
-            <input type="hidden" name="todo" value=2>
-            <button>View Requests</button>
-        </form>
+        <div class="hello">
+            <p>Welcome Provider {{username}}</p>
+            <p>Id: {{userid}}</p>
 
-        <form action="/prov_funct" method='POST'>
-            
-            <input type="hidden" name="todo" value=3>
-            <button>Orders in Progress</button>
-        </form>
-
-        <form action="/prov_funct" method='POST'>
-            
-            <input type="hidden" name="todo" value=4>
-            <button>View completed Orders</button>
-        </form>
-        <form action="/login" method='POST'>
-            <button>Logout</button>
-        </form>
-
+            <form action="/login" method='POST'>
+                <input type="hidden" name="todo" value=99>
+                <button>Logout</button>
+            </form>
+        </div>
     </div>
+    <br>
+    <div class="lower" id="inline">
+        <div class="dashbut">
+
+            <form action="/prov_funct" method='POST'>
+                <img src="./../static/profile.png" alt="Profile">            
+                <input type="hidden" name="todo" value=1>
+                <button type="submit">Profile</button>
+            </form>
+        </div>
+        <div class="dashbut">
+
+            <form action="/prov_funct" method='POST'>
+                <img src="./../static/verify_regis.png" alt="view requests">            
+                <input type="hidden" name="todo" value=2>
+                <button type="submit">View Requests</button>
+            </form>
+        </div>
+        <div class="dashbut">
+
+            <form action="/prov_funct" method='POST'>
+                <img src="./../static/inprogress.png" alt="inprogress">            
+                <input type="hidden" name="todo" value=3>
+                <button type="submit">Orders in Progress</button>
+            </form>
+        </div>
+        <div class="dashbut">
+
+            <form action="/prov_funct" method='POST'>
+                <img src="./../static/completed.png" alt="completed">            
+                <input type="hidden" name="todo" value=4>
+                <button type="submit">View completed Orders</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var dashbuts = document.querySelectorAll('.dashbut');
+    
+            dashbuts.forEach(function(dashbut) {
+                dashbut.addEventListener('click', function() {
+                    var button = this.querySelector('button[type="submit"]');
+                    if (button) {
+                        button.click();
+                    }
+                });
+            });
+        });
+    </script>
 </body>
+
 
 </html>

@@ -1,11 +1,135 @@
-#inline {
-    display: inline-block;
+@import url('./config.css');
+
+.logo {
+    font-size: x-large;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    color: var(--dark-accent);
+    border: none;
+    font-weight: bold;
+    padding: 0;
+    cursor: pointer;
+    appearance: none;
+    background: none;
+    transition: font-size 0.3s;
+    z-index: 2;
 }
 
-* {
-    text-align: center;
+.logo:hover {
+    font-size: 28px;
 }
 
-h1 {
+body, html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--dark-secondary);
+    font-size: large;
+    font-weight: bolder;
+    color: var(--light-primary);
+}
+.upper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background-color: var(--dark-primary);
+    z-index: 1;
+}
+.hello {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    top: 10px; 
+    right: 20px;
+    color: var(--light-primary);
+    z-index: 2;
+}
+
+.hello p {
+    padding: 0px 15px;
+    font-family: 'Courier New', Courier, monospace;
+}
+.hello button {
+    background: none;
+    border: none;
+    color: red;
+    font-weight: bold;
+    font-size: large;
+    padding: 0;
+    cursor: pointer;
+    appearance: none;
+    margin: 15px;
+}
+
+.hello button:hover {
     text-decoration: underline;
+}
+
+
+.lower {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+.dashbut {
+    background-color: var(--light-primary);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 40px;
+    padding: 20px 10px;
+    border-radius: 20px;
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+
+.dashbut img {
+    max-height: 120px;
+    max-width: 120px;
+    margin: 10px 40px;
+}
+
+.dashbut button {
+    background: none;
+    border: none;
+    color: var(--dark-primary);
+    font-size: large;
+    padding: 0;
+    cursor: pointer;
+    appearance: none;
+    margin: 15px;
+}
+
+
+.dashbut:hover {
+    transform: scale(1.1);
+}
+
+#pop_up {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2em;
+    padding: 10px;
+    background-color: #c63737;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.dashbut form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
 }

@@ -11,48 +11,80 @@
 
 
 <body>
-    <h1>Customer Dashboard</h1>
-    <p>Welcome Customer {{ username }}</p>
-    <p>Id:{{userid}}</p>
+    <div class="upper">
+        <form action="/" class="button-container">
+            <button class="logo">GO-VYA</button>
+        </form>
+        <div class="hello">
+            <p>Welcome Customer {{ username }}</p>
+            <p>Id: {{userid}}</p>
+
+            <form action="/login" method='POST'>
+                <input type="hidden" name="todo" value=99>
+                <button>Logout</button>
+            </form>
+        </div>
+    </div>
     {% if ordercreated %}
     <p id="pop_up">
         Order Created with the Order ID: {{ order_id }}
     </p>
     {% endif %}
-    <form action="/cust_funct" method='POST'>
-        
-        <input type="hidden" name="todo" value=1>
+    <div class="lower">
+        <div class="dashbut">
+            <form action="/cust_funct" method='POST'>
+                <img src="./../static/profile.png" alt="profile"> 
+                <input type="hidden" name="todo" value=1>    
+                <button type="submit">Profile</button>
+            </form>
+        </div>
+        <div class="dashbut">
+            
+            <form action="/cust_funct" method='POST'>
+                <img src="./../static/createnew.png" alt="new Request">
+                <input type="hidden" name="todo" value=2>
+                <button type="submit">Create a New Request</button>
+            </form>
+        </div>
+        <div class="dashbut">
 
-        <button>Profile</button>
-    </form>
-    <form action="/cust_funct" method='POST'>
-        
-        <input type="hidden" name="todo" value=2>
-        <button>Create a New Request</button>
-    </form>
-
-    <form action="/cust_funct" method='POST'>
-        
-        <input type="hidden" name="todo" value=3>
-        <button>Check quotes</button>
-    </form>
-
-    <form action="/cust_funct" method='POST'>
-        
-        <input type="hidden" name="todo" value=4>
-        <button>View Orders in Progress</button>
-    </form>
-
-    <form action="/cust_funct" method='POST'>
-        
-        <input type="hidden" name="todo" value=11>
-        <button>View Completed Orders</button>
-    </form>
-    <form action="/login" method='POST'>
-
-        <button>Logout</button>
-    </form>
-
+            <form action="/cust_funct" method='POST'>
+            <img src="./../static/verify_regis.png" alt="check quotes">
+                <input type="hidden" name="todo" value=3>
+                <button type="submit">Check quotes</button>
+            </form>
+        </div>
+        <div class="dashbut">            
+            <form action="/cust_funct" method='POST'>
+                <img src="./../static/inprogress.png" alt="in Progress">
+                <input type="hidden" name="todo" value=4>
+                <button type="submit">View Orders in Progress</button>
+            </form>
+        </div>
+        <div class="dashbut">
+            <form action="/cust_funct" method='POST'>
+                <img src="./../static/completed.png" alt="completed">            
+                <input type="hidden" name="todo" value=11>
+                <button type="submit">View Completed Orders</button>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var dashbuts = document.querySelectorAll('.dashbut');
+    
+            dashbuts.forEach(function(dashbut) {
+                dashbut.addEventListener('click', function() {
+                    var button = this.querySelector('button[type="submit"]');
+                    if (button) {
+                        button.click();
+                    }
+                });
+            });
+        });
+    </script>
+    
 </body>
 
 </html>
