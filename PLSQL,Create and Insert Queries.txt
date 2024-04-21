@@ -208,8 +208,6 @@ INSERT INTO EMP_PHONENO (emp_ID, emp_phoneNo) VALUES
 NEW COHERENT INSERTS
 
 
-
-
 INSERT INTO CUSTOMER (c_ID, c_homeaddr, c_phoneNo) VALUES
 (1002, 'Ganga Nagar, Pune', '9901234567'),
 (1003, 'Rajendra Nagar, Chennai', '9902345678'),
@@ -219,6 +217,9 @@ INSERT INTO CUSTOMER (c_ID, c_homeaddr, c_phoneNo) VALUES
 (1007, 'Gandhi Road, Lucknow', '9906789012'),
 (1008, 'Tagore Nagar, Bangalore', '9907890123'),
 (1009, 'Patel Chowk, Ahmedabad', '9908901234');
+(1010, 'Vasant Vihar’, '9908887777'),
+(1011, 'Patlipada', '9907776666'),
+(1012, 'Godhbunder', '9906665555');
 
 
 INSERT INTO PROVIDER (p_ID, p_scale, p_officeaddr, p_phoneNo, p_multiplier, p_PAN, p_GST, verified) VALUES
@@ -253,6 +254,9 @@ INSERT INTO QUOTES (quote_ID, p_ID, quote_amt, quote_speed, req_id) VALUES
 (9, 3008, 22000.0, 5, 6),
 (10, 3009, 7000.0, 3, 6);
 
+
+
+
 INSERT INTO ORDERS (c_ID, p_ID, order_ID, weight, size, type, speed, status, dist, bill, start, end) VALUES
 (1002, 3002, 3, 105.1, 4.8, 'Large', 4, 'Scheduled for Pickup', 180.2, 8000, 'Mumbai', 'Pune'),
 (1003, 3003, 4, 46.8, 2.1, 'Medium', 4, 'En Route', 118.3, 5500, 'Bangalore', 'Chennai'),
@@ -261,20 +265,20 @@ INSERT INTO ORDERS (c_ID, p_ID, order_ID, weight, size, type, speed, status, dis
 (1006, 3006, 7, 101.9, 3.6, 'Medium', 6, 'In Transit', 268.4, 15000, 'Lucknow', 'Kanpur'),
 (1007, 3007, 8, 77.6, 2.3, 'Small', 4, 'Scheduled for Pickup', 220.1, 1800, 'Hyderabad', 'Secunderabad'),
 (1008, 3008, 9, 113.7, 4.1, 'Large', 5, 'En Route', 293.9, 22000, 'Ahmedabad', 'Vadodara'),
-(1009, 3009, 10, 90.2, 3.0, 'Medium', 3, 'At Destination', 216.5, 7000, 'Chandigarh', 'Ludhiana');
-(1010, 3010, 11, 85.4, 2.8, 'Medium', 4, 'Completed', 193.7, 8500, 'Pune', 'Mumbai'),
-(1011, 3011, 12, 57.6, 3.5, 'Large', 5, 'Completed', 132.4, 18000, 'Chennai', 'Bangalore'),
-(1012, 3012, 13, 120.8, 4.2, 'Large', 6, 'Completed', 270.5, 32000, 'Delhi', 'Jaipur');
+(1009, 3009, 10, 90.2, 3.0, 'Medium', 3, 'At Destination', 216.5, 7000, 'Chandigarh', 'Ludhiana'),
+(1010, 3007, 11, 85.4, 2.8, 'Medium', 4, 'Completed', 193.7, 8500, 'Pune', 'Mumbai'),
+(1011, 3008, 12, 57.6, 3.5, 'Large', 5, 'Completed', 132.4, 18000, 'Chennai', 'Bangalore'),
+(1012, 3009, 13, 120.8, 4.2, 'Large', 6, 'Completed', 270.5, 32000, 'Delhi', 'Jaipur');
 
 INSERT INTO EMPLOYEE (emp_ID, emp_email, emp_salary, isAssisting) VALUES
-(4001, 'akash.sharma@gmail.com', 50000.00, 0),
+(4001, 'akash.sharma@gmail.com', 50000.00, 1002),
 (4002, 'neha.joshi@gmail.com', 60000.00, 0),
 (4003, 'suresh.kumar@gmail.com', 55000.00, 0),
-(4004, 'priya.mishra@outlook.com', 52000.00, 0),
+(4004, 'priya.mishra@outlook.com', 52000.00, 1004),
 (4005, 'ananya.gupta@outlook.com', 53000.00, 0),
 (4006, 'rajesh.singh@outlook.com', 58000.00, 0),
 (4007, 'divya.sharma@hotmail.com', 57000.00, 0),
-(4008, 'akash.verma@hotmail.com', 62000.00, 0),
+(4008, 'akash.verma@hotmail.com', 62000.00, 1003),
 (4009, 'meera.patel@hotmail.com', 54000.00, 0);
 
 INSERT INTO EMP_PHONENO (emp_ID, emp_phoneNo) VALUES <wite fir 4001 2>
@@ -287,5 +291,24 @@ INSERT INTO EMP_PHONENO (emp_ID, emp_phoneNo) VALUES <wite fir 4001 2>
 (4007, '9810987654'),
 (4008, '9791234567'),
 (4009, '9878901234');
+
+INSERT INTO ADMIN (adm_ID, adm_join_date) VALUES
+(2000, '2024-01-15'),
+(2001, '2024-02-20');
+(2002, '2024-03-25'),
+(2003, '2024-04-30');
+
+INSERT INTO USER (user_ID, name, password, email) VALUES
+(1000, 'Vikram', 'password123', 'vikram@gmail.com'),
+(1001, 'Jasmine Patel', 'securepass', 'jasmine_patel@gmail.com'),
+(1002, 'Vikas', 'abcde', 'vikas@gmail.com'),
+(2000, 'Ashok Kumar', 'adminpass', 'ashok@gmail.com'),
+(2001, 'Yogendra Singh', 'adminpass', 'yogendra@live.com'),
+(2003, 'Akshay', 'admin', 'akshay@gmail.com'),
+(2004, 'Aryan', 'admin', 'aryan@hotmail.com'),
+(3000, 'Aarav Mehra', 'providerpass', 'aarav_mehra@live.com'),
+(3001, 'Dhruv Trivedi', 'providerpass', 'dhruv_trivedi@live.com');
+(3003, 'Arjun', '12345', 'arjun@hotmail.com'),
+(3004, 'Aditya', 'abcde', 'aditya@outlook.com');
 
 
