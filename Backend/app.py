@@ -3,7 +3,7 @@ import mysql.connector
 from flask_wtf import FlaskForm
 from wtforms import StringField,SubmitField,PasswordField
 
-mydb=mysql.connector.connect(host="localhost",user="root",passwd="password",database="sql_college")
+mydb=mysql.connector.connect(host="localhost",user="root",passwd="Ashwin@319",database="sql_college")
 cursor=mydb.cursor()
 app=Flask( __name__)
 app.config['SECRET_KEY']='nokey'
