@@ -18,7 +18,7 @@
             <p>Welcome Admin {{username}}</p>
             <p>Id: {{userid}}</p>
 
-            <form action="/login" method='POST'>
+            <form action="/" method='POST'>
                 <input type="hidden" name="todo" value=99>
                 <button>Logout</button>
             </form>
@@ -35,27 +35,27 @@
 
         <div class="dashbut">
             <img src="./../static/inprogress.png" alt="order status">
-        <form action="/admin_funct" method="POST">
-            <input type="hidden" name="todo" value=2>
-            <button type="submit" class="button-container">View Order Status</button>
-        </form>
+            <form action="/admin_funct" method="POST">
+                <input type="hidden" name="todo" value=2>
+                <button type="submit" class="button-container">View Orders</button>
+            </form>
         </div>
         <div class="dashbut">
             <img src="./../static/employee.png" alt="Employees">
-        <form action="/admin_funct" method="POST">
-            <input type="hidden" name="todo" value=3>
-            <button type="submit" class="button-container">View Employees</button>
-        </form>
+            <form action="/admin_funct" method="POST">
+                <input type="hidden" name="todo" value=3>
+                <button type="submit" class="button-container">View Employees</button>
+            </form>
         </div>
-        
+
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             var dashbuts = document.querySelectorAll('.dashbut');
-    
-            dashbuts.forEach(function(dashbut) {
-                dashbut.addEventListener('click', function() {
+
+            dashbuts.forEach(function (dashbut) {
+                dashbut.addEventListener('click', function () {
                     var button = this.querySelector('button[type="submit"]');
                     if (button) {
                         button.click();
@@ -64,7 +64,7 @@
             });
         });
     </script>
-    
+
 
 </body>
 

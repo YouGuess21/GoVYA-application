@@ -3,7 +3,7 @@ import mysql.connector
 from flask_wtf import FlaskForm
 from wtforms import StringField,SubmitField,PasswordField
 
-mydb=mysql.connector.connect(host="localhost",user="root",passwd="password",database="sql_college")
+mydb=mysql.connector.connect(host="localhost",user="root",passwd="Ashwin@319",database="sql_college")
 cursor=mydb.cursor()
 app=Flask( __name__)
 app.config['SECRET_KEY']='nokey'
@@ -15,8 +15,10 @@ class DataForm(FlaskForm): #We can create an object of this form
     #password=PasswordField('Enter Password:', render_kw={"id": "password"})
     submit=SubmitField('Login', render_kw={"id": "sub"})
 
-@app.route('/')
+@app.route('/',methods=['GET','POST'])
 def home():
+    session.pop('username', None)
+    session.pop('userid', None)
     return render_template('Home.html')
 
 
@@ -24,8 +26,6 @@ def home():
 def login():
     session.pop('username', None)
     session.pop('userid', None)
-    #cursor.execute("select * from user")
-    #value=cursor.fetchall()
     form=DataForm()
     return render_template('Login.html',form=form)
 
@@ -48,8 +48,11 @@ def CustomerFunction():
             return render_template('Cust_funct.html',userid=user_id,funct=2,username=uname)
         if(todo==3):
             cursor.execute("select quote_ID ,name,quote_amt,quote_speed from (quotes natural join requests) join user on p_id=user_id where c_id=%s",(user_id,))
+            flag=False
+            if cursor.rowcount>0:
+                flag=True
             userdata=cursor.fetchall()
-            if bool(userdata):
+            if flag:
                 return render_template('Cust_funct.html',userid=user_id,cur=userdata,funct=3,quotepresent=True,username=uname)
             else:
                 return render_template('Cust_funct.html',userid=user_id,funct=3,noquotes=True,username=uname)
@@ -508,7 +511,7 @@ def prov_register():
             cursor.execute("insert into provider(p_id,p_scale,p_officeaddr,p_phoneNo,p_multiplier,p_PAN,p_GST,verified) values(%s,%s,%s,%s,%s,%s,%s,%s)",(p_id,scale,office,num,float(mult),pan,gst,False))
             #Had to use float() as number we get is a string so have to change it to a float
             mydb.commit()
-            return redirect(url_for('prov_register',Success="Success Account Created:"+str(name) +" User Id:" +str(p_id)))
+            return redirect(url_for('prov_register',Success="Success Account Created:"+str(name) +" User Id:" +str(p_id)+" \n Wait for Account to be verified"))
         else:
             return redirect(url_for('prov_register',Success="Passwords Do not match?"))
         

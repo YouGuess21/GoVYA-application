@@ -17,7 +17,7 @@
             
             <p>Welcome Customer {{ username }} !</p>
             <p>Id:{{userid}}</p>
-            <form action="/login" method='POST'>
+            <form action="/" method='POST'>
                 
                 <button>Logout</button>
             </form>
@@ -193,6 +193,11 @@
     <div id="view_quotes">
         {% if funct==3 %}
         <h1 id="head">List of Available Quotes</h1>
+        {% if noquotes %}
+        <div id="pop_up">
+            <p id="pop_up">Currently No Quotes Available</p>
+        </div>
+        {%endif%}
         {% if quotepresent %}
         
         <table align="center" border="1">
@@ -218,11 +223,7 @@
                 {% endfor %}
             </tbody>
         </table>
-        {% if noquotes %}
-        <div id="pop_up">
-            <p id="pop_up">Currently No Quotes Available</p>
-        </div>
-        {%endif%}
+        
         {% if wrongquote %}
         <div id="pop_up">
             <p id="pop_up">Unauthorized or Invalid Quote Id Entered</p>
