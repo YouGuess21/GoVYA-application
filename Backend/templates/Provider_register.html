@@ -15,12 +15,19 @@
     <div class="container">
         <div class="heading">
             <h1>Provider Registeration</h1>
-        </div>
-        <div class="content"><br>
+            <div class="login_line">
+                <p>Already a provider? </p>
+                <form action="/login" class="button-container">
+                    <button class="login_button">Login.</button>
+                </form>
+            </div>
             {% if Success %}
             <p id="pop_up">{{Success}}</p>
-
+            
             {% endif %}
+        </div>
+        <div class="content"><br>
+            
             
             <form action="/prov_reg" method='POST'>
                 <input placeholder="Enter Name" type="text" id="name" name="name" required><br><br>

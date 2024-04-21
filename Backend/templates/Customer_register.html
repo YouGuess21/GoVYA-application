@@ -13,14 +13,21 @@
     <form action="/" class="button-container">
         <button class="logo">GO-VYA</button>
     </form>
-    {% if Success %}
-    <p id="pop_up">{{Success}}</p>
-    
-    {% endif %}
+
     
     <div class="container">
         <div class="heading">
             <h1>Customer Registeration</h1>
+            <div class="login_line">
+                <p>Already a customer? </p>
+                <form action="/login" class="button-container">
+                    <button class="login_button">Login.</button>
+                </form>
+            </div>
+            {% if Success %}
+            <p id="pop_up">{{Success}}</p>
+            
+            {% endif %}
         </div>
         <div class="content"><br>
             <form action="/cust_reg" method='POST'>
