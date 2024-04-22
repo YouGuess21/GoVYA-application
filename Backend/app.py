@@ -248,11 +248,11 @@ def ProviderFunction():
             days= request.form.get("days", default=0,type=int)
             
             cursor.execute("select max( distinct quote_id) from quotes")
-            
             val=cursor.fetchone()
-            
-            quoteid=val[0]
-            
+            if bool(val):
+                quoteid=val[0]
+            else:
+                quoteid=0
             quoteid=quoteid+1
             x=cursor.fetchall()
             cursor.execute("select p_scale from provider where p_id=%s",(user_id,))
