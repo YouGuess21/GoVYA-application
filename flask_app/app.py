@@ -2,8 +2,10 @@ from flask import Flask,render_template,request,redirect,url_for,session,flash
 import mysql.connector
 from flask_wtf import FlaskForm
 from wtforms import StringField,SubmitField,PasswordField
+import time
 
-mydb=mysql.connector.connect(host="localhost",user="root",passwd="Ashwin@319",database="sql_college")
+time.sleep(5)
+mydb=mysql.connector.connect(host="mysql_db",user="flaskuser",passwd="flaskpassword",database="flaskdb")
 cursor=mydb.cursor()
 app=Flask( __name__)
 app.config['SECRET_KEY']='nokey'
@@ -96,7 +98,7 @@ def CustomerFunction():
             
             if empid != 0 :
                 
-                cursor.execute("select * from employee natural join EMP_PHONENO where emp_id =%s",(int(empid),) )
+                cursor.execute("select * from employee natural join emp_phoneno where emp_id =%s",(int(empid),) )
                 val2=cursor.fetchall()
                 for row in val2:
                     if row:
@@ -373,7 +375,7 @@ def Admin_fun():
             elif todo==3:
                 cursor.execute('select * from employee')
                 val=cursor.fetchall()
-                cursor.execute('select * from emp_Phoneno')
+                cursor.execute('select * from emp_phoneno')
                 val2=cursor.fetchall()
                 return render_template('admin_funct.html', username=username, userid=userid,cur=val,cur2=val2,funct=3)
                 

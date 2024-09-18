@@ -1,12 +1,4 @@
-To run this locally, make sure you are in Backend directory and have the required packages installed and then
-
-```flask run```
-
-Change the password to your sql password in line 6 of app.py
-
-And run the following queries in MySQL command Line
-```
-create database flaskdb;
+create database if not exists flaskdb;
 use flaskdb;
 create table user (
     user_id int primary key,
@@ -175,15 +167,3 @@ begin
     where isassisting = old.user_id;
 end//
 delimiter ;
-```
-
-```
-DROP TABLE requests;
-DROP TABLE orders;
-DROP TABLE emp_phoneno;
-DROP TABLE employee;
-DROP TABLE customer;
-DROP TABLE provider;
-DROP TABLE admin;
-DROP TABLE user;
-```
